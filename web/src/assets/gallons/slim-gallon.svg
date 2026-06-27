@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 200" fill="none">
+  <defs>
+    <linearGradient id="slimBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4da3ff"/>
+      <stop offset="50%" stop-color="#1677ff"/>
+      <stop offset="100%" stop-color="#0d5bd7"/>
+    </linearGradient>
+    <linearGradient id="slimCap" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#d9d9d9"/>
+    </linearGradient>
+    <linearGradient id="slimHandle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#91caff"/>
+      <stop offset="100%" stop-color="#4096ff"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="60" cy="178" rx="38" ry="8" fill="#000" opacity="0.12"/>
+  <rect x="44" y="18" width="32" height="14" rx="4" fill="url(#slimCap)"/>
+  <rect x="48" y="8" width="24" height="12" rx="3" fill="#bfbfbf"/>
+  <path d="M38 32h44c6 0 10 4 10 10v120c0 8-6 14-14 14H42c-8 0-14-6-14-14V42c0-6 4-10 10-10z" fill="url(#slimBody)"/>
+  <path d="M38 32h44c6 0 10 4 10 10v120c0 8-6 14-14 14H42c-8 0-14-6-14-14V42c0-6 4-10 10-10z" fill="#fff" opacity="0.15"/>
+  <ellipse cx="52" cy="70" rx="8" ry="20" fill="#fff" opacity="0.25"/>
+  <rect x="72" y="100" width="28" height="10" rx="5" fill="url(#slimHandle)"/>
+  <circle cx="100" cy="105" r="6" fill="#4096ff"/>
+  <text x="60" y="120" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" opacity="0.9">H2O</text>
+</svg>

@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const productController_1 = require("../controllers/productController");
+const auth_1 = require("../middlewares/auth");
+const rbac_1 = require("../middlewares/rbac");
+const validate_1 = require("../middlewares/validate");
+const schemas_1 = require("../validators/schemas");
+const auditLog_1 = require("../middlewares/auditLog");
+const validateObjectId_1 = require("../middlewares/validateObjectId");
+const enums_1 = require("../types/enums");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticate);
+router.get('/active', (0, rbac_1.authorize)('pos:*', 'transactions:*'), productController_1.getActiveProducts);
+router.get('/', (0, rbac_1.authorizeRoles)(enums_1.UserRole.ADMIN), productController_1.getProducts);
+router.get('/:id', (0, rbac_1.authorizeRoles)(enums_1.UserRole.ADMIN), validateObjectId_1.validateParamObjectId, productController_1.getProduct);
+router.post('/', (0, rbac_1.authorizeRoles)(enums_1.UserRole.ADMIN), (0, validate_1.validate)(schemas_1.createProductSchema), (0, auditLog_1.auditLog)('products', 'create'), productController_1.createProduct);
+router.put('/:id', (0, rbac_1.authorizeRoles)(enums_1.UserRole.ADMIN), validateObjectId_1.validateParamObjectId, (0, validate_1.validate)(schemas_1.updateProductSchema), (0, auditLog_1.auditLog)('products', 'update'), productController_1.updateProduct);
+router.delete('/:id', (0, rbac_1.authorizeRoles)(enums_1.UserRole.ADMIN), validateObjectId_1.validateParamObjectId, (0, auditLog_1.auditLog)('products', 'delete'), productController_1.deleteProduct);
+exports.default = router;
+//# sourceMappingURL=productRoutes.js.map

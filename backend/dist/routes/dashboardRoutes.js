@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const dashboardController_1 = require("../controllers/dashboardController");
+const auth_1 = require("../middlewares/auth");
+const rbac_1 = require("../middlewares/rbac");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticate);
+router.use((0, rbac_1.authorize)('dashboard:read'));
+router.get('/stats', dashboardController_1.getStats);
+router.get('/sales', dashboardController_1.getSales);
+router.get('/deliveries', dashboardController_1.getDeliveries);
+router.get('/inventory', dashboardController_1.getInventory);
+router.get('/activity', dashboardController_1.getActivity);
+router.get('/top-customers', dashboardController_1.getTopCustomers);
+router.get('/recent-deliveries', dashboardController_1.getRecentDeliveries);
+router.get('/recent-transactions', dashboardController_1.getRecentTransactions);
+router.get('/system-summary', dashboardController_1.getSystemSummary);
+exports.default = router;
+//# sourceMappingURL=dashboardRoutes.js.map

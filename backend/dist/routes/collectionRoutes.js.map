@@ -1,0 +1,1 @@
+{"version":3,"file":"collectionRoutes.js","sourceRoot":"","sources":["../../src/routes/collectionRoutes.ts"],"names":[],"mappings":";;AAAA,qCAAiC;AACjC,8EAAyE;AACzE,8CAAmD;AACnD,8CAAgD;AAEhD,MAAM,MAAM,GAAG,IAAA,gBAAM,GAAE,CAAC;AAExB,MAAM,CAAC,GAAG,CAAC,mBAAY,CAAC,CAAC;AACzB,MAAM,CAAC,GAAG,CAAC,QAAQ,EAAE,IAAA,gBAAS,EAAC,iBAAiB,CAAC,EAAE,yCAAkB,CAAC,CAAC;AAEvE,kBAAe,MAAM,CAAC"}

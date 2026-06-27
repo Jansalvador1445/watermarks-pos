@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const deliveryController_1 = require("../controllers/deliveryController");
+const auth_1 = require("../middlewares/auth");
+const rbac_1 = require("../middlewares/rbac");
+const validate_1 = require("../middlewares/validate");
+const schemas_1 = require("../validators/schemas");
+const auditLog_1 = require("../middlewares/auditLog");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticate);
+router.get('/', (0, rbac_1.authorize)('deliveries:read', 'deliveries:*'), deliveryController_1.getDeliveries);
+router.get('/calendar', (0, rbac_1.authorize)('deliveries:read', 'deliveries:*'), deliveryController_1.getCalendarEvents);
+router.get('/history', (0, rbac_1.authorize)('deliveries:read', 'deliveries:*'), deliveryController_1.getDeliveredHistory);
+router.post('/:id/decision', (0, rbac_1.authorize)('deliveries:*'), (0, validate_1.validate)(schemas_1.deliveryDecisionSchema), (0, auditLog_1.auditLog)('deliveries', 'decision'), deliveryController_1.resolveDeliveryDecision);
+router.get('/:id', (0, rbac_1.authorize)('deliveries:read', 'deliveries:*'), deliveryController_1.getDelivery);
+router.post('/', (0, rbac_1.authorize)('deliveries:*'), (0, validate_1.validate)(schemas_1.createDeliverySchema), (0, auditLog_1.auditLog)('deliveries', 'create'), deliveryController_1.createDelivery);
+router.put('/:id', (0, rbac_1.authorize)('deliveries:*'), (0, validate_1.validate)(schemas_1.updateDeliverySchema), (0, auditLog_1.auditLog)('deliveries', 'update'), deliveryController_1.updateDelivery);
+router.delete('/:id', (0, rbac_1.authorize)('deliveries:*'), (0, auditLog_1.auditLog)('deliveries', 'delete'), deliveryController_1.deleteDelivery);
+exports.default = router;
+//# sourceMappingURL=deliveryRoutes.js.map

@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const customerController_1 = require("../controllers/customerController");
+const auth_1 = require("../middlewares/auth");
+const rbac_1 = require("../middlewares/rbac");
+const validate_1 = require("../middlewares/validate");
+const schemas_1 = require("../validators/schemas");
+const auditLog_1 = require("../middlewares/auditLog");
+const upload_1 = require("../middlewares/upload");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticate);
+router.get('/', (0, rbac_1.authorize)('customers:read'), customerController_1.getCustomers);
+router.get('/:id', (0, rbac_1.authorize)('customers:read'), customerController_1.getCustomer);
+router.post('/', (0, rbac_1.authorize)('customers:*'), (0, validate_1.validate)(schemas_1.createCustomerSchema), (0, auditLog_1.auditLog)('customers', 'create'), customerController_1.createCustomer);
+router.put('/:id', (0, rbac_1.authorize)('customers:*'), (0, validate_1.validate)(schemas_1.updateCustomerSchema), (0, auditLog_1.auditLog)('customers', 'update'), customerController_1.updateCustomer);
+router.delete('/:id', (0, rbac_1.authorize)('customers:*'), (0, auditLog_1.auditLog)('customers', 'delete'), customerController_1.deleteCustomer);
+router.patch('/:id/toggle-status', (0, rbac_1.authorize)('customers:*'), customerController_1.toggleCustomerStatus);
+router.post('/import', (0, rbac_1.authorize)('customers:*'), customerController_1.importCustomers);
+router.post('/:id/photo', (0, rbac_1.authorize)('customers:*'), upload_1.customerPhotoUpload.single('photo'), (0, auditLog_1.auditLog)('customers', 'upload-photo'), customerController_1.uploadCustomerPhoto);
+router.delete('/:id/photo', (0, rbac_1.authorize)('customers:*'), (0, auditLog_1.auditLog)('customers', 'delete-photo'), customerController_1.deleteCustomerPhoto);
+exports.default = router;
+//# sourceMappingURL=customerRoutes.js.map

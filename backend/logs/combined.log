@@ -1,0 +1,1175 @@
+2026-06-26T02:29:34.553Z [info]: MongoDB connected successfully
+2026-06-26T02:29:34.973Z [info]: Admin user created: admin@h2o.com / Admin@123
+2026-06-26T02:29:35.374Z [info]: Seed completed
+2026-06-26T02:29:54.975Z [info]: MongoDB connected successfully
+2026-06-26T02:29:55.011Z [info]: Cron jobs initialized
+2026-06-26T02:29:55.017Z [info]: Server running on port 5000 in development mode
+2026-06-26T02:31:02.833Z [info]: MongoDB connected successfully
+2026-06-26T02:31:02.877Z [info]: Seed completed
+2026-06-26T02:31:09.386Z [info]: MongoDB connected successfully
+2026-06-26T02:31:09.417Z [info]: Cron jobs initialized
+2026-06-26T02:31:09.423Z [info]: Server running on port 5000 in development mode
+2026-06-26T02:32:12.349Z [debug]: Socket connected: ejY56kNeiKxTLAsJAAAC
+2026-06-26T02:32:12.356Z [debug]: Socket connected: oFneFK1RCqM04Sy1AAAD
+2026-06-26T02:32:13.790Z [debug]: Socket disconnected: ejY56kNeiKxTLAsJAAAC
+2026-06-26T02:32:13.792Z [debug]: Socket disconnected: oFneFK1RCqM04Sy1AAAD
+2026-06-26T02:33:00.274Z [debug]: Socket connected: zBJv1pCTlOJtohdxAAAG
+2026-06-26T02:33:00.276Z [debug]: Socket connected: bny2J79Q61nqgdGvAAAH
+2026-06-26T02:33:22.582Z [debug]: Socket disconnected: zBJv1pCTlOJtohdxAAAG
+2026-06-26T02:33:22.584Z [debug]: Socket disconnected: bny2J79Q61nqgdGvAAAH
+2026-06-26T02:34:06.903Z [debug]: Socket connected: kK44yOI0PH9rtpYLAAAK
+2026-06-26T02:34:06.911Z [debug]: Socket connected: q_Ef1n8nlJ0OgI9xAAAL
+2026-06-26T02:39:41.705Z [debug]: Socket disconnected: kK44yOI0PH9rtpYLAAAK
+2026-06-26T02:39:41.707Z [debug]: Socket disconnected: q_Ef1n8nlJ0OgI9xAAAL
+2026-06-26T02:39:42.145Z [debug]: Socket connected: cnIOLT8AJNt_4CBfAAAO
+2026-06-26T02:39:42.148Z [debug]: Socket connected: NUCmMR87JwIf7D3DAAAP
+2026-06-26T02:43:14.586Z [info]: MongoDB connected successfully
+2026-06-26T02:43:14.612Z [info]: Cron jobs initialized
+2026-06-26T02:43:14.625Z [info]: Server running on port 5000 in development mode
+2026-06-26T02:43:14.692Z [debug]: Socket connected: FiwaOvV5R2ZV3WRAAAAC
+2026-06-26T02:43:14.698Z [debug]: Socket connected: KMT5Cb5hCTv3NIWpAAAD
+2026-06-26T02:45:06.589Z [info]: MongoDB connected successfully
+2026-06-26T02:45:06.634Z [info]: Cron jobs initialized
+2026-06-26T02:45:06.659Z [info]: Server running on port 5000 in development mode
+2026-06-26T02:45:06.738Z [debug]: Socket connected: NXbcLN192O5qY79GAAAB
+2026-06-26T02:45:09.174Z [debug]: Socket connected: HaDTIHCdEd-cQyvNAAAD
+2026-06-26T02:45:45.880Z [debug]: Socket disconnected: HaDTIHCdEd-cQyvNAAAD
+2026-06-26T02:45:45.883Z [debug]: Socket disconnected: NXbcLN192O5qY79GAAAB
+2026-06-26T02:45:46.351Z [debug]: Socket connected: NYfTbNfCBS0Cw8vkAAAG
+2026-06-26T02:45:46.354Z [debug]: Socket connected: RfWt9S9mLjjSTRycAAAH
+2026-06-26T02:49:38.871Z [debug]: Socket disconnected: NYfTbNfCBS0Cw8vkAAAG
+2026-06-26T02:49:38.872Z [debug]: Socket disconnected: RfWt9S9mLjjSTRycAAAH
+2026-06-26T02:49:39.137Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:53:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-26T02:49:39.272Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:53:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-26T02:49:53.900Z [info]: MongoDB connected successfully
+2026-06-26T02:49:53.924Z [info]: Cron jobs initialized
+2026-06-26T02:49:53.929Z [info]: Server running on port 5000 in development mode
+2026-06-26T02:50:23.655Z [debug]: Socket connected: n9EPynFmqTw1a38eAAAC
+2026-06-26T02:50:23.662Z [debug]: Socket connected: BI74CuWFuv9aCMBcAAAD
+2026-06-26T02:57:18.909Z [debug]: Socket disconnected: n9EPynFmqTw1a38eAAAC
+2026-06-26T02:57:18.912Z [debug]: Socket disconnected: BI74CuWFuv9aCMBcAAAD
+2026-06-26T02:57:19.383Z [debug]: Socket connected: VYWmeS0tGb-lNqntAAAG
+2026-06-26T02:57:19.387Z [debug]: Socket connected: VK3vTJ9sSmxNBNkFAAAH
+2026-06-26T03:00:02.407Z [debug]: Socket disconnected: VYWmeS0tGb-lNqntAAAG
+2026-06-26T03:00:02.410Z [debug]: Socket disconnected: VK3vTJ9sSmxNBNkFAAAH
+2026-06-26T03:00:02.810Z [debug]: Socket connected: u9gygV2_SiENw3k3AAAK
+2026-06-26T03:00:02.814Z [debug]: Socket connected: ky_ucdkPt-NWS9yKAAAL
+2026-06-26T03:10:00.041Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:53:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-26T03:10:00.050Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:53:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-26T03:10:00.144Z [debug]: Socket disconnected: u9gygV2_SiENw3k3AAAK
+2026-06-26T03:10:00.153Z [debug]: Socket disconnected: ky_ucdkPt-NWS9yKAAAL
+2026-06-26T03:10:49.554Z [debug]: Socket connected: MZPwmFW9rrSvzk2zAAAO
+2026-06-26T03:10:49.556Z [debug]: Socket connected: sBdISSRDPsxpIM6LAAAP
+2026-06-26T03:14:27.661Z [info]: MongoDB connected successfully
+2026-06-26T03:14:27.710Z [info]: Cron jobs initialized
+2026-06-26T03:14:27.722Z [info]: Server running on port 5000 in development mode
+2026-06-26T03:14:56.553Z [debug]: Socket connected: 84zarNyV1HzDp78SAAAC
+2026-06-26T03:14:56.557Z [debug]: Socket connected: O_kNZTY2FADizYrvAAAD
+2026-06-26T03:16:20.090Z [debug]: Socket disconnected: 84zarNyV1HzDp78SAAAC
+2026-06-26T03:16:20.091Z [debug]: Socket disconnected: O_kNZTY2FADizYrvAAAD
+2026-06-26T03:16:20.379Z [debug]: Socket connected: Ch4hjH-um6l_GIWzAAAG
+2026-06-26T03:16:20.383Z [debug]: Socket connected: Ycn18C22RjmHSiadAAAH
+2026-06-26T03:30:00.087Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:53:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-26T03:30:01.314Z [debug]: Socket disconnected: Ch4hjH-um6l_GIWzAAAG
+2026-06-26T03:30:01.319Z [debug]: Socket disconnected: Ycn18C22RjmHSiadAAAH
+2026-06-26T03:38:13.370Z [info]: MongoDB connected successfully
+2026-06-26T03:38:13.453Z [info]: Cron jobs initialized
+2026-06-26T03:38:13.471Z [info]: Server running on port 5000 in development mode
+2026-06-26T03:45:12.223Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T03:45:12.797Z [debug]: Socket connected: Tj7wtE0YevOTenzEAAAC
+2026-06-26T03:45:12.812Z [debug]: Socket connected: 5Oq0GkTo4K2g1dCvAAAD
+2026-06-26T03:45:33.199Z [debug]: Socket disconnected: Tj7wtE0YevOTenzEAAAC
+2026-06-26T03:45:33.205Z [debug]: Socket disconnected: 5Oq0GkTo4K2g1dCvAAAD
+2026-06-26T04:00:00.036Z [info]: Overdue delivery check completed
+2026-06-26T04:05:38.485Z [warn]: Failed login attempt {"email":"admin@h2o.com","ip":"::1"}
+2026-06-26T04:05:46.489Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T04:05:46.962Z [debug]: Socket connected: e6_UdTEwhC5dZXwPAAAG
+2026-06-26T04:05:46.968Z [debug]: Socket connected: FQAOtcC1cDMUdH2hAAAH
+2026-06-26T04:16:25.098Z [info]: MongoDB connected successfully
+2026-06-26T04:16:25.352Z [info]: Cron jobs initialized
+2026-06-26T04:16:25.372Z [info]: Server running on port 5000 in development mode
+2026-06-26T04:16:42.838Z [debug]: Socket connected: I6RAKinDT1SKxy5TAAAC
+2026-06-26T04:16:42.889Z [debug]: Socket connected: DkM0EfM9LSuMNuRyAAAD
+2026-06-26T04:25:00.077Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:84:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-26T04:25:00.206Z [debug]: Socket disconnected: I6RAKinDT1SKxy5TAAAC
+2026-06-26T04:25:00.208Z [debug]: Socket disconnected: DkM0EfM9LSuMNuRyAAAD
+2026-06-26T04:25:31.282Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T04:25:31.702Z [debug]: Socket connected: PaHGxdoyJEogxb8zAAAG
+2026-06-26T04:25:31.706Z [debug]: Socket connected: iO-PLrE8MFEgjFthAAAH
+2026-06-26T04:30:35.918Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T04:31:19.348Z [info]: MongoDB connected successfully
+2026-06-26T04:31:19.425Z [info]: Cron jobs initialized
+2026-06-26T04:31:19.437Z [info]: Server running on port 5000 in development mode
+2026-06-26T04:31:20.494Z [debug]: Socket connected: Ow9p58UWmB2JFPl_AAAB
+2026-06-26T04:31:26.950Z [info]: MongoDB connected successfully
+2026-06-26T04:31:27.016Z [info]: Cron jobs initialized
+2026-06-26T04:31:27.028Z [info]: Server running on port 5000 in development mode
+2026-06-26T04:31:27.378Z [debug]: Socket connected: FvimYSiOlh0WDvrhAAAC
+2026-06-26T04:31:27.393Z [debug]: Socket connected: ob3FlYGd6HPZanrgAAAD
+2026-06-26T04:31:38.699Z [info]: MongoDB connected successfully
+2026-06-26T04:31:38.774Z [info]: Cron jobs initialized
+2026-06-26T04:31:38.787Z [info]: Server running on port 5000 in development mode
+2026-06-26T04:31:39.067Z [debug]: Socket connected: p5FNBTOIS6nCAlWDAAAB
+2026-06-26T04:31:40.105Z [debug]: Socket connected: MCnQ0NiSzd6O3iqXAAAD
+2026-06-26T04:32:34.775Z [info]: MongoDB connected successfully
+2026-06-26T04:32:35.026Z [info]: Sample deliveries created
+2026-06-26T04:32:35.115Z [info]: Sample transactions created
+2026-06-26T04:32:35.121Z [info]: Seed completed
+2026-06-26T04:33:03.808Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T04:33:20.126Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T04:40:54.753Z [debug]: Socket disconnected: p5FNBTOIS6nCAlWDAAAB
+2026-06-26T04:40:54.756Z [debug]: Socket disconnected: MCnQ0NiSzd6O3iqXAAAD
+2026-06-26T04:41:15.694Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T04:41:16.095Z [debug]: Socket connected: xpPIS7iaWCo4oGnfAAAG
+2026-06-26T04:41:16.100Z [debug]: Socket connected: XXF9zMWHkMPh9qZSAAAH
+2026-06-26T04:42:18.531Z [info]: MongoDB connected successfully
+2026-06-26T04:42:18.613Z [info]: Cron jobs initialized
+2026-06-26T04:42:18.627Z [info]: Server running on port 5000 in development mode
+2026-06-26T04:42:20.218Z [debug]: Socket connected: qWQDvZzIJ6Wl59Q4AAAB
+2026-06-26T04:42:20.687Z [debug]: Socket connected: KSAuz49RrcpjxHB0AAAD
+2026-06-26T04:42:54.452Z [info]: MongoDB connected successfully
+2026-06-26T04:42:54.522Z [info]: Cron jobs initialized
+2026-06-26T04:42:54.535Z [info]: Server running on port 5000 in development mode
+2026-06-26T04:42:56.882Z [debug]: Socket connected: dRyEWTJka6RJKMp_AAAB
+2026-06-26T04:42:58.201Z [debug]: Socket connected: 3_QNIIMbE_y0V85GAAAD
+2026-06-26T04:43:12.476Z [info]: MongoDB connected successfully
+2026-06-26T04:43:12.550Z [info]: Cron jobs initialized
+2026-06-26T04:43:12.562Z [info]: Server running on port 5000 in development mode
+2026-06-26T04:43:12.764Z [debug]: Socket connected: lTXUuUGkicrqVqlbAAAB
+2026-06-26T04:43:13.721Z [debug]: Socket connected: UPLRHjEERX-Yw76gAAAD
+2026-06-26T04:43:48.463Z [info]: MongoDB connected successfully
+2026-06-26T04:43:48.499Z [info]: Cron jobs initialized
+2026-06-26T04:43:48.505Z [info]: Server running on port 5000 in development mode
+2026-06-26T04:43:49.184Z [debug]: Socket connected: n4rRliBFHdzW0NSuAAAB
+2026-06-26T04:43:50.603Z [debug]: Socket connected: q-GYx7rYiG4CzookAAAD
+2026-06-26T04:43:54.658Z [debug]: Socket disconnected: n4rRliBFHdzW0NSuAAAB
+2026-06-26T04:43:54.663Z [debug]: Socket disconnected: q-GYx7rYiG4CzookAAAD
+2026-06-26T04:43:55.033Z [debug]: Socket connected: 3mSfFAKlpPDcVEiZAAAG
+2026-06-26T04:43:55.036Z [debug]: Socket connected: sFxBHJf1t7H3IeXbAAAH
+2026-06-26T04:44:27.222Z [debug]: Socket disconnected: 3mSfFAKlpPDcVEiZAAAG
+2026-06-26T04:44:27.224Z [debug]: Socket disconnected: sFxBHJf1t7H3IeXbAAAH
+2026-06-26T04:44:27.497Z [debug]: Socket connected: RSoXk0HaXpEmc0UEAAAK
+2026-06-26T04:44:27.501Z [debug]: Socket connected: -7QjJBj3oBmjPjIlAAAL
+2026-06-26T04:45:49.352Z [debug]: Socket disconnected: -7QjJBj3oBmjPjIlAAAL
+2026-06-26T04:45:49.353Z [debug]: Socket disconnected: RSoXk0HaXpEmc0UEAAAK
+2026-06-26T04:45:49.606Z [debug]: Socket connected: qIAKixTxwjoysbDGAAAO
+2026-06-26T04:45:49.610Z [debug]: Socket connected: PHXo_I0P5KZLkt3mAAAP
+2026-06-26T07:43:39.840Z [info]: MongoDB connected successfully
+2026-06-26T07:43:40.067Z [info]: Cron jobs initialized
+2026-06-26T07:43:40.095Z [info]: Server running on port 5000 in development mode
+2026-06-26T07:45:55.075Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T07:45:55.521Z [debug]: Socket connected: lV4EP_ce7rTyK1KaAAAE
+2026-06-26T07:45:55.528Z [debug]: Socket connected: FOWE_XbhxHpWm4qeAAAF
+2026-06-26T08:05:00.126Z [debug]: Socket disconnected: FOWE_XbhxHpWm4qeAAAF
+2026-06-26T08:05:00.128Z [debug]: Socket disconnected: lV4EP_ce7rTyK1KaAAAE
+2026-06-26T08:08:19.097Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T08:08:19.587Z [debug]: Socket connected: 5jvlTcTRrXRodcHmAAAI
+2026-06-26T08:08:19.592Z [debug]: Socket connected: 22TeghbU8-ARa_S0AAAJ
+2026-06-26T08:08:49.808Z [info]: MongoDB connected successfully
+2026-06-26T08:08:49.894Z [info]: Cron jobs initialized
+2026-06-26T08:08:49.908Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:08:50.279Z [debug]: Socket connected: 6FmTdGev1Iz7XwFwAAAC
+2026-06-26T08:08:50.296Z [debug]: Socket connected: A5aWdkRAcggQQ8FrAAAD
+2026-06-26T08:09:04.332Z [info]: MongoDB connected successfully
+2026-06-26T08:09:04.413Z [info]: Cron jobs initialized
+2026-06-26T08:09:04.430Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:09:30.325Z [info]: MongoDB connected successfully
+2026-06-26T08:09:30.405Z [info]: Cron jobs initialized
+2026-06-26T08:09:30.420Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:09:30.554Z [debug]: Socket connected: zLnw_N_uD6zzeIRNAAAC
+2026-06-26T08:09:30.570Z [debug]: Socket connected: dEman3BKUdHOm_mNAAAD
+2026-06-26T08:09:35.980Z [info]: MongoDB connected successfully
+2026-06-26T08:09:36.068Z [info]: Cron jobs initialized
+2026-06-26T08:09:36.083Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:09:36.249Z [debug]: Socket connected: 2y8d4jCCp4kmz32bAAAB
+2026-06-26T08:09:36.269Z [debug]: Socket connected: l4JCVX7RC3TmHefSAAAD
+2026-06-26T08:09:43.993Z [info]: MongoDB connected successfully
+2026-06-26T08:09:44.067Z [info]: Cron jobs initialized
+2026-06-26T08:09:44.083Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:09:44.357Z [debug]: Socket connected: vCnC0NTJUyvUrQE7AAAC
+2026-06-26T08:09:44.388Z [debug]: Socket connected: E9KblB8VBG4ivziQAAAD
+2026-06-26T08:11:17.201Z [info]: MongoDB connected successfully
+2026-06-26T08:11:17.279Z [info]: Cron jobs initialized
+2026-06-26T08:11:17.292Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:11:17.483Z [debug]: Socket connected: I1Plbix_uPU65ye8AAAC
+2026-06-26T08:11:17.506Z [debug]: Socket connected: RQLAKO6eM5nfEktYAAAD
+2026-06-26T08:11:26.047Z [debug]: Socket disconnected: I1Plbix_uPU65ye8AAAC
+2026-06-26T08:11:26.051Z [debug]: Socket disconnected: RQLAKO6eM5nfEktYAAAD
+2026-06-26T08:11:27.138Z [debug]: Socket connected: KlSTL0qDomQVgjM-AAAG
+2026-06-26T08:11:27.147Z [debug]: Socket connected: BFS13sVfFKIzODPtAAAH
+2026-06-26T08:11:44.929Z [info]: MongoDB connected successfully
+2026-06-26T08:11:45.005Z [info]: Cron jobs initialized
+2026-06-26T08:11:45.018Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:11:45.094Z [debug]: Socket connected: hCvg3X5S9L87F093AAAB
+2026-06-26T08:11:45.698Z [debug]: Socket connected: zzqsY__a6jhfsc9tAAAD
+2026-06-26T08:11:59.708Z [info]: MongoDB connected successfully
+2026-06-26T08:11:59.797Z [info]: Cron jobs initialized
+2026-06-26T08:11:59.813Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:11:59.985Z [debug]: Socket connected: aoVeEFW2V1KOuZg8AAAC
+2026-06-26T08:12:00.009Z [debug]: Socket connected: wt-jVBS9WI-EVcHSAAAD
+2026-06-26T08:16:13.489Z [debug]: Socket disconnected: aoVeEFW2V1KOuZg8AAAC
+2026-06-26T08:16:13.493Z [debug]: Socket disconnected: wt-jVBS9WI-EVcHSAAAD
+2026-06-26T08:16:14.340Z [debug]: Socket connected: 73PTNqa0OEuo6WGFAAAG
+2026-06-26T08:16:14.345Z [debug]: Socket connected: YFwapC6EKIw6Ns49AAAH
+2026-06-26T08:16:41.663Z [info]: MongoDB connected successfully
+2026-06-26T08:16:41.724Z [info]: Cron jobs initialized
+2026-06-26T08:16:41.738Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:16:42.792Z [debug]: Socket connected: Oy-pav_lwlM4ErSgAAAB
+2026-06-26T08:16:43.480Z [debug]: Socket connected: gyz5wsgy5FrwQoYBAAAD
+2026-06-26T08:18:06.645Z [debug]: Socket disconnected: Oy-pav_lwlM4ErSgAAAB
+2026-06-26T08:18:06.647Z [debug]: Socket disconnected: gyz5wsgy5FrwQoYBAAAD
+2026-06-26T08:18:24.254Z [info]: Successful login {"userId":"6a3de40fd7f8b32566d4a86d","email":"cashier@h2o.com","ip":"::1"}
+2026-06-26T08:18:24.619Z [debug]: Socket connected: -CfS8RSoSeSLQdkKAAAG
+2026-06-26T08:18:24.626Z [debug]: Socket connected: j0YhigNYKSqwx8A4AAAH
+2026-06-26T08:19:19.029Z [debug]: Socket disconnected: j0YhigNYKSqwx8A4AAAH
+2026-06-26T08:19:19.030Z [debug]: Socket disconnected: -CfS8RSoSeSLQdkKAAAG
+2026-06-26T08:19:38.148Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T08:19:38.535Z [debug]: Socket connected: guVwv5BfuCdQPIOQAAAK
+2026-06-26T08:19:38.542Z [debug]: Socket connected: QOoDTmDIrsYyX4VpAAAL
+2026-06-26T08:20:53.140Z [debug]: Socket disconnected: guVwv5BfuCdQPIOQAAAK
+2026-06-26T08:20:53.142Z [debug]: Socket disconnected: QOoDTmDIrsYyX4VpAAAL
+2026-06-26T08:21:09.219Z [warn]: Failed login attempt {"email":"delivery@h2o.com","ip":"::1"}
+2026-06-26T08:21:18.946Z [warn]: Failed login attempt {"email":"delivery@h2o.com","ip":"::1"}
+2026-06-26T08:21:47.095Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T08:21:47.494Z [debug]: Socket connected: 3xK7KAFhbXlTVOr1AAAO
+2026-06-26T08:21:47.497Z [debug]: Socket connected: yHNN7qv2a2ODOD3CAAAP
+2026-06-26T08:21:58.073Z [debug]: Socket disconnected: 3xK7KAFhbXlTVOr1AAAO
+2026-06-26T08:21:58.075Z [debug]: Socket disconnected: yHNN7qv2a2ODOD3CAAAP
+2026-06-26T08:22:11.048Z [info]: Successful login {"userId":"6a3e3660de571d4699c3064d","email":"deliver@h2o.com","ip":"::1"}
+2026-06-26T08:22:11.399Z [debug]: Socket connected: ZFsACZaTxYRZQ7XpAAAS
+2026-06-26T08:22:11.405Z [debug]: Socket connected: rNW6aQIvc4sYUPP2AAAT
+2026-06-26T08:24:49.037Z [debug]: Socket disconnected: ZFsACZaTxYRZQ7XpAAAS
+2026-06-26T08:24:49.039Z [debug]: Socket disconnected: rNW6aQIvc4sYUPP2AAAT
+2026-06-26T08:25:09.792Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T08:25:10.177Z [debug]: Socket connected: SWJ6eGj5__WfzeDEAAAW
+2026-06-26T08:25:10.181Z [debug]: Socket connected: MtbMn5ZS7DiqNS5VAAAX
+2026-06-26T08:29:52.659Z [info]: MongoDB connected successfully
+2026-06-26T08:29:52.710Z [info]: Cron jobs initialized
+2026-06-26T08:29:52.721Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:30:11.059Z [info]: MongoDB connected successfully
+2026-06-26T08:30:11.121Z [info]: Cron jobs initialized
+2026-06-26T08:30:11.132Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:30:11.202Z [debug]: Socket connected: HF-oJbNioRjWO-70AAAC
+2026-06-26T08:30:11.211Z [debug]: Socket connected: Ty91NfvKkQuMQ6LtAAAD
+2026-06-26T08:30:19.196Z [info]: MongoDB connected successfully
+2026-06-26T08:30:19.247Z [info]: Cron jobs initialized
+2026-06-26T08:30:19.258Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:30:19.699Z [debug]: Socket connected: dQNbXJgHM9HMo53PAAAB
+2026-06-26T08:30:20.872Z [debug]: Socket connected: E96yqis76s99tCK0AAAD
+2026-06-26T08:30:33.679Z [debug]: Socket disconnected: dQNbXJgHM9HMo53PAAAB
+2026-06-26T08:30:33.709Z [debug]: Socket disconnected: E96yqis76s99tCK0AAAD
+2026-06-26T08:30:34.723Z [debug]: Socket connected: 3UOvyELQHoSoCAUAAAAG
+2026-06-26T08:30:34.728Z [debug]: Socket connected: Ozv9N4KSV1-_efjbAAAH
+2026-06-26T08:31:10.757Z [info]: MongoDB connected successfully
+2026-06-26T08:31:10.788Z [info]: Cron jobs initialized
+2026-06-26T08:31:10.799Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:31:10.851Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-06-26T08:31:10.879Z [debug]: Socket connected: NH9uzXguJQezTkNGAAAB
+2026-06-26T08:31:11.072Z [debug]: Socket connected: jkwIEYtf_zbSLZ4NAAAD
+2026-06-26T08:31:14.275Z [debug]: Socket connected: QwxvTVEj-K5-c_83AAAF
+2026-06-26T08:31:14.618Z [debug]: Socket connected: UFjErSgtmstLQdxEAAAH
+2026-06-26T08:41:07.611Z [debug]: Socket disconnected: UFjErSgtmstLQdxEAAAH
+2026-06-26T08:41:07.612Z [debug]: Socket disconnected: QwxvTVEj-K5-c_83AAAF
+2026-06-26T08:41:07.612Z [debug]: Socket disconnected: jkwIEYtf_zbSLZ4NAAAD
+2026-06-26T08:41:07.613Z [debug]: Socket disconnected: NH9uzXguJQezTkNGAAAB
+2026-06-26T08:41:26.556Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T08:41:26.769Z [debug]: Socket connected: 7a_p-uNuBj8RYro3AAAK
+2026-06-26T08:41:26.772Z [debug]: Socket connected: rZi4BGCp1bgAUIWOAAAL
+2026-06-26T08:42:24.438Z [debug]: Socket disconnected: 7a_p-uNuBj8RYro3AAAK
+2026-06-26T08:42:24.440Z [debug]: Socket disconnected: rZi4BGCp1bgAUIWOAAAL
+2026-06-26T08:42:24.839Z [debug]: Socket connected: OfBCJMA_XVtbVIqXAAAO
+2026-06-26T08:42:24.841Z [debug]: Socket connected: cBenYeFkNHT174xIAAAP
+2026-06-26T08:43:38.701Z [info]: MongoDB connected successfully
+2026-06-26T08:43:38.726Z [info]: Cron jobs initialized
+2026-06-26T08:43:38.735Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:43:38.773Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-06-26T08:43:38.795Z [debug]: Socket connected: CC6apa43koEZalQlAAAC
+2026-06-26T08:43:38.804Z [debug]: Socket connected: pZ9PrntAyiICDL_6AAAD
+2026-06-26T08:43:48.298Z [info]: MongoDB connected successfully
+2026-06-26T08:43:48.327Z [info]: Cron jobs initialized
+2026-06-26T08:43:48.338Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:43:48.376Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-06-26T08:43:48.399Z [debug]: Socket connected: 2oM3xRkoKd8o--h_AAAC
+2026-06-26T08:43:48.406Z [debug]: Socket connected: gLeebvsGIs_GyUhwAAAD
+2026-06-26T08:43:59.374Z [debug]: Socket disconnected: 2oM3xRkoKd8o--h_AAAC
+2026-06-26T08:43:59.376Z [debug]: Socket disconnected: gLeebvsGIs_GyUhwAAAD
+2026-06-26T08:43:59.762Z [debug]: Socket connected: RoVFXw5jaFdS_UiFAAAG
+2026-06-26T08:43:59.765Z [debug]: Socket connected: wGBxUHddIvUxB2SMAAAH
+2026-06-26T08:44:52.070Z [info]: MongoDB connected successfully
+2026-06-26T08:44:52.093Z [info]: Cron jobs initialized
+2026-06-26T08:44:52.102Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:44:52.140Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-06-26T08:44:52.198Z [debug]: Socket connected: pMz34C1pNzgP9-fMAAAC
+2026-06-26T08:44:52.204Z [debug]: Socket connected: BfkQugx-nHkHl1fYAAAD
+2026-06-26T08:45:13.671Z [info]: MongoDB connected successfully
+2026-06-26T08:45:13.694Z [info]: Cron jobs initialized
+2026-06-26T08:45:13.706Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:45:13.756Z [debug]: Socket connected: XjX9grpmJsZ3QfnzAAAC
+2026-06-26T08:45:13.762Z [debug]: Socket connected: C4oQ18n-7VYxlStPAAAD
+2026-06-26T08:45:13.767Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-06-26T08:45:42.203Z [debug]: Socket disconnected: XjX9grpmJsZ3QfnzAAAC
+2026-06-26T08:45:42.205Z [debug]: Socket disconnected: C4oQ18n-7VYxlStPAAAD
+2026-06-26T08:46:17.371Z [info]: MongoDB connected successfully
+2026-06-26T08:46:17.401Z [info]: Cron jobs initialized
+2026-06-26T08:46:17.413Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:46:17.476Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-06-26T08:47:00.746Z [info]: MongoDB connected successfully
+2026-06-26T08:47:00.773Z [info]: Cron jobs initialized
+2026-06-26T08:47:00.783Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:47:00.831Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-06-26T08:47:37.874Z [info]: Onboarding completed {"userId":"6a3de40ed7f8b32566d4a86c","username":"admin"}
+2026-06-26T08:47:38.135Z [debug]: Socket connected: oB2qzs7m3_gxA8WlAAAC
+2026-06-26T08:47:38.139Z [debug]: Socket connected: EgKqHH1JK_rzfgLGAAAD
+2026-06-26T08:47:46.677Z [debug]: Socket disconnected: oB2qzs7m3_gxA8WlAAAC
+2026-06-26T08:47:46.678Z [debug]: Socket disconnected: EgKqHH1JK_rzfgLGAAAD
+2026-06-26T08:48:00.292Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T08:48:00.494Z [debug]: Socket connected: 8XV3YQkYhzcZvN8mAAAG
+2026-06-26T08:48:00.497Z [debug]: Socket connected: gGykUlUgHkLtI8z9AAAH
+2026-06-26T08:51:26.026Z [debug]: Socket disconnected: gGykUlUgHkLtI8z9AAAH
+2026-06-26T08:51:26.028Z [debug]: Socket disconnected: 8XV3YQkYhzcZvN8mAAAG
+2026-06-26T08:51:26.443Z [debug]: Socket connected: Q6KxD-EM8GnS6UI-AAAK
+2026-06-26T08:51:26.446Z [debug]: Socket connected: d2m3WeZyWcoEx-fmAAAL
+2026-06-26T08:54:44.156Z [info]: MongoDB connected successfully
+2026-06-26T08:54:44.182Z [info]: Cron jobs initialized
+2026-06-26T08:54:44.193Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:54:44.279Z [debug]: Socket connected: qfULja1mthWy_IPmAAAC
+2026-06-26T08:54:44.288Z [debug]: Socket connected: 31grFVpQ4Y8Rh-SQAAAD
+2026-06-26T08:54:44.319Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":1}
+2026-06-26T08:54:48.382Z [info]: MongoDB connected successfully
+2026-06-26T08:54:48.409Z [info]: Cron jobs initialized
+2026-06-26T08:54:48.419Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:54:48.474Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T08:54:50.217Z [debug]: Socket connected: ZJsXSMflVqNlbtbhAAAB
+2026-06-26T08:54:50.430Z [debug]: Socket connected: 0DlADtdmb4sU680MAAAD
+2026-06-26T08:55:28.801Z [info]: MongoDB connected successfully
+2026-06-26T08:55:28.823Z [info]: Cron jobs initialized
+2026-06-26T08:55:28.832Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:55:28.882Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T08:55:28.959Z [debug]: Socket connected: 3zTzX0b6oE-f32JDAAAC
+2026-06-26T08:55:28.965Z [debug]: Socket connected: 01fxSOJrCGFxSRS5AAAD
+2026-06-26T08:56:31.635Z [info]: MongoDB connected successfully
+2026-06-26T08:56:31.663Z [info]: Cron jobs initialized
+2026-06-26T08:56:31.674Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:56:31.743Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T08:56:31.821Z [debug]: Socket connected: 7_rElF4xusQM-BcMAAAC
+2026-06-26T08:56:33.534Z [info]: MongoDB connected successfully
+2026-06-26T08:56:33.558Z [info]: Cron jobs initialized
+2026-06-26T08:56:33.568Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:56:33.619Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T08:56:33.671Z [debug]: Socket connected: nuXyWF1UEH6cj_gvAAAC
+2026-06-26T08:56:33.675Z [debug]: Socket connected: 6XFgxdiruMDRkkx9AAAD
+2026-06-26T08:56:55.260Z [info]: MongoDB connected successfully
+2026-06-26T08:56:55.287Z [info]: Cron jobs initialized
+2026-06-26T08:56:55.296Z [info]: Server running on port 5000 in development mode
+2026-06-26T08:56:55.368Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T08:56:55.447Z [debug]: Socket connected: s__6yN5z3Zg5MS-LAAAC
+2026-06-26T08:56:55.456Z [debug]: Socket connected: MNShMLX7RgYkYmsMAAAD
+2026-06-26T09:02:52.945Z [debug]: Socket disconnected: s__6yN5z3Zg5MS-LAAAC
+2026-06-26T09:02:52.947Z [debug]: Socket disconnected: MNShMLX7RgYkYmsMAAAD
+2026-06-26T09:02:55.007Z [debug]: Socket connected: 99j18vmReZ5GxCRPAAAG
+2026-06-26T09:02:55.047Z [debug]: Socket connected: bUu6eXIYNLAUGe1TAAAH
+2026-06-26T09:03:22.753Z [debug]: Socket disconnected: 99j18vmReZ5GxCRPAAAG
+2026-06-26T09:03:22.754Z [debug]: Socket disconnected: bUu6eXIYNLAUGe1TAAAH
+2026-06-26T09:03:42.904Z [info]: Successful login {"userId":"6a3de40fd7f8b32566d4a86d","email":"cashier@h2o.com","ip":"::1"}
+2026-06-26T09:05:25.576Z [info]: Onboarding completed {"userId":"6a3de40fd7f8b32566d4a86d","username":"cashier"}
+2026-06-26T09:05:25.819Z [debug]: Socket connected: 6fv1tT3byWBSlfLcAAAK
+2026-06-26T09:05:25.837Z [debug]: Socket connected: sCj302VYuXReL9vVAAAL
+2026-06-26T09:05:51.308Z [debug]: Socket disconnected: 6fv1tT3byWBSlfLcAAAK
+2026-06-26T09:05:51.309Z [debug]: Socket disconnected: sCj302VYuXReL9vVAAAL
+2026-06-26T09:06:09.369Z [info]: Successful login {"userId":"6a3de40fd7f8b32566d4a86d","email":"cashier@h2o.com","ip":"::1"}
+2026-06-26T09:06:09.616Z [debug]: Socket connected: iySb4SFg_WDWqlpzAAAO
+2026-06-26T09:06:09.619Z [debug]: Socket connected: 5obhA7PVWewnqjZRAAAP
+2026-06-26T09:07:05.205Z [debug]: Socket disconnected: 5obhA7PVWewnqjZRAAAP
+2026-06-26T09:07:05.210Z [debug]: Socket disconnected: iySb4SFg_WDWqlpzAAAO
+2026-06-26T09:07:13.061Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T09:07:13.310Z [debug]: Socket connected: FyxKhv5YZqTzDYudAAAS
+2026-06-26T09:07:13.312Z [debug]: Socket connected: EOzJtGimFXSk_anOAAAT
+2026-06-26T09:07:50.457Z [debug]: Socket disconnected: FyxKhv5YZqTzDYudAAAS
+2026-06-26T09:07:50.458Z [debug]: Socket disconnected: EOzJtGimFXSk_anOAAAT
+2026-06-26T09:07:50.872Z [debug]: Socket connected: Ixq7pQ8blMytnIiOAAAW
+2026-06-26T09:07:50.876Z [debug]: Socket connected: paY5WGeEVSU84pcnAAAX
+2026-06-26T09:09:09.651Z [debug]: Socket disconnected: Ixq7pQ8blMytnIiOAAAW
+2026-06-26T09:09:09.653Z [debug]: Socket disconnected: paY5WGeEVSU84pcnAAAX
+2026-06-26T22:59:54.512Z [info]: MongoDB connected successfully
+2026-06-26T22:59:54.701Z [info]: Cron jobs initialized
+2026-06-26T22:59:54.728Z [info]: Server running on port 5000 in development mode
+2026-06-26T22:59:55.074Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:00:17.208Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T23:00:17.935Z [debug]: Socket connected: Xgt9F5tmtlaSkEmXAAAC
+2026-06-26T23:00:17.942Z [debug]: Socket connected: h5o-GaoXIGuuAxJ8AAAD
+2026-06-26T23:18:55.639Z [debug]: Socket disconnected: Xgt9F5tmtlaSkEmXAAAC
+2026-06-26T23:18:55.642Z [debug]: Socket disconnected: h5o-GaoXIGuuAxJ8AAAD
+2026-06-26T23:19:12.608Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T23:19:13.164Z [debug]: Socket connected: 3vSCSPRb1gJsNSGWAAAI
+2026-06-26T23:19:13.189Z [debug]: Socket connected: 3fqCCpmEmah2IERfAAAJ
+2026-06-26T23:35:00.196Z [debug]: Socket disconnected: 3vSCSPRb1gJsNSGWAAAI
+2026-06-26T23:35:00.200Z [debug]: Socket disconnected: 3fqCCpmEmah2IERfAAAJ
+2026-06-26T23:44:00.293Z [info]: MongoDB connected successfully
+2026-06-26T23:44:00.361Z [info]: Cron jobs initialized
+2026-06-26T23:44:00.388Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:44:00.508Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:53:40.541Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-26T23:53:41.159Z [debug]: Socket connected: DN-OzZurwRvLSIHgAAAC
+2026-06-26T23:53:41.167Z [debug]: Socket connected: 6yajU0V80N7zqppwAAAD
+2026-06-26T23:54:07.654Z [info]: MongoDB connected successfully
+2026-06-26T23:54:07.734Z [info]: Cron jobs initialized
+2026-06-26T23:54:07.764Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:54:07.870Z [debug]: Socket connected: k0Q7_NTV8il1_iiYAAAC
+2026-06-26T23:54:07.890Z [debug]: Socket connected: _U-dyO-EEO_rt8mVAAAD
+2026-06-26T23:54:07.966Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:54:26.654Z [info]: MongoDB connected successfully
+2026-06-26T23:54:26.722Z [info]: Cron jobs initialized
+2026-06-26T23:54:26.747Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:54:26.863Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:54:37.863Z [info]: MongoDB connected successfully
+2026-06-26T23:54:37.921Z [info]: Cron jobs initialized
+2026-06-26T23:54:37.948Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:54:38.067Z [debug]: Socket connected: _2YE5xRgJBamRJmhAAAC
+2026-06-26T23:54:38.086Z [debug]: Socket connected: zNI95h6LQfogDsvPAAAD
+2026-06-26T23:54:38.188Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:54:48.826Z [info]: MongoDB connected successfully
+2026-06-26T23:54:48.898Z [info]: Cron jobs initialized
+2026-06-26T23:54:48.921Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:54:49.008Z [debug]: Socket connected: FvOiaHsxjT9aOubWAAAC
+2026-06-26T23:54:49.018Z [debug]: Socket connected: k9nhpDNetHIy3KwqAAAD
+2026-06-26T23:54:49.125Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:56:02.094Z [info]: MongoDB connected successfully
+2026-06-26T23:56:02.147Z [info]: Cron jobs initialized
+2026-06-26T23:56:02.170Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:56:02.260Z [debug]: Socket connected: 9dFWU8tq7q5tfdBUAAAC
+2026-06-26T23:56:02.264Z [debug]: Socket connected: QgRv-5jTaFVEKHUfAAAD
+2026-06-26T23:56:02.349Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:57:03.047Z [info]: MongoDB connected successfully
+2026-06-26T23:57:03.191Z [info]: Sample products created
+2026-06-26T23:57:03.214Z [info]: Seed completed
+2026-06-26T23:57:19.253Z [info]: MongoDB connected successfully
+2026-06-26T23:57:19.327Z [info]: Cron jobs initialized
+2026-06-26T23:57:19.356Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:57:19.696Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:57:19.829Z [debug]: Socket connected: 9CnN075J3889HQGvAAAC
+2026-06-26T23:57:19.849Z [debug]: Socket connected: FVy3feablbYTJwQfAAAD
+2026-06-26T23:57:30.105Z [debug]: Socket disconnected: 9CnN075J3889HQGvAAAC
+2026-06-26T23:57:30.109Z [debug]: Socket disconnected: FVy3feablbYTJwQfAAAD
+2026-06-26T23:57:31.578Z [debug]: Socket connected: Mgl0CL2xAg1IVMdRAAAG
+2026-06-26T23:57:31.582Z [debug]: Socket connected: 9YeE2xenlSRaZOFUAAAH
+2026-06-26T23:58:04.669Z [info]: MongoDB connected successfully
+2026-06-26T23:58:04.734Z [info]: Cron jobs initialized
+2026-06-26T23:58:04.761Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:58:04.922Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:58:04.938Z [debug]: Socket connected: 4b6UHnFu1QWwCwZTAAAC
+2026-06-26T23:58:04.952Z [debug]: Socket connected: VL26rDpmJNDYuDk4AAAD
+2026-06-26T23:58:12.255Z [info]: MongoDB connected successfully
+2026-06-26T23:58:12.324Z [info]: Cron jobs initialized
+2026-06-26T23:58:12.350Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:58:12.490Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:58:12.525Z [debug]: Socket connected: CXS06MYInphbWpuTAAAC
+2026-06-26T23:58:12.537Z [debug]: Socket connected: 0OKL2E_hABf41P3sAAAD
+2026-06-26T23:58:31.619Z [info]: MongoDB connected successfully
+2026-06-26T23:58:31.685Z [info]: Cron jobs initialized
+2026-06-26T23:58:31.707Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:58:31.774Z [debug]: Socket connected: qrkLn23TPOTJF2MjAAAC
+2026-06-26T23:58:31.804Z [debug]: Socket connected: gdcsZwUhdfdb4agzAAAD
+2026-06-26T23:58:31.886Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:58:38.780Z [info]: MongoDB connected successfully
+2026-06-26T23:58:38.831Z [info]: Cron jobs initialized
+2026-06-26T23:58:38.855Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:58:38.985Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:58:39.663Z [debug]: Socket connected: GslaqPtUorTxCDwzAAAB
+2026-06-26T23:58:39.984Z [debug]: Socket connected: dfYhE2mKY7TwZlTrAAAD
+2026-06-26T23:58:53.509Z [debug]: Socket disconnected: GslaqPtUorTxCDwzAAAB
+2026-06-26T23:58:53.518Z [debug]: Socket disconnected: dfYhE2mKY7TwZlTrAAAD
+2026-06-26T23:58:54.777Z [debug]: Socket connected: qpjIPRAqvblssTN1AAAG
+2026-06-26T23:58:54.785Z [debug]: Socket connected: rMSwPW3ZbW7-ofteAAAH
+2026-06-26T23:59:17.947Z [info]: MongoDB connected successfully
+2026-06-26T23:59:18.012Z [info]: Cron jobs initialized
+2026-06-26T23:59:18.038Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:59:18.181Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:59:18.859Z [debug]: Socket connected: d2MM9FXOLZpXgWreAAAB
+2026-06-26T23:59:19.197Z [debug]: Socket connected: vegTCutwPS6uWAcuAAAD
+2026-06-26T23:59:45.494Z [info]: MongoDB connected successfully
+2026-06-26T23:59:45.557Z [info]: Cron jobs initialized
+2026-06-26T23:59:45.576Z [info]: Server running on port 5000 in development mode
+2026-06-26T23:59:45.746Z [debug]: Socket connected: RNkqSO_1Yn4ba-sXAAAB
+2026-06-26T23:59:45.752Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-26T23:59:46.498Z [debug]: Socket connected: ZOGT0uFGTKhfZUkxAAAD
+2026-06-27T00:00:00.069Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:00:00.091Z [info]: Daily morning checks completed
+2026-06-27T00:00:25.646Z [info]: MongoDB connected successfully
+2026-06-27T00:00:25.892Z [info]: Seed completed
+2026-06-27T00:00:33.051Z [info]: MongoDB connected successfully
+2026-06-27T00:00:33.124Z [info]: Cron jobs initialized
+2026-06-27T00:00:33.147Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:00:33.283Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:00:34.021Z [debug]: Socket connected: V4T9fHlWY0yXjY66AAAB
+2026-06-27T00:00:34.092Z [debug]: Socket connected: sk3PksSJA7UOw0XzAAAD
+2026-06-27T00:00:35.587Z [debug]: Socket disconnected: V4T9fHlWY0yXjY66AAAB
+2026-06-27T00:00:35.590Z [debug]: Socket disconnected: sk3PksSJA7UOw0XzAAAD
+2026-06-27T00:00:36.484Z [debug]: Socket connected: tc48odZ6YysuRwQlAAAG
+2026-06-27T00:00:36.491Z [debug]: Socket connected: vYurV61rkj7uAU-dAAAH
+2026-06-27T00:02:42.070Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:03:05.873Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:03:11.510Z [info]: MongoDB connected successfully
+2026-06-27T00:03:11.578Z [info]: Cron jobs initialized
+2026-06-27T00:03:11.601Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:03:11.748Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:03:31.241Z [info]: MongoDB connected successfully
+2026-06-27T00:03:31.323Z [info]: Cron jobs initialized
+2026-06-27T00:03:31.353Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:03:31.745Z [debug]: Socket connected: 2nGSIKjYMMwcpfdsAAAC
+2026-06-27T00:03:31.780Z [debug]: Socket connected: -NEgu3gN7a3W6sJ5AAAD
+2026-06-27T00:03:31.789Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:04:03.100Z [info]: MongoDB connected successfully
+2026-06-27T00:04:03.168Z [info]: Cron jobs initialized
+2026-06-27T00:04:03.195Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:04:03.271Z [debug]: Socket connected: N1I-m6Kridic4Wh0AAAB
+2026-06-27T00:04:03.343Z [debug]: Socket connected: wUQzvYF-iXyfhWzbAAAD
+2026-06-27T00:04:03.456Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:04:42.271Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:04:48.890Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:04:49.990Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:05:06.155Z [info]: MongoDB connected successfully
+2026-06-27T00:05:06.226Z [info]: Cron jobs initialized
+2026-06-27T00:05:06.255Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:05:06.419Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:05:06.795Z [debug]: Socket connected: NBM_0pzEt0Tp0YxlAAAB
+2026-06-27T00:05:07.142Z [debug]: Socket connected: O-Nf9lGilYO1E0fnAAAD
+2026-06-27T00:07:18.554Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:09:05.518Z [debug]: Socket disconnected: NBM_0pzEt0Tp0YxlAAAB
+2026-06-27T00:09:05.522Z [debug]: Socket disconnected: O-Nf9lGilYO1E0fnAAAD
+2026-06-27T00:09:13.636Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T00:09:14.189Z [debug]: Socket connected: aGDRCToj-pPHDXVuAAAG
+2026-06-27T00:09:14.194Z [debug]: Socket connected: 4D3J7SenCL94_50IAAAH
+2026-06-27T00:09:22.813Z [info]: MongoDB connected successfully
+2026-06-27T00:09:22.896Z [info]: Cron jobs initialized
+2026-06-27T00:09:22.923Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:09:23.091Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:09:25.011Z [debug]: Socket connected: OJu-fucCN4dSve5oAAAB
+2026-06-27T00:09:27.532Z [debug]: Socket connected: -iRAD_k6-2ST-pJBAAAD
+2026-06-27T00:09:37.513Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:10:35.578Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:10:41.976Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:17:27.393Z [info]: MongoDB connected successfully
+2026-06-27T00:17:27.474Z [info]: Cron jobs initialized
+2026-06-27T00:17:27.499Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:17:27.660Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:17:35.362Z [info]: MongoDB connected successfully
+2026-06-27T00:17:35.419Z [info]: Cron jobs initialized
+2026-06-27T00:17:35.442Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:17:35.538Z [debug]: Socket connected: ya6SuV5OpEZ4h8DuAAAB
+2026-06-27T00:17:35.621Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:17:36.086Z [debug]: Socket connected: 0HWkJbBPvi5t1l0gAAAD
+2026-06-27T00:18:40.377Z [info]: MongoDB connected successfully
+2026-06-27T00:18:40.456Z [info]: Cron jobs initialized
+2026-06-27T00:18:40.483Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:18:40.615Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:18:41.492Z [debug]: Socket connected: SW_S4DzAzoJFOkesAAAB
+2026-06-27T00:18:45.508Z [info]: MongoDB connected successfully
+2026-06-27T00:18:45.559Z [info]: Cron jobs initialized
+2026-06-27T00:18:45.584Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:18:45.702Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:18:51.588Z [info]: MongoDB connected successfully
+2026-06-27T00:18:51.644Z [info]: Cron jobs initialized
+2026-06-27T00:18:51.668Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:18:51.736Z [debug]: Socket connected: sMXIk56a94Ik_tdDAAAB
+2026-06-27T00:18:51.891Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:18:57.103Z [info]: MongoDB connected successfully
+2026-06-27T00:18:57.159Z [info]: Cron jobs initialized
+2026-06-27T00:18:57.186Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:18:57.323Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:19:03.201Z [info]: MongoDB connected successfully
+2026-06-27T00:19:03.278Z [info]: Cron jobs initialized
+2026-06-27T00:19:03.310Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:19:03.572Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:19:03.588Z [debug]: Socket connected: K-BMJw1nslyGo3o7AAAB
+2026-06-27T00:19:03.651Z [debug]: Socket connected: Ga5JSWbFm1PpeAsRAAAD
+2026-06-27T00:20:26.072Z [info]: MongoDB connected successfully
+2026-06-27T00:20:26.142Z [info]: Cron jobs initialized
+2026-06-27T00:20:26.166Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:20:26.328Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:20:30.584Z [debug]: Socket connected: Gh3xGcS_rPZL5YXFAAAC
+2026-06-27T00:20:30.592Z [debug]: Socket connected: A5yyD0GxGkgWMmTpAAAD
+2026-06-27T00:21:41.963Z [info]: MongoDB connected successfully
+2026-06-27T00:21:42.031Z [info]: Cron jobs initialized
+2026-06-27T00:21:42.056Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:21:42.278Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:21:42.665Z [debug]: Socket connected: XPeK_VOUhD2R9zy6AAAC
+2026-06-27T00:21:42.672Z [debug]: Socket connected: U5TSx03Q6ZnlRbyKAAAD
+2026-06-27T00:24:24.954Z [debug]: Socket disconnected: U5TSx03Q6ZnlRbyKAAAD
+2026-06-27T00:24:24.956Z [debug]: Socket disconnected: XPeK_VOUhD2R9zy6AAAC
+2026-06-27T00:24:32.412Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T00:24:32.888Z [debug]: Socket connected: M25BEmf7vttMn8WiAAAG
+2026-06-27T00:24:32.893Z [debug]: Socket connected: lePSOSNtlUfnvJVIAAAH
+2026-06-27T00:25:50.410Z [error]: MongoServerError: This MongoDB deployment does not support retryable writes. Please add retryWrites=false to your connection string.
+    at executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:289:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async Collection.findOneAndUpdate (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\collection.ts:1041:12)
+    at async model.Query._findOneAndUpdate (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongoose\lib\query.js:3623:13)
+    at async maybeTracedQueryExec (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongoose\lib\query.js:4801:65)
+    at async <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\deliveryService.ts:206:26)
+    at async <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\inventoryMovementService.ts:50:20)
+    at async ClientSession.withTransaction (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sessions.ts:827:20)
+    at async Function.withTransaction (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\inventoryMovementService.ts:49:9) {"error":"This MongoDB deployment does not support retryable writes. Please add retryWrites=false to your connection string."}
+2026-06-27T00:25:55.417Z [error]: MongoServerError: This MongoDB deployment does not support retryable writes. Please add retryWrites=false to your connection string.
+    at executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:289:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async Collection.findOneAndUpdate (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\collection.ts:1041:12)
+    at async model.Query._findOneAndUpdate (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongoose\lib\query.js:3623:13)
+    at async maybeTracedQueryExec (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongoose\lib\query.js:4801:65)
+    at async <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\deliveryService.ts:206:26)
+    at async <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\inventoryMovementService.ts:50:20)
+    at async ClientSession.withTransaction (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sessions.ts:827:20)
+    at async Function.withTransaction (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\inventoryMovementService.ts:49:9) {"error":"This MongoDB deployment does not support retryable writes. Please add retryWrites=false to your connection string."}
+2026-06-27T00:27:33.413Z [info]: MongoDB connected successfully
+2026-06-27T00:27:33.496Z [info]: Cron jobs initialized
+2026-06-27T00:27:33.521Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:27:33.662Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:27:34.105Z [debug]: Socket connected: vc8UpfrzlaLqYaGxAAAB
+2026-06-27T00:27:34.151Z [debug]: Socket connected: lXmdKxYjUHPsuz5TAAAD
+2026-06-27T00:28:11.496Z [warn]: MongoDB disconnected
+2026-06-27T00:28:33.504Z [info]: MongoDB connected successfully
+2026-06-27T00:28:33.529Z [info]: Cron jobs initialized
+2026-06-27T00:28:33.538Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:28:33.602Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:28:33.764Z [debug]: Socket connected: ycaBCn_FgMuODo4uAAAB
+2026-06-27T00:28:34.124Z [debug]: Socket connected: tvM_FukYvm-dcePlAAAD
+2026-06-27T00:28:47.423Z [warn]: MongoDB disconnected
+2026-06-27T00:29:11.087Z [info]: MongoDB connected successfully
+2026-06-27T00:29:11.112Z [info]: Cron jobs initialized
+2026-06-27T00:29:11.123Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:29:11.182Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:29:13.027Z [info]: MongoDB connected successfully
+2026-06-27T00:29:13.057Z [info]: Cron jobs initialized
+2026-06-27T00:29:13.066Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:29:13.122Z [debug]: Socket connected: 0TH_id8CWP0hwqMXAAAC
+2026-06-27T00:29:13.133Z [debug]: Socket connected: -ZZ_yPmjzOOLJx_2AAAD
+2026-06-27T00:29:13.153Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:29:20.209Z [info]: MongoDB connected successfully
+2026-06-27T00:29:20.243Z [info]: Cron jobs initialized
+2026-06-27T00:29:20.262Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:29:20.342Z [debug]: Socket connected: wON2LvgaBlUtDRrGAAAC
+2026-06-27T00:29:20.365Z [debug]: Socket connected: xkVTkLpstZ9Cn_tLAAAD
+2026-06-27T00:29:20.397Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:29:28.389Z [warn]: MongoDB disconnected
+2026-06-27T00:31:19.396Z [debug]: Socket disconnected: wON2LvgaBlUtDRrGAAAC
+2026-06-27T00:31:19.397Z [debug]: Socket disconnected: xkVTkLpstZ9Cn_tLAAAD
+2026-06-27T00:31:19.848Z [debug]: Socket connected: EVvGnqLRSQVSoX8DAAAG
+2026-06-27T00:31:19.851Z [debug]: Socket connected: gD0_WIPaJbrBFGVBAAAH
+2026-06-27T00:32:24.750Z [debug]: Socket disconnected: gD0_WIPaJbrBFGVBAAAH
+2026-06-27T00:32:24.752Z [debug]: Socket disconnected: EVvGnqLRSQVSoX8DAAAG
+2026-06-27T00:32:25.216Z [debug]: Socket connected: lvdJKePV-LTRLOAlAAAK
+2026-06-27T00:32:25.218Z [debug]: Socket connected: ZxwRJyihk5XGRzrwAAAL
+2026-06-27T00:35:35.600Z [info]: MongoDB connected successfully
+2026-06-27T00:35:35.629Z [info]: Cron jobs initialized
+2026-06-27T00:35:35.638Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:35:35.682Z [debug]: Socket connected: J_4zFmXTXbITn3ZjAAAC
+2026-06-27T00:35:35.692Z [debug]: Socket connected: 9QcCCPlf9eBBBS27AAAD
+2026-06-27T00:35:35.722Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:35:40.448Z [info]: MongoDB connected successfully
+2026-06-27T00:35:40.470Z [info]: Cron jobs initialized
+2026-06-27T00:35:40.479Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:35:40.541Z [debug]: Socket connected: 2dXzT1gU3LpKpzCUAAAC
+2026-06-27T00:35:40.549Z [debug]: Socket connected: UXf_wqJsKAUDZVZvAAAD
+2026-06-27T00:35:40.550Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:35:45.484Z [info]: MongoDB connected successfully
+2026-06-27T00:35:45.509Z [info]: Cron jobs initialized
+2026-06-27T00:35:45.519Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:35:45.561Z [debug]: Socket connected: LaQhc61ae0NOOIdkAAAC
+2026-06-27T00:35:45.565Z [debug]: Socket connected: TG8q1ddqFqxoUbgTAAAD
+2026-06-27T00:35:45.594Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:36:28.540Z [warn]: MongoDB disconnected
+2026-06-27T00:37:12.578Z [info]: MongoDB connected successfully
+2026-06-27T00:37:12.609Z [info]: Cron jobs initialized
+2026-06-27T00:37:12.617Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:37:12.681Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:37:12.714Z [debug]: Socket connected: _MZalL-Hd_Um_pKoAAAC
+2026-06-27T00:37:12.720Z [debug]: Socket connected: g7nncaqYigwA2TFTAAAD
+2026-06-27T00:37:33.647Z [debug]: Socket disconnected: _MZalL-Hd_Um_pKoAAAC
+2026-06-27T00:37:33.681Z [debug]: Socket disconnected: g7nncaqYigwA2TFTAAAD
+2026-06-27T00:37:34.134Z [debug]: Socket connected: F_Z8rk7Vc6bDgDYRAAAG
+2026-06-27T00:37:34.136Z [debug]: Socket connected: lCwV7zJ5d8_gBiftAAAH
+2026-06-27T00:39:54.705Z [debug]: Socket disconnected: F_Z8rk7Vc6bDgDYRAAAG
+2026-06-27T00:39:54.710Z [debug]: Socket disconnected: lCwV7zJ5d8_gBiftAAAH
+2026-06-27T00:40:00.411Z [info]: MongoDB connected successfully
+2026-06-27T00:40:00.445Z [info]: Cron jobs initialized
+2026-06-27T00:40:00.455Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:40:00.511Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:40:03.519Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T00:40:03.761Z [debug]: Socket connected: uV2mhWVY3bthCpJyAAAC
+2026-06-27T00:40:03.764Z [debug]: Socket connected: pj7E7DpIeNsGL3_eAAAD
+2026-06-27T00:40:55.185Z [debug]: Socket disconnected: uV2mhWVY3bthCpJyAAAC
+2026-06-27T00:40:55.187Z [debug]: Socket disconnected: pj7E7DpIeNsGL3_eAAAD
+2026-06-27T00:40:55.611Z [debug]: Socket connected: SD4tZc48XVgqRkN-AAAG
+2026-06-27T00:40:55.613Z [debug]: Socket connected: TDO2SydQMKxyUbgfAAAH
+2026-06-27T00:41:45.101Z [debug]: Socket disconnected: TDO2SydQMKxyUbgfAAAH
+2026-06-27T00:41:45.102Z [debug]: Socket disconnected: SD4tZc48XVgqRkN-AAAG
+2026-06-27T00:41:45.537Z [debug]: Socket connected: FwO1Yw1qRfJNdVdAAAAK
+2026-06-27T00:41:45.541Z [debug]: Socket connected: imE9uQcqS85M3WsUAAAL
+2026-06-27T00:45:39.240Z [info]: MongoDB connected successfully
+2026-06-27T00:45:39.267Z [info]: Cron jobs initialized
+2026-06-27T00:45:39.280Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:45:39.338Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:45:39.686Z [debug]: Socket connected: nZ04achv9uGz0ZwvAAAB
+2026-06-27T00:45:40.309Z [debug]: Socket connected: T-3kWBjJ4QBV_SGRAAAD
+2026-06-27T00:45:47.749Z [info]: MongoDB connected successfully
+2026-06-27T00:45:47.772Z [info]: Cron jobs initialized
+2026-06-27T00:45:47.781Z [info]: Server running on port 5000 in development mode
+2026-06-27T00:45:47.834Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T00:45:47.932Z [debug]: Socket connected: 4GgG7IUes1VhUtRtAAAC
+2026-06-27T00:45:47.942Z [debug]: Socket connected: mC9TLLiCibTSq2RFAAAD
+2026-06-27T00:46:32.668Z [warn]: MongoDB disconnected
+2026-06-27T00:54:37.916Z [warn]: MongoDB disconnected
+2026-06-27T01:00:00.100Z [debug]: Socket disconnected: 4GgG7IUes1VhUtRtAAAC
+2026-06-27T01:00:00.102Z [debug]: Socket disconnected: mC9TLLiCibTSq2RFAAAD
+2026-06-27T01:00:12.106Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T01:00:12.481Z [debug]: Socket connected: 6hq9zchHrTRKxtl_AAAG
+2026-06-27T01:00:12.483Z [debug]: Socket connected: 4EdJfmpw2v44SjHLAAAH
+2026-06-27T01:20:00.139Z [debug]: Socket disconnected: 6hq9zchHrTRKxtl_AAAG
+2026-06-27T01:20:00.142Z [debug]: Socket disconnected: 4EdJfmpw2v44SjHLAAAH
+2026-06-27T01:38:16.676Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T01:38:16.970Z [debug]: Socket connected: D4Z_ZefGoyym7jv7AAAK
+2026-06-27T01:38:16.972Z [debug]: Socket connected: MUjrDecrIYimkvFUAAAL
+2026-06-27T01:53:37.271Z [debug]: Socket disconnected: MUjrDecrIYimkvFUAAAL
+2026-06-27T01:53:37.272Z [debug]: Socket disconnected: D4Z_ZefGoyym7jv7AAAK
+2026-06-27T02:47:14.775Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T02:47:15.101Z [debug]: Socket connected: RATSx3E3LtdNYRygAAAO
+2026-06-27T02:47:15.105Z [debug]: Socket connected: 1gkAkQSNsMVt6IOJAAAP
+2026-06-27T03:05:00.130Z [debug]: Socket disconnected: RATSx3E3LtdNYRygAAAO
+2026-06-27T03:05:00.132Z [debug]: Socket disconnected: 1gkAkQSNsMVt6IOJAAAP
+2026-06-27T03:07:41.924Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T03:07:42.238Z [debug]: Socket connected: Tq3FFswru140Exx3AAAS
+2026-06-27T03:07:42.240Z [debug]: Socket connected: s8I5JA3BVno5CDJcAAAT
+2026-06-27T03:25:00.165Z [debug]: Socket disconnected: Tq3FFswru140Exx3AAAS
+2026-06-27T03:25:00.173Z [debug]: Socket disconnected: s8I5JA3BVno5CDJcAAAT
+2026-06-27T04:00:00.042Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T04:00:00.044Z [info]: Overdue delivery check completed
+2026-06-27T04:00:12.350Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T04:00:12.692Z [debug]: Socket connected: rryQLg2IybFh8Q0sAAAW
+2026-06-27T04:00:12.695Z [debug]: Socket connected: VPRlYcy1SH4g9eDsAAAX
+2026-06-27T04:20:00.117Z [debug]: Socket disconnected: rryQLg2IybFh8Q0sAAAW
+2026-06-27T04:20:00.119Z [debug]: Socket disconnected: VPRlYcy1SH4g9eDsAAAX
+2026-06-27T05:07:56.544Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T05:07:56.930Z [debug]: Socket connected: gj6rv2eurbBa7NlnAAAa
+2026-06-27T05:07:56.932Z [debug]: Socket connected: _6sbS-2ui21hJGm6AAAb
+2026-06-27T05:25:00.159Z [debug]: Socket disconnected: gj6rv2eurbBa7NlnAAAa
+2026-06-27T05:25:00.163Z [debug]: Socket disconnected: _6sbS-2ui21hJGm6AAAb
+2026-06-27T05:35:23.637Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T05:35:23.950Z [debug]: Socket connected: 19x5Bs59Oj0bAJWaAAAe
+2026-06-27T05:35:23.952Z [debug]: Socket connected: CeGH9QRvXNXz1j1EAAAf
+2026-06-27T05:52:40.695Z [debug]: Socket disconnected: 19x5Bs59Oj0bAJWaAAAe
+2026-06-27T05:52:40.703Z [debug]: Socket disconnected: CeGH9QRvXNXz1j1EAAAf
+2026-06-27T06:13:28.093Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T06:13:28.397Z [debug]: Socket connected: 4jf9_NvApErDJmoiAAAi
+2026-06-27T06:13:28.401Z [debug]: Socket connected: qpaFtrU0kJ7wiQbZAAAj
+2026-06-27T06:14:03.453Z [info]: MongoDB connected successfully
+2026-06-27T06:14:03.485Z [info]: Cron jobs initialized
+2026-06-27T06:14:03.496Z [info]: Server running on port 5000 in development mode
+2026-06-27T06:14:03.572Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T06:14:05.490Z [debug]: Socket connected: sImR0cLQja1riw9yAAAB
+2026-06-27T06:14:06.304Z [debug]: Socket connected: DqRoBsgmTMjpQ3ATAAAD
+2026-06-27T06:14:08.232Z [debug]: Socket disconnected: DqRoBsgmTMjpQ3ATAAAD
+2026-06-27T06:14:08.235Z [debug]: Socket disconnected: sImR0cLQja1riw9yAAAB
+2026-06-27T06:14:10.724Z [debug]: Socket connected: gNjvcTUUFx8_2sjjAAAG
+2026-06-27T06:14:10.729Z [debug]: Socket connected: OldcbHsXsm3wIYonAAAH
+2026-06-27T06:17:46.286Z [debug]: Socket disconnected: gNjvcTUUFx8_2sjjAAAG
+2026-06-27T06:17:46.287Z [debug]: Socket disconnected: OldcbHsXsm3wIYonAAAH
+2026-06-27T06:33:53.531Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T06:33:53.846Z [debug]: Socket connected: Txi_oN3B8qUurvtOAAAK
+2026-06-27T06:33:53.848Z [debug]: Socket connected: aGSdlcUqltBytqUBAAAL
+2026-06-27T06:50:00.162Z [debug]: Socket disconnected: aGSdlcUqltBytqUBAAAL
+2026-06-27T06:50:00.165Z [debug]: Socket disconnected: Txi_oN3B8qUurvtOAAAK
+2026-06-27T07:00:08.778Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T07:00:09.073Z [debug]: Socket connected: 6co3T7-0R2NH7j1gAAAO
+2026-06-27T07:00:09.075Z [debug]: Socket connected: DAMJdh627VkjM9BPAAAP
+2026-06-27T07:20:00.100Z [debug]: Socket disconnected: 6co3T7-0R2NH7j1gAAAO
+2026-06-27T07:20:00.104Z [debug]: Socket disconnected: DAMJdh627VkjM9BPAAAP
+2026-06-27T07:21:32.505Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T07:21:32.809Z [debug]: Socket connected: WSYmVnmB11CPy67nAAAS
+2026-06-27T07:21:32.811Z [debug]: Socket connected: 0mNrbM05iVIr-pByAAAT
+2026-06-27T07:22:21.455Z [debug]: Socket disconnected: WSYmVnmB11CPy67nAAAS
+2026-06-27T07:22:21.457Z [debug]: Socket disconnected: 0mNrbM05iVIr-pByAAAT
+2026-06-27T07:22:21.992Z [debug]: Socket connected: EJzggK9tePZ0OSoWAAAW
+2026-06-27T07:22:21.994Z [debug]: Socket connected: yvIUnIHzpdpguofFAAAX
+2026-06-27T07:40:00.295Z [debug]: Socket disconnected: EJzggK9tePZ0OSoWAAAW
+2026-06-27T07:40:00.301Z [debug]: Socket disconnected: yvIUnIHzpdpguofFAAAX
+2026-06-27T08:14:38.856Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T08:14:39.595Z [debug]: Socket connected: LVUiLYpJ2gLCUgzWAAAa
+2026-06-27T08:14:39.602Z [debug]: Socket connected: jW7xoFVmQsYc-gezAAAb
+2026-06-27T08:15:53.313Z [debug]: Socket disconnected: LVUiLYpJ2gLCUgzWAAAa
+2026-06-27T08:15:53.316Z [debug]: Socket disconnected: jW7xoFVmQsYc-gezAAAb
+2026-06-27T08:16:16.479Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T08:16:17.171Z [debug]: Socket connected: KiQZSvJnhFE9R3KUAAAe
+2026-06-27T08:16:17.178Z [debug]: Socket connected: IFu_Se9DLXrkogDPAAAf
+2026-06-27T08:35:00.153Z [debug]: Socket disconnected: KiQZSvJnhFE9R3KUAAAe
+2026-06-27T08:35:00.155Z [debug]: Socket disconnected: IFu_Se9DLXrkogDPAAAf
+2026-06-27T11:36:07.077Z [info]: MongoDB connected successfully
+2026-06-27T11:36:07.151Z [info]: Cron jobs initialized
+2026-06-27T11:36:07.170Z [info]: Server running on port 5000 in development mode
+2026-06-27T11:36:07.518Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T11:36:47.744Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T11:36:48.276Z [debug]: Socket connected: hmcfxkEHWWxYWXEuAAAE
+2026-06-27T11:36:48.284Z [debug]: Socket connected: g4gDbqptKVMcya0iAAAF
+2026-06-27T11:52:39.788Z [debug]: Socket disconnected: hmcfxkEHWWxYWXEuAAAE
+2026-06-27T11:52:39.792Z [debug]: Socket disconnected: g4gDbqptKVMcya0iAAAF
+2026-06-27T11:52:51.641Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T11:52:52.163Z [debug]: Socket connected: wzeaVy4ddghbr5RUAAAI
+2026-06-27T11:52:52.171Z [debug]: Socket connected: e-4AdAPVhXLugE10AAAJ
+2026-06-27T11:54:44.875Z [debug]: Socket disconnected: e-4AdAPVhXLugE10AAAJ
+2026-06-27T11:54:44.885Z [debug]: Socket disconnected: wzeaVy4ddghbr5RUAAAI
+2026-06-27T11:54:54.760Z [debug]: Socket connected: u-O7Mh1LhYLN_HVDAAAM
+2026-06-27T11:54:54.771Z [debug]: Socket connected: 7AnWVhuJsn-SBPSMAAAN
+2026-06-27T11:54:54.819Z [debug]: Socket disconnected: 7AnWVhuJsn-SBPSMAAAN
+2026-06-27T11:54:54.822Z [debug]: Socket disconnected: u-O7Mh1LhYLN_HVDAAAM
+2026-06-27T11:54:55.464Z [debug]: Socket connected: sQ8akVM4uNpq4KqFAAAQ
+2026-06-27T11:54:55.467Z [debug]: Socket connected: slgmqi4ueOREk-YyAAAR
+2026-06-27T11:55:07.827Z [debug]: Socket disconnected: sQ8akVM4uNpq4KqFAAAQ
+2026-06-27T11:55:07.832Z [debug]: Socket disconnected: slgmqi4ueOREk-YyAAAR
+2026-06-27T12:19:03.113Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T12:19:03.651Z [debug]: Socket connected: g5rX7FulEzIF4d5KAAAW
+2026-06-27T12:19:03.656Z [debug]: Socket connected: ahhL9H327m5otOn3AAAX
+2026-06-27T12:35:00.127Z [debug]: Socket disconnected: g5rX7FulEzIF4d5KAAAW
+2026-06-27T12:35:00.131Z [debug]: Socket disconnected: ahhL9H327m5otOn3AAAX
+2026-06-27T13:37:15.216Z [info]: MongoDB connected successfully
+2026-06-27T13:37:16.280Z [info]: Cron jobs initialized
+2026-06-27T13:37:16.511Z [info]: Server running on port 5000 in development mode
+2026-06-27T13:37:19.343Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T13:37:36.901Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T13:37:40.416Z [debug]: Socket connected: hl2vI38JrXWSkcfBAAAG
+2026-06-27T13:37:40.460Z [debug]: Socket connected: OsY9TPJ5rYDNeQXtAAAH
+2026-06-27T16:11:24.751Z [info]: MongoDB connected successfully
+2026-06-27T16:11:24.794Z [info]: Cron jobs initialized
+2026-06-27T16:11:24.808Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:11:25.028Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:12:15.265Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T16:12:15.534Z [debug]: Socket connected: 0XP3DX-F3Ju9_pfrAAAE
+2026-06-27T16:12:15.540Z [debug]: Socket connected: pl06nBVxRqrDpPHjAAAF
+2026-06-27T16:30:00.115Z [debug]: Socket disconnected: 0XP3DX-F3Ju9_pfrAAAE
+2026-06-27T16:30:00.119Z [debug]: Socket disconnected: pl06nBVxRqrDpPHjAAAF
+2026-06-27T16:35:13.741Z [info]: MongoDB connected successfully
+2026-06-27T16:35:13.774Z [info]: Cron jobs initialized
+2026-06-27T16:35:13.786Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:35:13.855Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:35:14.627Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T16:35:15.023Z [debug]: Socket connected: FTcAM0a7ekSucWyTAAAC
+2026-06-27T16:35:15.027Z [debug]: Socket connected: jNoMLTd2WcKiLXUTAAAD
+2026-06-27T16:37:03.692Z [info]: MongoDB connected successfully
+2026-06-27T16:37:03.733Z [info]: Cron jobs initialized
+2026-06-27T16:37:03.750Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:37:03.880Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:37:13.808Z [info]: MongoDB connected successfully
+2026-06-27T16:37:13.841Z [info]: Cron jobs initialized
+2026-06-27T16:37:13.851Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:37:13.958Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:37:22.104Z [info]: MongoDB connected successfully
+2026-06-27T16:37:22.158Z [info]: Cron jobs initialized
+2026-06-27T16:37:22.176Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:37:22.280Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:37:25.193Z [debug]: Socket connected: kOzJFzrqmAkghH6MAAAC
+2026-06-27T16:37:25.202Z [debug]: Socket connected: w3q01gznU7OAlcpPAAAD
+2026-06-27T16:37:56.595Z [info]: MongoDB connected successfully
+2026-06-27T16:37:56.630Z [info]: Cron jobs initialized
+2026-06-27T16:37:56.639Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:37:56.715Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:37:56.724Z [debug]: Socket connected: MRSR9YRVC2wpQLT4AAAC
+2026-06-27T16:37:56.733Z [debug]: Socket connected: BPpwssVLBUpOJ1m3AAAD
+2026-06-27T16:38:28.866Z [info]: MongoDB connected successfully
+2026-06-27T16:38:28.903Z [info]: Cron jobs initialized
+2026-06-27T16:38:28.919Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:38:28.985Z [debug]: Socket connected: FAadBjesJ7uEMG76AAAB
+2026-06-27T16:38:29.080Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:38:30.178Z [debug]: Socket connected: zUHuSw_bJ1CP0PN4AAAD
+2026-06-27T16:38:54.486Z [info]: MongoDB connected successfully
+2026-06-27T16:38:54.528Z [info]: Cron jobs initialized
+2026-06-27T16:38:54.538Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:38:54.603Z [debug]: Socket connected: dqJz3SdBByB7xd2sAAAC
+2026-06-27T16:38:54.615Z [debug]: Socket connected: FqOFNyHZbFxHeoalAAAD
+2026-06-27T16:38:54.664Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:40:18.322Z [debug]: Socket disconnected: dqJz3SdBByB7xd2sAAAC
+2026-06-27T16:40:18.324Z [debug]: Socket disconnected: FqOFNyHZbFxHeoalAAAD
+2026-06-27T16:40:19.021Z [debug]: Socket connected: UeMCGahMdrW9LMWbAAAG
+2026-06-27T16:40:19.024Z [debug]: Socket connected: 11qQ1JLT0sQfkoWbAAAH
+2026-06-27T16:40:41.726Z [debug]: Socket disconnected: UeMCGahMdrW9LMWbAAAG
+2026-06-27T16:40:41.729Z [debug]: Socket disconnected: 11qQ1JLT0sQfkoWbAAAH
+2026-06-27T16:40:43.030Z [debug]: Socket connected: C9FU6-QlVy0ive8iAAAK
+2026-06-27T16:40:43.034Z [debug]: Socket connected: fQKvqmFxpaDJ0s-QAAAL
+2026-06-27T16:42:42.128Z [warn]: MongoDB disconnected
+2026-06-27T16:43:01.899Z [info]: MongoDB connected successfully
+2026-06-27T16:43:02.018Z [info]: Seed completed
+2026-06-27T16:43:04.836Z [info]: MongoDB connected successfully
+2026-06-27T16:43:04.839Z [info]: Starting v2 migration...
+2026-06-27T16:43:04.994Z [info]: Migration complete {"customersUpdated":7,"inventoryUpdated":3,"productsLinked":2,"gallonUpdated":2,"ordersArchived":5}
+2026-06-27T16:43:04.997Z [warn]: MongoDB disconnected
+2026-06-27T16:43:08.052Z [warn]: MongoDB disconnected
+2026-06-27T16:43:46.046Z [info]: MongoDB connected successfully
+2026-06-27T16:43:46.079Z [info]: Cron jobs initialized
+2026-06-27T16:43:46.090Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:43:46.139Z [debug]: Socket connected: _Wh5NWXwyapRM_lkAAAC
+2026-06-27T16:43:46.145Z [debug]: Socket connected: eNLWD-rBOpLOEyCJAAAD
+2026-06-27T16:43:46.200Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:43:54.625Z [info]: MongoDB connected successfully
+2026-06-27T16:43:54.663Z [info]: Cron jobs initialized
+2026-06-27T16:43:54.680Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:43:54.792Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:43:54.815Z [debug]: Socket connected: 6fMZOyDPdxEOjVwPAAAC
+2026-06-27T16:43:54.822Z [debug]: Socket connected: 77oQi5zB93A1Mll3AAAD
+2026-06-27T16:44:04.564Z [warn]: MongoDB disconnected
+2026-06-27T16:44:11.197Z [debug]: Socket disconnected: 6fMZOyDPdxEOjVwPAAAC
+2026-06-27T16:44:11.200Z [debug]: Socket disconnected: 77oQi5zB93A1Mll3AAAD
+2026-06-27T16:44:11.759Z [debug]: Socket connected: nlHO1pIlwuzUJJPnAAAG
+2026-06-27T16:44:11.762Z [debug]: Socket connected: Uu5dAEJ74UAfliAnAAAH
+2026-06-27T16:51:02.986Z [debug]: Socket disconnected: Uu5dAEJ74UAfliAnAAAH
+2026-06-27T16:51:02.987Z [debug]: Socket disconnected: nlHO1pIlwuzUJJPnAAAG
+2026-06-27T16:51:09.449Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T16:51:09.730Z [debug]: Socket connected: -7Oyy0S03_Ugvz49AAAK
+2026-06-27T16:51:09.736Z [debug]: Socket connected: 7Iqz3RpePxmVNeFeAAAL
+2026-06-27T16:57:37.118Z [info]: MongoDB connected successfully
+2026-06-27T16:57:37.157Z [info]: Cron jobs initialized
+2026-06-27T16:57:37.175Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:57:37.288Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:57:38.036Z [debug]: Socket connected: 0Xf1O0_W0htkdTPqAAAB
+2026-06-27T16:57:38.511Z [debug]: Socket connected: JEyKiN-9dH1erqEDAAAD
+2026-06-27T16:57:41.550Z [info]: MongoDB connected successfully
+2026-06-27T16:57:41.577Z [info]: Cron jobs initialized
+2026-06-27T16:57:41.586Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:57:41.630Z [debug]: Socket connected: SJpFoNtzc8wue6biAAAC
+2026-06-27T16:57:41.635Z [debug]: Socket connected: jfXumC4313a00YriAAAD
+2026-06-27T16:57:41.676Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:57:51.181Z [info]: MongoDB connected successfully
+2026-06-27T16:57:51.209Z [info]: Cron jobs initialized
+2026-06-27T16:57:51.222Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:57:51.288Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:57:52.494Z [debug]: Socket connected: 8SX8YmFSG-s4Uu32AAAB
+2026-06-27T16:57:52.528Z [debug]: Socket connected: reuav_iLCHlvHF-hAAAD
+2026-06-27T16:58:53.572Z [info]: MongoDB connected successfully
+2026-06-27T16:58:53.608Z [info]: Cron jobs initialized
+2026-06-27T16:58:53.620Z [info]: Server running on port 5000 in development mode
+2026-06-27T16:58:53.684Z [debug]: Socket connected: JJ0YLwzPii0thN8xAAAC
+2026-06-27T16:58:53.697Z [debug]: Socket connected: iFQp-bWQmAh4HK-rAAAD
+2026-06-27T16:58:53.746Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T16:59:04.590Z [info]: MongoDB connected successfully
+2026-06-27T16:59:04.593Z [info]: Starting v2 migration...
+2026-06-27T16:59:04.687Z [info]: Migration complete {"customersUpdated":0,"inventoryUpdated":0,"productsLinked":0,"gallonUpdated":2,"ordersArchived":0}
+2026-06-27T16:59:04.696Z [warn]: MongoDB disconnected
+2026-06-27T16:59:07.873Z [warn]: MongoDB disconnected
+2026-06-27T16:59:58.886Z [info]: MongoDB connected successfully
+2026-06-27T16:59:58.888Z [info]: Starting v2 migration...
+2026-06-27T16:59:58.947Z [info]: Migration complete {"customersUpdated":0,"inventoryUpdated":0,"productsLinked":0,"gallonUpdated":2,"ordersArchived":0}
+2026-06-27T16:59:58.951Z [warn]: MongoDB disconnected
+2026-06-27T17:00:17.202Z [info]: MongoDB connected successfully
+2026-06-27T17:00:17.236Z [info]: Cron jobs initialized
+2026-06-27T17:00:17.245Z [info]: Server running on port 5000 in development mode
+2026-06-27T17:00:17.303Z [debug]: Socket connected: hXGxJMaXPfFCdfRqAAAC
+2026-06-27T17:00:17.312Z [debug]: Socket connected: 0reXN7r2EbhuXpp4AAAD
+2026-06-27T17:00:17.357Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T17:18:53.861Z [info]: MongoDB connected successfully
+2026-06-27T17:18:53.889Z [info]: Cron jobs initialized
+2026-06-27T17:18:53.902Z [info]: Server running on port 5000 in development mode
+2026-06-27T17:18:54.026Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T17:19:03.904Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T17:19:04.171Z [debug]: Socket connected: 9P9LSlwPpsXya4wfAAAM
+2026-06-27T17:19:04.174Z [debug]: Socket connected: _flccL-jkSzztHlQAAAN
+2026-06-27T17:24:24.734Z [info]: MongoDB connected successfully
+2026-06-27T17:24:24.763Z [info]: Cron jobs initialized
+2026-06-27T17:24:24.773Z [info]: Server running on port 5000 in development mode
+2026-06-27T17:24:24.834Z [debug]: Socket connected: bSaEnOcxmKaiSe8yAAAC
+2026-06-27T17:24:24.839Z [debug]: Socket connected: CAmhVaz94yjW5wQvAAAD
+2026-06-27T17:24:24.873Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T17:24:28.130Z [info]: MongoDB connected successfully
+2026-06-27T17:24:28.161Z [info]: Cron jobs initialized
+2026-06-27T17:24:28.173Z [info]: Server running on port 5000 in development mode
+2026-06-27T17:24:28.257Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T17:24:28.347Z [debug]: Socket connected: FJpuNvAXolPPJGBFAAAC
+2026-06-27T17:24:28.356Z [debug]: Socket connected: APl0DpwF_8IiySR5AAAD
+2026-06-27T17:25:13.135Z [info]: MongoDB connected successfully
+2026-06-27T17:25:13.163Z [info]: Cron jobs initialized
+2026-06-27T17:25:13.175Z [info]: Server running on port 5000 in development mode
+2026-06-27T17:25:13.241Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T17:25:13.285Z [debug]: Socket connected: VrwdKFYtx-gzFyuKAAAC
+2026-06-27T17:25:13.292Z [debug]: Socket connected: X_OZ3miYld-C7Je6AAAD
+2026-06-27T17:33:25.881Z [info]: MongoDB connected successfully
+2026-06-27T17:33:25.911Z [info]: Cron jobs initialized
+2026-06-27T17:33:25.923Z [info]: Server running on port 5000 in development mode
+2026-06-27T17:33:25.992Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T17:33:26.355Z [debug]: Socket connected: Plpkj8dOzlfINcltAAAB
+2026-06-27T17:33:27.663Z [debug]: Socket connected: SqT-DMyYN29Z2zDTAAAD
+2026-06-27T17:35:00.153Z [debug]: Socket disconnected: Plpkj8dOzlfINcltAAAB
+2026-06-27T17:35:00.158Z [debug]: Socket disconnected: SqT-DMyYN29Z2zDTAAAD
+2026-06-27T17:35:05.458Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T17:35:05.725Z [debug]: Socket connected: SJJ0w7LLjmulFTwUAAAG
+2026-06-27T17:35:05.727Z [debug]: Socket connected: z-yfwpImDZSunrpcAAAH
+2026-06-27T17:43:16.946Z [info]: MongoDB connected successfully
+2026-06-27T17:43:16.991Z [info]: Cron jobs initialized
+2026-06-27T17:43:17.004Z [info]: Server running on port 5000 in development mode
+2026-06-27T17:43:17.109Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-27T17:43:21.487Z [debug]: Socket connected: Me-4oKMsECr3dmAKAAAB
+2026-06-27T17:43:21.954Z [debug]: Socket connected: t8lJ8NI9xah15SueAAAD
+2026-06-27T17:43:25.495Z [debug]: Socket disconnected: t8lJ8NI9xah15SueAAAD
+2026-06-27T17:43:25.497Z [debug]: Socket disconnected: Me-4oKMsECr3dmAKAAAB
+2026-06-27T17:43:29.715Z [debug]: Socket connected: qu2G8Hp2HDIombDYAAAG
+2026-06-27T17:43:29.717Z [debug]: Socket connected: EJfappgp_oUN2iBbAAAH
+2026-06-27T17:43:32.138Z [debug]: Socket disconnected: EJfappgp_oUN2iBbAAAH
+2026-06-27T17:43:32.139Z [debug]: Socket disconnected: qu2G8Hp2HDIombDYAAAG
+2026-06-27T17:43:32.548Z [debug]: Socket connected: X7dJOcnGB_EmJCYfAAAK
+2026-06-27T17:43:32.551Z [debug]: Socket connected: _IdeJQVZsLvxlC7UAAAL
+2026-06-27T17:43:38.655Z [debug]: Socket connected: j1032iCGIoV16dRVAAAO
+2026-06-27T17:43:38.659Z [debug]: Socket connected: UFyFUX0V_SwGQKASAAAP
+2026-06-27T17:43:40.741Z [debug]: Socket disconnected: X7dJOcnGB_EmJCYfAAAK
+2026-06-27T17:43:40.750Z [debug]: Socket disconnected: _IdeJQVZsLvxlC7UAAAL
+2026-06-27T17:43:44.955Z [debug]: Socket disconnected: j1032iCGIoV16dRVAAAO
+2026-06-27T17:43:44.958Z [debug]: Socket disconnected: UFyFUX0V_SwGQKASAAAP
+2026-06-27T17:43:57.899Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-27T17:43:58.156Z [debug]: Socket connected: OMcvuLAYENscGjAlAAAS
+2026-06-27T17:43:58.159Z [debug]: Socket connected: saMEXttbCqYgUg-7AAAT
+2026-06-27T17:44:58.568Z [debug]: Socket disconnected: saMEXttbCqYgUg-7AAAT
+2026-06-27T17:44:58.570Z [debug]: Socket disconnected: OMcvuLAYENscGjAlAAAS

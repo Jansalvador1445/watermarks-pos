@@ -1,0 +1,19 @@
+import { Request, Response } from 'express';
+export declare const getGallonOverview: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const recordGallonOut: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const recordGallonReturn: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const recordGallonTransaction: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const getGallonHistory: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const getInventory: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const getInventoryItem: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const createInventoryItem: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const updateInventoryItem: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const deleteInventoryItem: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const getSalesReport: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const getDeliveryReport: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const getCustomerReport: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const getInventoryReport: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const addProduction: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const manualAdjust: (req: Request, res: Response, next: import("express").NextFunction) => void;
+export declare const getInventoryMovements: (req: Request, res: Response, next: import("express").NextFunction) => void;
+//# sourceMappingURL=inventoryController.d.ts.map

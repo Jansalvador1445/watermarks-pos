@@ -1,0 +1,222 @@
+/* Page header */
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header__breadcrumb {
+  margin-bottom: 8px;
+}
+
+.page-header__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.page-header__title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.page-header__subtitle {
+  color: #8c8c8c;
+  margin-top: 4px;
+}
+
+.page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Mobile list cards (table alternative) */
+.mobile-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-list__item {
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.mobile-list__pagination {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.mobile-list-card {
+  padding: 14px 16px;
+}
+
+.mobile-list-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.mobile-list-card__heading {
+  min-width: 0;
+  flex: 1;
+}
+
+.mobile-list-card__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #262626;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.mobile-list-card__subtitle {
+  margin-top: 2px;
+  font-size: 13px;
+  color: #1677ff;
+}
+
+.mobile-list-card__actions {
+  flex-shrink: 0;
+}
+
+.mobile-list-card__fields {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.mobile-list-card__field {
+  display: grid;
+  grid-template-columns: minmax(88px, 34%) 1fr;
+  gap: 8px;
+  align-items: start;
+  font-size: 13px;
+}
+
+.mobile-list-card__field dt {
+  margin: 0;
+  color: #8c8c8c;
+  font-weight: 500;
+}
+
+.mobile-list-card__field dd {
+  margin: 0;
+  color: #262626;
+  word-break: break-word;
+}
+
+.card-rounded--mobile-list .ant-card-body {
+  padding: 12px;
+}
+
+.table-scroll-wrap {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  margin: 0 -4px;
+  padding: 0 4px 4px;
+}
+
+.table-scroll-wrap::after {
+  content: '';
+  display: block;
+  height: 1px;
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    margin-bottom: 16px;
+  }
+
+  .page-header__subtitle {
+    font-size: 13px;
+  }
+
+  .card-rounded .ant-card-body {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-header__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-header__actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-header__action-btn {
+    width: 100%;
+  }
+
+  .stat-card .ant-card-body {
+    padding: 16px;
+  }
+
+  .stat-card__value {
+    font-size: 22px;
+  }
+
+  .filter-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-toolbar .ant-input-affix-wrapper,
+  .filter-toolbar .ant-select,
+  .filter-toolbar .ant-picker,
+  .filter-toolbar .ant-input {
+    width: 100% !important;
+  }
+}
+
+.stat-card {
+  border-radius: 16px;
+  height: 100%;
+}
+
+.stat-card__title {
+  color: #8c8c8c;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.stat-card__value {
+  color: #262626;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.stat-card__subtext {
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+/* Priority color cell */
+.stat-card__value .ant-statistic-content-value,
+.stat-card__value .ant-statistic-content {
+  color: #262626;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.stat-card__value--warning {
+  color: #ff4d4f;
+}
+
+.stat-card .ant-card-body {
+  padding: 24px;
+}

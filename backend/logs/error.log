@@ -1,0 +1,187 @@
+2026-06-26T02:49:39.137Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:53:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-26T02:49:39.272Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:53:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-26T03:10:00.041Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:53:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-26T03:10:00.050Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:53:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-26T03:30:00.087Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:53:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-26T04:25:00.077Z [error]: JsonWebTokenError: invalid signature
+    at C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:171:19
+    at getSecret (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at verifyRefreshToken (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\jwt.ts:28:14)
+    at Function.refresh (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\authService.ts:84:21)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\controllers\authController.ts:14:36)
+    at <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\utils\response.ts:18:21)
+    at Layer.handleRequest (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\router\lib\route.js:117:3) {"error":"invalid signature"}
+2026-06-27T00:02:42.070Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:03:05.873Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:04:42.271Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:04:48.890Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:04:49.990Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:07:18.554Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:09:37.513Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:10:35.578Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:10:41.976Z [error]: MongoServerError: Transaction numbers are only allowed on a replica set member or mongos
+    at Connection.sendCommand (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:561:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Connection.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cmap\connection.ts:634:22)
+    at async Server.command (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sdam\server.ts:351:21)
+    at async executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:266:24)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async FindCursor._initialize (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\find_cursor.ts:92:22)
+    at async FindCursor.cursorInit (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:917:21)
+    at async FindCursor.fetchBatch (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:955:7)
+    at async FindCursor.next (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\cursor\abstract_cursor.ts:573:9) {"error":"Transaction numbers are only allowed on a replica set member or mongos"}
+2026-06-27T00:25:50.410Z [error]: MongoServerError: This MongoDB deployment does not support retryable writes. Please add retryWrites=false to your connection string.
+    at executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:289:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async Collection.findOneAndUpdate (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\collection.ts:1041:12)
+    at async model.Query._findOneAndUpdate (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongoose\lib\query.js:3623:13)
+    at async maybeTracedQueryExec (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongoose\lib\query.js:4801:65)
+    at async <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\deliveryService.ts:206:26)
+    at async <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\inventoryMovementService.ts:50:20)
+    at async ClientSession.withTransaction (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sessions.ts:827:20)
+    at async Function.withTransaction (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\inventoryMovementService.ts:49:9) {"error":"This MongoDB deployment does not support retryable writes. Please add retryWrites=false to your connection string."}
+2026-06-27T00:25:55.417Z [error]: MongoServerError: This MongoDB deployment does not support retryable writes. Please add retryWrites=false to your connection string.
+    at executeOperationWithRetries (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:289:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async executeOperation (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\operations\execute_operation.ts:127:12)
+    at async Collection.findOneAndUpdate (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\collection.ts:1041:12)
+    at async model.Query._findOneAndUpdate (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongoose\lib\query.js:3623:13)
+    at async maybeTracedQueryExec (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongoose\lib\query.js:4801:65)
+    at async <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\deliveryService.ts:206:26)
+    at async <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\inventoryMovementService.ts:50:20)
+    at async ClientSession.withTransaction (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sessions.ts:827:20)
+    at async Function.withTransaction (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\inventoryMovementService.ts:49:9) {"error":"This MongoDB deployment does not support retryable writes. Please add retryWrites=false to your connection string."}

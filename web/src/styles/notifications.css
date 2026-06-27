@@ -1,0 +1,124 @@
+/* Notifications page */
+.notifications-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.notifications-summary {
+  margin-bottom: 0;
+}
+
+.notifications-summary .ant-card {
+  border-radius: 12px;
+}
+
+.notifications-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.notifications-toolbar__hint {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification-card {
+  border-radius: 12px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.notification-card--unread {
+  border-left: 4px solid #1677ff;
+  background: rgba(22, 119, 255, 0.04);
+}
+
+.notification-card--action {
+  border-left: 4px solid #fa541c;
+  background: rgba(250, 84, 28, 0.04);
+}
+
+.notification-card--read {
+  opacity: 0.88;
+}
+
+.notification-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.notification-card__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.notification-card__title {
+  margin: 0 !important;
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+}
+
+.notification-card__time {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+
+.notification-card__message {
+  margin: 0 0 8px;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 1.5;
+}
+
+.notification-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.notification-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 576px) {
+  .notification-card__head {
+    flex-direction: column;
+  }
+
+  .notification-card__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .notification-card__footer .ant-space {
+    width: 100%;
+  }
+
+  .notification-card__footer .ant-btn {
+    flex: 1;
+  }
+}

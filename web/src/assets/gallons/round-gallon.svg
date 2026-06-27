@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 200" fill="none">
+  <defs>
+    <linearGradient id="roundBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#69b1ff"/>
+      <stop offset="45%" stop-color="#1677ff"/>
+      <stop offset="100%" stop-color="#0958d9"/>
+    </linearGradient>
+    <linearGradient id="roundCap" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#d9d9d9"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="80" cy="178" rx="52" ry="10" fill="#000" opacity="0.12"/>
+  <rect x="58" y="16" width="44" height="16" rx="5" fill="url(#roundCap)"/>
+  <rect x="64" y="4" width="32" height="14" rx="4" fill="#bfbfbf"/>
+  <rect x="28" y="32" width="104" height="130" rx="52" fill="url(#roundBody)"/>
+  <ellipse cx="80" cy="32" rx="52" ry="18" fill="#4096ff"/>
+  <ellipse cx="62" cy="78" rx="14" ry="32" fill="#fff" opacity="0.22"/>
+  <ellipse cx="80" cy="162" rx="52" ry="14" fill="#0958d9" opacity="0.5"/>
+  <text x="80" y="108" text-anchor="middle" fill="#fff" font-size="18" font-weight="700" opacity="0.95">H2O</text>
+</svg>
