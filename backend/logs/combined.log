@@ -1173,3 +1173,10 @@
 2026-06-27T17:43:58.159Z [debug]: Socket connected: saMEXttbCqYgUg-7AAAT
 2026-06-27T17:44:58.568Z [debug]: Socket disconnected: saMEXttbCqYgUg-7AAAT
 2026-06-27T17:44:58.570Z [debug]: Socket disconnected: OMcvuLAYENscGjAlAAAS
+2026-06-28T14:51:29.096Z [info]: MongoDB connected successfully
+2026-06-28T14:51:29.231Z [info]: Cron jobs initialized
+2026-06-28T14:51:29.243Z [info]: Server running on port 5000 in development mode
+2026-06-28T14:51:29.611Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":0}
+2026-06-28T14:51:40.797Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
+2026-06-28T14:51:41.121Z [debug]: Socket connected: mxyrWV2BpkVFRGIHAAAE
+2026-06-28T14:51:41.125Z [debug]: Socket connected: a4E1hhUxYlMC11N3AAAF
