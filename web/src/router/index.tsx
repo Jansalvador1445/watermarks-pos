@@ -21,7 +21,7 @@ const UsersPage = lazy(() => import('@/features/users/UsersPage').then((m) => ({
 const SettingsPage = lazy(() => import('@/features/settings/SettingsPage').then((m) => ({ default: m.SettingsPage })));
 const NotificationsPage = lazy(() => import('@/features/notifications/NotificationsPage').then((m) => ({ default: m.NotificationsPage })));
 const BackupPage = lazy(() => import('@/features/backup/BackupPage').then((m) => ({ default: m.BackupPage })));
-const LogsPage = lazy(() => import('@/features/logs/LogsPage').then((m) => ({ default: m.LogsPage })));
+const LogsPage = lazy(() => import('../features/logs/LogsPage').then((m) => ({ default: m.LogsPage })));
 const InvoicesPage = lazy(() => import('@/features/orders/InvoicesPage').then((m) => ({ default: m.InvoicesPage })));
 const DailyCollectionPage = lazy(() => import('@/features/collection/DailyCollectionPage').then((m) => ({ default: m.DailyCollectionPage })));
 const DeliveredHistoryPage = lazy(() => import('@/features/deliveries/DeliveredHistoryPage').then((m) => ({ default: m.DeliveredHistoryPage })));
