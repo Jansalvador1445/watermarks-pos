@@ -18,12 +18,21 @@ export interface ResolvedTransactionItem {
   decrementsStock: boolean;
 }
 
+const LINKED_INVENTORY_FIELDS = 'name category unit refillType currentStock lowStockThreshold';
+
 export class ProductService {
   private static formatProduct(product: Record<string, unknown>) {
     const linked = product.linkedInventoryId;
 
     if (linked && typeof linked === 'object' && linked !== null && '_id' in linked) {
-      const doc = linked as { _id: mongoose.Types.ObjectId; name?: string; category?: string; unit?: string };
+      const doc = linked as {
+        _id: mongoose.Types.ObjectId;
+        name?: string;
+        category?: string;
+        unit?: string;
+        currentStock?: number;
+        lowStockThreshold?: number;
+      };
       const id = doc._id.toString();
       return {
         ...product,
@@ -33,6 +42,8 @@ export class ProductService {
           name: doc.name ?? 'Inventory item',
           category: doc.category,
           unit: doc.unit,
+          currentStock: doc.currentStock,
+          lowStockThreshold: doc.lowStockThreshold,
         },
       };
     }
@@ -93,7 +104,7 @@ export class ProductService {
 
     const [data, total] = await Promise.all([
       Product.find(filter)
-        .populate('linkedInventoryId', 'name category unit refillType')
+        .populate('linkedInventoryId', LINKED_INVENTORY_FIELDS)
         .sort(sort)
         .skip(skip)
         .limit(limit)
@@ -109,7 +120,7 @@ export class ProductService {
 
   static async getActiveProducts() {
     const products = await Product.find({ isDeleted: false, status: ProductStatus.ACTIVE })
-      .populate('linkedInventoryId', 'name category unit refillType')
+      .populate('linkedInventoryId', LINKED_INVENTORY_FIELDS)
       .sort({ name: 1 })
       .lean();
 
@@ -156,7 +167,7 @@ export class ProductService {
     const product = await Product.findOneAndUpdate({ _id: id, isDeleted: false }, updateFields, {
       new: true,
       runValidators: true,
-    }).populate('linkedInventoryId', 'name category unit refillType');
+    }).populate('linkedInventoryId', LINKED_INVENTORY_FIELDS);
 
     if (!product) throw new AppError('Product not found', 404);
     return this.formatProduct({ ...product.toObject() } as Record<string, unknown>);

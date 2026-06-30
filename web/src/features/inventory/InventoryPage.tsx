@@ -10,7 +10,6 @@ import {
   message,
   Popconfirm,
   Tabs,
-  Modal,
   Typography,
   DatePicker,
 } from 'antd';
@@ -28,7 +27,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { inventoryApi } from '@/services/api';
 import { BaseTable } from '@/components/BaseTable';
-import { BaseDrawer } from '@/components/BaseDrawer';
+import { BaseModal } from '@/components/BaseModal';
 import { PageHeader } from '@/components/PageHeader';
 import { usePagination } from '@/hooks/usePagination';
 import { useDebounce } from '@/hooks/useDebounce';
@@ -44,6 +43,7 @@ const MOVEMENT_TYPE_LABELS: Record<string, string> = {
   delivery: 'Delivery',
   pos_sale: 'POS Sale',
   walkin_sale: 'Walk-in Sale',
+  invoice_sale: 'Invoice Sale',
   return: 'Return',
   adjustment: 'Adjustment',
 };
@@ -53,6 +53,7 @@ const MOVEMENT_TYPE_COLORS: Record<string, string> = {
   delivery: 'blue',
   pos_sale: 'purple',
   walkin_sale: 'cyan',
+  invoice_sale: 'geekblue',
   return: 'orange',
   adjustment: 'gold',
 };
@@ -73,7 +74,7 @@ export const InventoryPage = () => {
   const [search, setSearch] = useState('');
   const [movementTypeFilter, setMovementTypeFilter] = useState<string | undefined>();
   const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [productionOpen, setProductionOpen] = useState(false);
   const [adjustOpen, setAdjustOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
@@ -110,7 +111,7 @@ export const InventoryPage = () => {
       message.success(editing ? 'Updated' : 'Created');
       queryClient.invalidateQueries({ queryKey: ['inventory'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard'] });
-      setDrawerOpen(false);
+      setModalOpen(false);
     },
     onError: (error) => message.error(getApiErrorMessage(error, 'Failed to save inventory item')),
   });
@@ -154,7 +155,7 @@ export const InventoryPage = () => {
     onError: (error) => message.error(getApiErrorMessage(error, 'Failed to record adjustment')),
   });
 
-  const openDrawer = (record?: InventoryItem) => {
+  const openModal = (record?: InventoryItem) => {
     setEditing(record || null);
     form.setFieldsValue(
       record || {
@@ -167,7 +168,7 @@ export const InventoryPage = () => {
         lowStockThreshold: 10,
       },
     );
-    setDrawerOpen(true);
+    setModalOpen(true);
   };
 
   const openProduction = (record: InventoryItem) => {
@@ -210,7 +211,7 @@ export const InventoryPage = () => {
               <Button type="link" size="small" icon={<ToolOutlined />} onClick={() => openAdjust(r)}>
                 Adjust
               </Button>
-              <Button type="text" icon={<EditOutlined />} onClick={() => openDrawer(r)} />
+              <Button type="text" icon={<EditOutlined />} onClick={() => openModal(r)} />
               <Popconfirm title="Delete?" onConfirm={() => deleteMutation.mutate(r.publicId)}>
                 <Button type="text" danger icon={<DeleteOutlined />} />
               </Popconfirm>
@@ -328,7 +329,7 @@ export const InventoryPage = () => {
         refreshQueryKeys={['inventory', 'inventory-movements']}
         extra={
           isAdmin ? (
-            <Button type="primary" icon={<PlusOutlined />} onClick={() => openDrawer()}>
+            <Button type="primary" icon={<PlusOutlined />} onClick={() => openModal()}>
               Add Item
             </Button>
           ) : undefined
@@ -359,19 +360,13 @@ export const InventoryPage = () => {
         ]}
       />
 
-      <BaseDrawer
+      <BaseModal
         title={editing ? 'Edit Item' : 'Add Item'}
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        extra={
-          <Button
-            type="primary"
-            onClick={() => form.validateFields().then((v) => saveMutation.mutate(v))}
-            loading={saveMutation.isPending}
-          >
-            Save
-          </Button>
-        }
+        open={modalOpen}
+        onCancel={() => setModalOpen(false)}
+        onOk={() => form.validateFields().then((v) => saveMutation.mutate(v))}
+        confirmLoading={saveMutation.isPending}
+        width={520}
       >
         <Form form={form} layout="vertical">
           <Form.Item name="name" label="Name" rules={[{ required: true }]}>
@@ -424,15 +419,14 @@ export const InventoryPage = () => {
             />
           </Form.Item>
         </Form>
-      </BaseDrawer>
+      </BaseModal>
 
-      <Modal
+      <BaseModal
         title={`Add Production — ${selectedItem?.name ?? ''}`}
         open={productionOpen}
         onCancel={() => setProductionOpen(false)}
         onOk={() => productionForm.validateFields().then((v) => productionMutation.mutate(v))}
         confirmLoading={productionMutation.isPending}
-        destroyOnClose
       >
         <Form form={productionForm} layout="vertical">
           <Form.Item name="quantity" label="Quantity" rules={[{ required: true, type: 'number', min: 1 }]}>
@@ -442,15 +436,14 @@ export const InventoryPage = () => {
             <Input.TextArea rows={3} placeholder="e.g. Morning production batch" />
           </Form.Item>
         </Form>
-      </Modal>
+      </BaseModal>
 
-      <Modal
+      <BaseModal
         title={`Manual Adjustment — ${selectedItem?.name ?? ''}`}
         open={adjustOpen}
         onCancel={() => setAdjustOpen(false)}
         onOk={() => adjustForm.validateFields().then((v) => adjustMutation.mutate(v))}
         confirmLoading={adjustMutation.isPending}
-        destroyOnClose
       >
         <Form form={adjustForm} layout="vertical">
           <Form.Item
@@ -464,7 +457,7 @@ export const InventoryPage = () => {
             <Input.TextArea rows={3} placeholder="Required reason for this adjustment" />
           </Form.Item>
         </Form>
-      </Modal>
+      </BaseModal>
     </div>
   );
 };

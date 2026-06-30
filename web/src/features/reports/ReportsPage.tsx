@@ -15,6 +15,7 @@ const MOVEMENT_LABELS: Record<string, string> = {
   delivery: 'Delivery',
   pos_sale: 'POS Sale',
   walkin_sale: 'Walk-in Sale',
+  invoice_sale: 'Invoice Sale',
   return: 'Return',
   adjustment: 'Adjustment',
 };

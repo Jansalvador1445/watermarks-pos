@@ -192,7 +192,14 @@ export interface Product {
   category: 'refill' | 'container' | 'rental' | 'other';
   decrementsStock: boolean;
   linkedInventoryId?: string;
-  linkedInventory?: { _id: string; name: string; category?: string; unit?: string };
+  linkedInventory?: {
+    _id: string;
+    name: string;
+    category?: string;
+    unit?: string;
+    currentStock?: number;
+    lowStockThreshold?: number;
+  };
   status: 'active' | 'disabled';
 }
 
@@ -200,7 +207,7 @@ export interface InventoryMovement {
   _id: string;
   date: string;
   itemId: { _id: string; name: string } | string;
-  movementType: 'production' | 'delivery' | 'pos_sale' | 'walkin_sale' | 'return' | 'adjustment';
+  movementType: 'production' | 'delivery' | 'pos_sale' | 'walkin_sale' | 'invoice_sale' | 'return' | 'adjustment';
   quantity: number;
   beforeStock: number;
   afterStock: number;

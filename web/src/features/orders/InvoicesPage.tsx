@@ -11,12 +11,14 @@ import {
   Popconfirm,
   Typography,
   Divider,
+  Alert,
 } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, SwapOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { invoiceApi, customerApi, productApi } from '@/services/api';
+import { invoiceApi, customerApi, productApi, inventoryApi } from '@/services/api';
 import { BaseTable } from '@/components/BaseTable';
-import { BaseDrawer } from '@/components/BaseDrawer';
+import { BaseModal } from '@/components/BaseModal';
+import { StockChip } from '@/components/StockChip';
 import { PageHeader } from '@/components/PageHeader';
 import { PermissionGate } from '@/components/PermissionGate';
 import { usePagination } from '@/hooks/usePagination';
@@ -24,6 +26,13 @@ import { PAYMENT_METHODS } from '@/utils/constants';
 import { formatCurrency } from '@/utils/formatters';
 import { getApiErrorMessage } from '@/utils/apiError';
 import { invalidateAfterInvoiceChange } from '@/utils/invalidateBusinessQueries';
+import {
+  buildInventoryLookup,
+  buildInvoiceStockCredit,
+  getAvailableStock,
+  getProductStockInfo,
+  invoiceLinesExceedStock,
+} from '@/utils/productStock';
 import type { Customer, Invoice, Product } from '@/types';
 
 const { Text } = Typography;
@@ -45,7 +54,7 @@ const calcLineSubtotal = (item: { quantity?: number; unitPrice?: number; discoun
 export const InvoicesPage = () => {
   const queryClient = useQueryClient();
   const { page, limit, onPageChange } = usePagination();
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Invoice | null>(null);
   const [statusFilter, setStatusFilter] = useState<string | undefined>();
   const [form] = Form.useForm();
@@ -65,13 +74,23 @@ export const InvoicesPage = () => {
     queryFn: () => productApi.active().then((r) => r.data.data),
   });
 
+  const { data: inventoryData } = useQuery({
+    queryKey: ['inventory', 'for-invoices-stock'],
+    queryFn: () => inventoryApi.list({ page: 1, limit: 200 }).then((r) => r.data.data),
+  });
+
+  const inventoryLookup = useMemo(
+    () => buildInventoryLookup(inventoryData ?? []),
+    [inventoryData],
+  );
+
   const saveMutation = useMutation({
     mutationFn: (values: Record<string, unknown>) =>
       editing ? invoiceApi.update(editing._id, values) : invoiceApi.create(values),
     onSuccess: () => {
       message.success(editing ? 'Invoice updated' : 'Invoice created');
       invalidateAfterInvoiceChange(queryClient);
-      setDrawerOpen(false);
+      setModalOpen(false);
       form.resetFields();
       setEditing(null);
     },
@@ -100,11 +119,37 @@ export const InvoicesPage = () => {
     customersData?.data?.map((c: Customer) => ({ label: c.fullName, value: c._id })) || [];
 
   const productOptions =
-    productsData?.map((p: Product) => ({ label: `${p.name} — ${formatCurrency(p.price)}`, value: p._id, product: p })) ||
-    [];
+    productsData?.map((p: Product) => {
+      const stock = getAvailableStock(p, inventoryLookup);
+      const stockSuffix =
+        p.decrementsStock && stock != null ? ` · Stock: ${stock}` : '';
+      return {
+        label: `${p.name} — ${formatCurrency(p.price)}${stockSuffix}`,
+        value: p._id,
+        product: p,
+      };
+    }) || [];
 
   const watchedItems = Form.useWatch('items', form) ?? [];
   const watchedTax = Form.useWatch('tax', form) ?? 0;
+  const watchedStatus = Form.useWatch('status', form);
+
+  const invoiceStockCredit = useMemo(() => {
+    if (!editing || editing.status === 'rejected') return undefined;
+    return buildInvoiceStockCredit(editing.items, productsData ?? [], inventoryLookup);
+  }, [editing, productsData, inventoryLookup]);
+
+  const stockOversell = useMemo(() => {
+    if (watchedStatus === 'rejected') {
+      return { exceeds: false, issues: [] };
+    }
+    return invoiceLinesExceedStock(
+      watchedItems,
+      productsData ?? [],
+      inventoryLookup,
+      invoiceStockCredit,
+    );
+  }, [watchedItems, productsData, inventoryLookup, watchedStatus, invoiceStockCredit]);
 
   const totals = useMemo(() => {
     const subtotal = watchedItems.reduce(
@@ -139,7 +184,7 @@ export const InvoicesPage = () => {
       tax: 0,
       items: [{ productId: undefined, name: '', quantity: 1, unitPrice: 0, discount: 0 }],
     });
-    setDrawerOpen(true);
+    setModalOpen(true);
   };
 
   const openEdit = (record: Invoice) => {
@@ -158,7 +203,7 @@ export const InvoicesPage = () => {
         discount: item.discount,
       })),
     });
-    setDrawerOpen(true);
+    setModalOpen(true);
   };
 
   const columns = [
@@ -213,7 +258,7 @@ export const InvoicesPage = () => {
       <PageHeader
         title="Invoices"
         subtitle="Manage customer orders with line items before delivery"
-        refreshQueryKeys={['invoices', 'customers', 'products']}
+        refreshQueryKeys={['invoices', 'customers', 'products', 'inventory']}
         extra={
           <PermissionGate permission="orders:*">
             <Button type="primary" icon={<PlusOutlined />} onClick={openCreate}>
@@ -247,16 +292,15 @@ export const InvoicesPage = () => {
         pagination={{ current: page, pageSize: limit, total: data?.pagination?.total, onChange: onPageChange }}
       />
 
-      <BaseDrawer
+      <BaseModal
         title={editing ? 'Edit Invoice' : 'New Invoice'}
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
+        open={modalOpen}
+        onCancel={() => setModalOpen(false)}
+        onOk={() => form.submit()}
+        confirmLoading={saveMutation.isPending}
+        okButtonProps={{ disabled: stockOversell.exceeds }}
         width={640}
-        extra={
-          <Button type="primary" loading={saveMutation.isPending} onClick={() => form.submit()}>
-            Save
-          </Button>
-        }
+        scrollable
       >
         <Form
           form={form}
@@ -273,10 +317,32 @@ export const InvoicesPage = () => {
           </Form.Item>
 
           <Divider plain>Line Items</Divider>
+          <Alert
+            type="info"
+            showIcon
+            className="mb-12"
+            message="Saving an invoice immediately decreases filled-water stock for refill products."
+          />
           <Form.List name="items">
             {(fields, { add, remove }) => (
               <>
-                {fields.map(({ key, name, ...restField }) => (
+                {fields.map(({ key, name, ...restField }) => {
+                  const lineItem = watchedItems[name] ?? {};
+                  const selectedProduct = productsData?.find((p: Product) => p._id === lineItem.productId);
+                  const stockInfo = selectedProduct
+                    ? getProductStockInfo(selectedProduct, inventoryLookup)
+                    : null;
+                  const lineQty = lineItem.quantity ?? 0;
+                  const availableForLine =
+                    stockInfo != null
+                      ? stockInfo.currentStock + (invoiceStockCredit?.get(stockInfo.inventoryId) ?? 0)
+                      : null;
+                  const lineExceedsStock =
+                    availableForLine != null &&
+                    watchedStatus !== 'rejected' &&
+                    lineQty > availableForLine;
+
+                  return (
                   <Space key={key} align="start" wrap className="mb-12 w-full">
                     <Form.Item
                       {...restField}
@@ -300,10 +366,24 @@ export const InvoicesPage = () => {
                       {...restField}
                       name={[name, 'quantity']}
                       label="Qty"
+                      validateStatus={lineExceedsStock ? 'error' : undefined}
+                      help={
+                        lineExceedsStock
+                          ? `Only ${availableForLine ?? 0} available`
+                          : undefined
+                      }
                       rules={[{ required: true, type: 'number', min: 1 }]}
                     >
                       <InputNumber min={1} style={{ width: 80 }} />
                     </Form.Item>
+                    {stockInfo ? (
+                      <Form.Item label="Stock">
+                        <StockChip
+                          currentStock={stockInfo.currentStock}
+                          lowStockThreshold={stockInfo.lowStockThreshold}
+                        />
+                      </Form.Item>
+                    ) : null}
                     <Form.Item
                       {...restField}
                       name={[name, 'unitPrice']}
@@ -322,10 +402,22 @@ export const InvoicesPage = () => {
                       <Button type="text" danger icon={<MinusCircleOutlined />} onClick={() => remove(name)} className="mt-28" />
                     )}
                   </Space>
-                ))}
+                  );
+                })}
                 <Button type="dashed" onClick={() => add({ quantity: 1, unitPrice: 0, discount: 0 })} block icon={<PlusOutlined />}>
                   Add Line Item
                 </Button>
+                {stockOversell.exceeds && (
+                  <Alert
+                    type="error"
+                    showIcon
+                    className="mb-12"
+                    message="Insufficient stock"
+                    description={stockOversell.issues
+                      .map((issue) => `${issue.name}: requested ${issue.requested}, available ${issue.available}`)
+                      .join(' · ')}
+                  />
+                )}
               </>
             )}
           </Form.List>
@@ -360,7 +452,7 @@ export const InvoicesPage = () => {
             <Input.TextArea rows={3} placeholder="Optional notes" />
           </Form.Item>
         </Form>
-      </BaseDrawer>
+      </BaseModal>
     </div>
   );
 };

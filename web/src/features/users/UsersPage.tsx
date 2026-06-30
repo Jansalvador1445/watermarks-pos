@@ -4,7 +4,7 @@ import { PlusOutlined, EditOutlined, DeleteOutlined, CopyOutlined, SearchOutline
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { userApi } from '@/services/api';
 import { BaseTable } from '@/components/BaseTable';
-import { BaseDrawer } from '@/components/BaseDrawer';
+import { BaseModal } from '@/components/BaseModal';
 import { PageHeader } from '@/components/PageHeader';
 import { usePagination } from '@/hooks/usePagination';
 import { useSearchFromUrl } from '@/hooks/useSearchFromUrl';
@@ -46,7 +46,7 @@ export const UsersPage = () => {
   const queryClient = useQueryClient();
   const { page, limit, onPageChange } = usePagination();
   const { search, setSearch, debouncedSearch } = useSearchFromUrl();
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [permissionState, setPermissionState] = useState<Record<string, PermissionModuleState>>(emptyPermissionState);
   const [activeTab, setActiveTab] = useState('details');
@@ -85,12 +85,12 @@ export const UsersPage = () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
       if (editingId) {
         message.success('User saved successfully');
-        closeDrawer();
+        closeModal();
         return;
       }
       const result = res?.data?.data as { user: { email: string }; tempPassword: string } | undefined;
       if (result?.tempPassword) {
-        closeDrawer();
+        closeModal();
         setTempCredentials({
           name: String(variables.name),
           email: result.user?.email || String(variables.email),
@@ -98,7 +98,7 @@ export const UsersPage = () => {
         });
       } else {
         message.success('User created successfully');
-        closeDrawer();
+        closeModal();
       }
     },
     onError: (err: Error) => {
@@ -115,8 +115,8 @@ export const UsersPage = () => {
     },
   });
 
-  const closeDrawer = () => {
-    setDrawerOpen(false);
+  const closeModal = () => {
+    setModalOpen(false);
     setEditingId(null);
     setActiveTab('details');
     form.resetFields();
@@ -129,7 +129,7 @@ export const UsersPage = () => {
     form.setFieldsValue({ status: 'active', role: 'cashier' });
     setPermissionState(buildStateFromPermissions(ROLE_PERMISSIONS.cashier));
     setActiveTab('details');
-    setDrawerOpen(true);
+    setModalOpen(true);
   };
 
   const openEdit = async (user: { _id: string }) => {
@@ -159,7 +159,7 @@ export const UsersPage = () => {
       }
 
       setActiveTab('details');
-      setDrawerOpen(true);
+      setModalOpen(true);
     } catch {
       message.error('Could not load user details');
     }
@@ -286,16 +286,15 @@ export const UsersPage = () => {
         pagination={{ current: page, pageSize: limit, total: data?.pagination?.total, onChange: onPageChange }}
       />
 
-      <BaseDrawer
+      <BaseModal
         title={editingId ? 'Edit User' : 'Add User'}
-        open={drawerOpen}
-        onClose={closeDrawer}
-        width={580}
-        extra={
-          <Button type="primary" loading={saveMutation.isPending} onClick={handleSave}>
-            Save User
-          </Button>
-        }
+        open={modalOpen}
+        onCancel={closeModal}
+        onOk={handleSave}
+        okText="Save User"
+        confirmLoading={saveMutation.isPending}
+        width={640}
+        scrollable
       >
         <Tabs
           activeKey={activeTab}
@@ -372,7 +371,7 @@ export const UsersPage = () => {
             },
           ]}
         />
-      </BaseDrawer>
+      </BaseModal>
 
       <Modal
         title="Share Login Credentials"

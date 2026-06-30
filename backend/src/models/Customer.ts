@@ -89,6 +89,7 @@ export interface IDelivery extends Document {
   assignedStaffId?: Types.ObjectId;
   continuationDecision?: string;
   inventoryProcessedAt?: Date;
+  sourceInvoiceId?: Types.ObjectId;
   isDeleted: boolean;
   deletedAt?: Date;
   createdAt: Date;
@@ -124,6 +125,7 @@ const deliverySchema = new Schema<IDelivery>(
       default: 'none',
     },
     inventoryProcessedAt: { type: Date },
+    sourceInvoiceId: { type: Schema.Types.ObjectId, ref: 'Invoice' },
     isDeleted: { type: Boolean, default: false },
     deletedAt: { type: Date },
   },

@@ -16,11 +16,13 @@ import {
   Empty,
   Tag,
   Alert,
+  Space,
 } from 'antd';
 import { PlusOutlined, DeleteOutlined, ShoppingCartOutlined, HistoryOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { transactionApi, productApi, customerApi } from '@/services/api';
+import { transactionApi, productApi, customerApi, inventoryApi } from '@/services/api';
 import { PageHeader } from '@/components/PageHeader';
+import { StockChip } from '@/components/StockChip';
 import { SalesHistory } from '@/features/pos/SalesHistory';
 import { ProductCatalog } from '@/features/pos/ProductCatalog';
 import { formatCurrency } from '@/utils/formatters';
@@ -28,7 +30,12 @@ import { getApiErrorMessage } from '@/utils/apiError';
 import { invalidateAfterTransactionChange } from '@/utils/invalidateBusinessQueries';
 import { PAYMENT_METHODS } from '@/utils/constants';
 import { useAuthStore } from '@/store/authStore';
-import { getProductStockLabel } from '@/utils/productStock';
+import {
+  buildInventoryLookup,
+  cartExceedsStock,
+  getProductStockInfo,
+  getProductStockLabel,
+} from '@/utils/productStock';
 import {
   getCustomerTierCode,
   getCustomerTierLabel,
@@ -45,6 +52,9 @@ interface CartItem {
   price: number;
   decrementsStock: boolean;
   stockLabel?: string | null;
+  inventoryId?: string;
+  currentStock?: number;
+  lowStockThreshold?: number;
 }
 
 export const POSPage = () => {
@@ -69,8 +79,32 @@ export const POSPage = () => {
     queryFn: () => customerApi.list({ page: 1, limit: 200, status: 'enabled' }).then((r) => r.data.data),
   });
 
+  const { data: inventoryResponse } = useQuery({
+    queryKey: ['inventory', 'for-pos-stock'],
+    queryFn: () => inventoryApi.list({ page: 1, limit: 200 }).then((r) => r.data.data),
+  });
+
   const products = productsResponse ?? [];
   const customers = customersResponse ?? [];
+  const inventoryLookup = useMemo(
+    () => buildInventoryLookup(inventoryResponse ?? []),
+    [inventoryResponse],
+  );
+
+  const stockOversell = useMemo(
+    () =>
+      cartExceedsStock(
+        cart.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+          decrementsStock: item.decrementsStock,
+          inventoryId: item.inventoryId,
+        })),
+        products,
+        inventoryLookup,
+      ),
+    [cart, products, inventoryLookup],
+  );
 
   const selectedCustomer = useMemo(
     () => customers.find((c: Customer) => c._id === selectedCustomerId),
@@ -128,6 +162,7 @@ export const POSPage = () => {
 
   const addToCart = (product: Product) => {
     const unitPrice = resolveUnitPrice(product);
+    const stockInfo = getProductStockInfo(product, inventoryLookup);
     const existing = cart.find((c) => c.productId === product._id);
     if (existing) {
       setCart(cart.map((c) => (c.productId === product._id ? { ...c, quantity: c.quantity + 1 } : c)));
@@ -141,6 +176,9 @@ export const POSPage = () => {
           quantity: 1,
           decrementsStock: product.decrementsStock,
           stockLabel: getProductStockLabel(product),
+          inventoryId: stockInfo?.inventoryId,
+          currentStock: stockInfo?.currentStock,
+          lowStockThreshold: stockInfo?.lowStockThreshold,
         },
       ]);
     }
@@ -208,11 +246,20 @@ export const POSPage = () => {
                     <div className="pos-product-name">{product.name}</div>
                     <Text type="secondary">{formatCurrency(resolveUnitPrice(product))}</Text>
                     {product.decrementsStock && getProductStockLabel(product) ? (
-                      <div className="mt-4">
+                      <Space size={4} wrap className="mt-4">
                         <Tag color="blue" className="text-xs">
                           Refill · {getProductStockLabel(product)} stock
                         </Tag>
-                      </div>
+                        {(() => {
+                          const stockInfo = getProductStockInfo(product, inventoryLookup);
+                          return stockInfo ? (
+                            <StockChip
+                              currentStock={stockInfo.currentStock}
+                              lowStockThreshold={stockInfo.lowStockThreshold}
+                            />
+                          ) : null;
+                        })()}
+                      </Space>
                     ) : (
                       <div className="mt-4">
                         <Tag className="text-xs">No stock change</Tag>
@@ -256,7 +303,14 @@ export const POSPage = () => {
           <List
             dataSource={cart}
             locale={{ emptyText: 'No items in cart' }}
-            renderItem={(item, index) => (
+            renderItem={(item, index) => {
+              const product = products.find((p) => p._id === item.productId);
+              const stockInfo = product ? getProductStockInfo(product, inventoryLookup) : null;
+              const availableStock = stockInfo?.currentStock ?? item.currentStock;
+              const remaining =
+                availableStock != null ? Math.max(0, availableStock - item.quantity) : null;
+
+              return (
               <List.Item
                 actions={[
                   <InputNumber
@@ -278,12 +332,25 @@ export const POSPage = () => {
                           −{item.stockLabel}
                         </Tag>
                       ) : null}
+                      {availableStock != null ? (
+                        <>
+                          <StockChip
+                            currentStock={availableStock}
+                            lowStockThreshold={stockInfo?.lowStockThreshold ?? item.lowStockThreshold}
+                            className="ml-8 text-xs"
+                          />
+                          {remaining != null ? (
+                            <Tag className="ml-8 text-xs">→ {remaining} after sale</Tag>
+                          ) : null}
+                        </>
+                      ) : null}
                     </>
                   }
                 />
                 <Text strong>{formatCurrency(item.quantity * item.price)}</Text>
               </List.Item>
-            )}
+              );
+            }}
           />
 
           <Divider />
@@ -330,7 +397,19 @@ export const POSPage = () => {
             />
           </Form.Item>
 
-          {cartStockUnits > 0 && (
+          {stockOversell.exceeds && (
+            <Alert
+              type="error"
+              showIcon
+              className="mb-12"
+              message="Insufficient stock"
+              description={stockOversell.issues
+                .map((issue) => `${issue.name}: requested ${issue.requested}, available ${issue.available}`)
+                .join(' · ')}
+            />
+          )}
+
+          {cartStockUnits > 0 && !stockOversell.exceeds && (
             <Alert
               type="warning"
               showIcon
@@ -344,7 +423,7 @@ export const POSPage = () => {
             block
             size="large"
             icon={<PlusOutlined />}
-            disabled={cart.length === 0}
+            disabled={cart.length === 0 || stockOversell.exceeds}
             loading={createMutation.isPending}
             onClick={() => createMutation.mutate()}
           >
@@ -400,7 +479,7 @@ export const POSPage = () => {
             ? 'Point of sale for walk-in customers · manage products in the Product Catalog tab'
             : 'Point of sale for walk-in customers'
         }
-        refreshQueryKeys={['products', 'pos-sales', 'transactions']}
+        refreshQueryKeys={['products', 'pos-sales', 'transactions', 'inventory']}
       />
 
       <Card bordered={false} className="card-rounded pos-page-tabs">

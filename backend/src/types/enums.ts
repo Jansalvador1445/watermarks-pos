@@ -50,6 +50,7 @@ export enum InventoryMovementType {
   DELIVERY = 'delivery',
   POS_SALE = 'pos_sale',
   WALKIN_SALE = 'walkin_sale',
+  INVOICE_SALE = 'invoice_sale',
   RETURN = 'return',
   ADJUSTMENT = 'adjustment',
 }

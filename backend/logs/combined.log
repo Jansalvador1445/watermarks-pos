@@ -1180,3 +1180,61 @@
 2026-06-28T14:51:40.797Z [info]: Successful login {"userId":"6a3de40ed7f8b32566d4a86c","email":"admin@h2o.com","ip":"::1"}
 2026-06-28T14:51:41.121Z [debug]: Socket connected: mxyrWV2BpkVFRGIHAAAE
 2026-06-28T14:51:41.125Z [debug]: Socket connected: a4E1hhUxYlMC11N3AAAF
+2026-06-30T14:22:44.624Z [info]: MongoDB connected successfully
+2026-06-30T14:22:44.627Z [info]: Starting v2 migration...
+2026-06-30T14:22:44.965Z [info]: Migration complete {"customersUpdated":0,"locationsUpdated":0,"inventoryUpdated":0,"productsLinked":0,"gallonUpdated":0,"ordersArchived":0}
+2026-06-30T14:22:44.983Z [warn]: MongoDB disconnected
+2026-06-30T14:22:56.867Z [info]: MongoDB connected successfully
+2026-06-30T14:22:57.466Z [info]: Admin user created: admin@h2o.com / Admin@123
+2026-06-30T14:22:58.088Z [info]: Sample products created
+2026-06-30T14:22:58.143Z [info]: Sample deliveries created
+2026-06-30T14:22:58.168Z [info]: Sample transactions created
+2026-06-30T14:22:58.177Z [info]: Sample activity logs created
+2026-06-30T14:24:42.312Z [info]: MongoDB connected successfully
+2026-06-30T14:24:42.418Z [info]: Cron jobs initialized
+2026-06-30T14:24:42.436Z [info]: Server running on port 5000 in development mode
+2026-06-30T14:24:42.612Z [info]: Delivery notifications processed {"late3DayCount":1,"decisionCount":1}
+2026-06-30T14:29:45.215Z [info]: Successful login {"userId":"6a43d141cd626fa73f918838","email":"admin@h2o.com","ip":"::1"}
+2026-06-30T14:29:45.763Z [debug]: Socket connected: oTS1KdJSvds1H402AAAC
+2026-06-30T14:29:45.771Z [debug]: Socket connected: ENiPtEwsak_04rPUAAAD
+2026-06-30T14:45:31.009Z [debug]: Socket disconnected: oTS1KdJSvds1H402AAAC
+2026-06-30T14:45:31.011Z [debug]: Socket disconnected: ENiPtEwsak_04rPUAAAD
+2026-06-30T14:54:30.097Z [info]: Successful login {"userId":"6a43d141cd626fa73f918838","email":"admin@h2o.com","ip":"::1"}
+2026-06-30T14:54:30.498Z [debug]: Socket connected: Y-IRqbg8JXkXoaeCAAAG
+2026-06-30T14:54:30.507Z [debug]: Socket connected: WkoA7brmaKJSJwv3AAAH
+2026-06-30T15:10:40.734Z [debug]: Socket disconnected: WkoA7brmaKJSJwv3AAAH
+2026-06-30T15:10:40.735Z [debug]: Socket disconnected: Y-IRqbg8JXkXoaeCAAAG
+2026-06-30T15:43:58.244Z [info]: Successful login {"userId":"6a43d141cd626fa73f918838","email":"admin@h2o.com","ip":"::1"}
+2026-06-30T15:43:58.759Z [debug]: Socket connected: gjEatKxVv_9DrkFRAAAK
+2026-06-30T15:43:58.763Z [debug]: Socket connected: boIJNokG-H3ybP6gAAAL
+2026-06-30T16:00:00.089Z [info]: Delivery notifications processed {"late3DayCount":2,"decisionCount":1}
+2026-06-30T16:00:00.090Z [info]: Overdue delivery check completed
+2026-06-30T16:00:33.924Z [debug]: Socket disconnected: gjEatKxVv_9DrkFRAAAK
+2026-06-30T16:00:34.018Z [debug]: Socket disconnected: boIJNokG-H3ybP6gAAAL
+2026-06-30T16:53:15.968Z [info]: MongoDB connected successfully
+2026-06-30T16:53:16.036Z [info]: Cron jobs initialized
+2026-06-30T16:53:16.059Z [info]: Server running on port 5000 in development mode
+2026-06-30T16:53:16.286Z [info]: Delivery notifications processed {"late3DayCount":2,"decisionCount":0}
+2026-06-30T16:53:54.703Z [info]: MongoDB connected successfully
+2026-06-30T16:53:54.742Z [info]: Cron jobs initialized
+2026-06-30T16:53:54.759Z [info]: Server running on port 5000 in development mode
+2026-06-30T16:53:54.883Z [info]: Delivery notifications processed {"late3DayCount":2,"decisionCount":0}
+2026-06-30T16:54:22.449Z [info]: MongoDB connected successfully
+2026-06-30T16:54:22.486Z [info]: Cron jobs initialized
+2026-06-30T16:54:22.499Z [info]: Server running on port 5000 in development mode
+2026-06-30T16:54:22.609Z [info]: Delivery notifications processed {"late3DayCount":2,"decisionCount":0}
+2026-06-30T16:55:06.077Z [info]: MongoDB connected successfully
+2026-06-30T16:55:06.115Z [info]: Cron jobs initialized
+2026-06-30T16:55:06.129Z [info]: Server running on port 5000 in development mode
+2026-06-30T16:55:06.228Z [info]: Delivery notifications processed {"late3DayCount":2,"decisionCount":0}
+2026-06-30T16:55:31.348Z [info]: MongoDB connected successfully
+2026-06-30T16:55:31.390Z [info]: Cron jobs initialized
+2026-06-30T16:55:31.407Z [info]: Server running on port 5000 in development mode
+2026-06-30T16:55:31.514Z [info]: Delivery notifications processed {"late3DayCount":2,"decisionCount":0}
+2026-06-30T17:00:53.172Z [info]: MongoDB connected successfully
+2026-06-30T17:00:53.218Z [info]: Cron jobs initialized
+2026-06-30T17:00:53.230Z [info]: Server running on port 5000 in development mode
+2026-06-30T17:00:53.365Z [info]: Delivery notifications processed {"late3DayCount":2,"decisionCount":0}
+2026-06-30T17:01:10.191Z [info]: Successful login {"userId":"6a43d141cd626fa73f918838","email":"admin@h2o.com","ip":"::1"}
+2026-06-30T17:01:10.783Z [debug]: Socket connected: xB12A9IlWHtaO4J3AAAC
+2026-06-30T17:01:10.791Z [debug]: Socket connected: gcqBWT54FmECptvQAAAD

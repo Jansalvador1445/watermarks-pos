@@ -33,7 +33,15 @@ export const invalidateAfterTransactionChange = (queryClient: QueryClient) => {
 };
 
 export const invalidateAfterInvoiceChange = (queryClient: QueryClient) => {
-  invalidateKeys(queryClient, ['invoices', 'water-orders', 'deliveries', 'dashboard', 'customers']);
+  invalidateKeys(queryClient, [
+    'invoices',
+    'water-orders',
+    'deliveries',
+    'dashboard',
+    'customers',
+    'inventory',
+    'inventory-movements',
+  ]);
 };
 
 /** @deprecated use invalidateAfterInvoiceChange */

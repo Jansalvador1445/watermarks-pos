@@ -16,7 +16,7 @@ import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { productApi, inventoryApi, pricingTierApi } from '@/services/api';
 import { BaseTable } from '@/components/BaseTable';
-import { BaseDrawer } from '@/components/BaseDrawer';
+import { BaseModal } from '@/components/BaseModal';
 import { ProductPricingFields } from '@/components/ProductPricingFields';
 import { usePagination } from '@/hooks/usePagination';
 import { formatCurrency, getStatusColor } from '@/utils/formatters';
@@ -65,7 +65,7 @@ const defaultFormValues: ProductFormValues = {
 export const ProductCatalog = () => {
   const queryClient = useQueryClient();
   const { page, limit, onPageChange } = usePagination();
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Product | null>(null);
   const [form] = Form.useForm<ProductFormValues>();
   const decrementsStock = Form.useWatch('decrementsStock', form);
@@ -111,7 +111,7 @@ export const ProductCatalog = () => {
     onSuccess: () => {
       message.success(editing ? 'Product updated' : 'Product created');
       invalidateProducts();
-      setDrawerOpen(false);
+      setModalOpen(false);
       setEditing(null);
       form.resetFields();
     },
@@ -127,7 +127,7 @@ export const ProductCatalog = () => {
     onError: (error) => message.error(getApiErrorMessage(error, 'Failed to delete product')),
   });
 
-  const openDrawer = (record?: Product) => {
+  const openModal = (record?: Product) => {
     setEditing(record ?? null);
     if (record) {
       form.setFieldsValue({
@@ -144,7 +144,7 @@ export const ProductCatalog = () => {
     } else {
       form.setFieldsValue(defaultFormValues);
     }
-    setDrawerOpen(true);
+    setModalOpen(true);
   };
 
   const handleCategoryChange = (value: Product['category']) => {
@@ -205,7 +205,7 @@ export const ProductCatalog = () => {
       width: 120,
       render: (_: unknown, record: Product) => (
         <Space>
-          <Button type="text" icon={<EditOutlined />} onClick={() => openDrawer(record)} aria-label="Edit product" />
+          <Button type="text" icon={<EditOutlined />} onClick={() => openModal(record)} aria-label="Edit product" />
           <Popconfirm
             title="Remove this product?"
             description="It will no longer appear on the POS. Past sales are kept."
@@ -231,7 +231,7 @@ export const ProductCatalog = () => {
       <BaseTable
         cardTitle="Products"
         extra={
-          <Button type="primary" icon={<PlusOutlined />} onClick={() => openDrawer()}>
+          <Button type="primary" icon={<PlusOutlined />} onClick={() => openModal()}>
             Add Product
           </Button>
         }
@@ -242,22 +242,16 @@ export const ProductCatalog = () => {
         pagination={{ current: page, pageSize: limit, total: data?.pagination?.total, onChange: onPageChange }}
       />
 
-      <BaseDrawer
+      <BaseModal
         title={editing ? 'Edit Product' : 'Add Product'}
-        open={drawerOpen}
-        onClose={() => {
-          setDrawerOpen(false);
+        open={modalOpen}
+        onCancel={() => {
+          setModalOpen(false);
           setEditing(null);
         }}
-        extra={
-          <Button
-            type="primary"
-            loading={saveMutation.isPending}
-            onClick={() => form.validateFields().then((v) => saveMutation.mutate(v))}
-          >
-            Save
-          </Button>
-        }
+        onOk={() => form.validateFields().then((v) => saveMutation.mutate(v))}
+        confirmLoading={saveMutation.isPending}
+        width={560}
       >
         <Form form={form} layout="vertical" initialValues={defaultFormValues}>
           <Form.Item
@@ -318,7 +312,7 @@ export const ProductCatalog = () => {
             Disabled products are hidden from the sale screen but kept for transaction history.
           </Typography.Text>
         </Form>
-      </BaseDrawer>
+      </BaseModal>
     </div>
   );
 };

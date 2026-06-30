@@ -30,7 +30,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { customerApi, pricingTierApi } from '@/services/api';
 import { BaseTable } from '@/components/BaseTable';
-import { BaseDrawer } from '@/components/BaseDrawer';
+import { BaseModal } from '@/components/BaseModal';
 import { PageHeader } from '@/components/PageHeader';
 import { MobileListCard } from '@/components/MobileListCard';
 import { CustomerLocationFields, type LocationTab } from '@/components/CustomerLocationFields';
@@ -83,7 +83,7 @@ export const CustomersPage = () => {
   const { page, limit, onPageChange, reset } = usePagination();
   const { search, setSearch, debouncedSearch } = useSearchFromUrl();
   const [statusFilter, setStatusFilter] = useState<string | undefined>();
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Customer | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | undefined>();
   const [locationTab, setLocationTab] = useState<LocationTab>('link');
@@ -135,7 +135,7 @@ export const CustomersPage = () => {
     onSuccess: () => {
       message.success('Customer created');
       invalidateAfterCustomerChange(queryClient);
-      closeDrawer();
+      closeModal();
     },
     onError: (error) => message.error(getApiErrorMessage(error, 'Failed to create customer')),
   });
@@ -145,7 +145,7 @@ export const CustomersPage = () => {
     onSuccess: () => {
       message.success('Customer updated');
       invalidateAfterCustomerChange(queryClient);
-      closeDrawer();
+      closeModal();
     },
     onError: (error) => message.error(getApiErrorMessage(error, 'Failed to update customer')),
   });
@@ -218,7 +218,7 @@ export const CustomersPage = () => {
       contacts: [],
       status: 'enabled',
     });
-    setDrawerOpen(true);
+    setModalOpen(true);
   };
 
   const openEdit = (record: Customer) => {
@@ -242,11 +242,11 @@ export const CustomersPage = () => {
       contacts: record.contacts ?? [],
       status: record.status,
     });
-    setDrawerOpen(true);
+    setModalOpen(true);
   };
 
-  const closeDrawer = () => {
-    setDrawerOpen(false);
+  const closeModal = () => {
+    setModalOpen(false);
     setEditing(null);
     setPhotoPreview(undefined);
   };
@@ -460,19 +460,14 @@ export const CustomersPage = () => {
         }}
       />
 
-      <BaseDrawer
+      <BaseModal
         title={editing ? 'Edit Customer' : 'Add Customer'}
-        open={drawerOpen}
-        onClose={closeDrawer}
-        extra={
-          <Button
-            type="primary"
-            onClick={handleSubmit(onSubmit)}
-            loading={createMutation.isPending || updateMutation.isPending}
-          >
-            Save
-          </Button>
-        }
+        open={modalOpen}
+        onCancel={closeModal}
+        onOk={handleSubmit(onSubmit)}
+        confirmLoading={createMutation.isPending || updateMutation.isPending}
+        width={720}
+        scrollable
       >
         <Form layout="vertical">
           <Form.Item label="Full Name" validateStatus={errors.fullName ? 'error' : ''} help={errors.fullName?.message}>
@@ -593,7 +588,7 @@ export const CustomersPage = () => {
             Add Contact
           </Button>
         </Form>
-      </BaseDrawer>
+      </BaseModal>
     </div>
   );
 };

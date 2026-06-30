@@ -73,6 +73,7 @@ export class DeliveryService {
     roundOut: number;
     slimReturn: number;
     roundReturn: number;
+    sourceInvoiceId?: mongoose.Types.ObjectId;
   }) {
     return {
       referenceNo: delivery.referenceNo,
@@ -81,6 +82,7 @@ export class DeliveryService {
       roundOut: delivery.roundOut,
       slimReturn: delivery.slimReturn,
       roundReturn: delivery.roundReturn,
+      sourceInvoiceId: delivery.sourceInvoiceId,
     };
   }
 
@@ -151,6 +153,7 @@ export class DeliveryService {
       roundOut: number;
       slimReturn: number;
       roundReturn: number;
+      sourceInvoiceId?: mongoose.Types.ObjectId;
     },
     userId: string,
     session?: mongoose.ClientSession,

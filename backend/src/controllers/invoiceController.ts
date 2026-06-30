@@ -19,13 +19,13 @@ export const createInvoice = asyncHandler(async (req: AuthRequest, res: Response
   return successResponse(res, data, 'Invoice created', 201);
 });
 
-export const updateInvoice = asyncHandler(async (req: Request, res: Response) => {
-  const data = await InvoiceService.update(getParamId(req), req.body);
+export const updateInvoice = asyncHandler(async (req: AuthRequest, res: Response) => {
+  const data = await InvoiceService.update(getParamId(req), req.body, req.user!.userId);
   return successResponse(res, data, 'Invoice updated');
 });
 
-export const deleteInvoice = asyncHandler(async (req: Request, res: Response) => {
-  await InvoiceService.delete(getParamId(req));
+export const deleteInvoice = asyncHandler(async (req: AuthRequest, res: Response) => {
+  await InvoiceService.delete(getParamId(req), req.user!.userId);
   return successResponse(res, null, 'Invoice deleted');
 });
 
