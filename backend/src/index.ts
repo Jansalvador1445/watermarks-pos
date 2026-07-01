@@ -1,3 +1,11 @@
+import crypto from 'crypto';
+
+if (typeof globalThis.crypto === 'undefined') {
+  Object.defineProperty(globalThis, 'crypto', {
+    value: crypto.webcrypto,
+  });
+}
+
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
@@ -16,6 +24,7 @@ import { apiLimiter } from './middlewares/rateLimiter';
 import { initSocket } from './socket';
 import { initCronJobs } from './jobs/cronJobs';
 import { DeliveryNotificationService } from './services/deliveryNotificationService';
+import { ensureAdminUser } from './services/ensureAdminUser';
 
 import authRoutes from './routes/authRoutes';
 import dashboardRoutes from './routes/dashboardRoutes';
@@ -45,12 +54,16 @@ const server = http.createServer(app);
 });
 
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
-app.use(
-  cors({
-    origin: env.CLIENT_URL,
-    credentials: true,
-  }),
-);
+if (env.NODE_ENV === 'development') {
+  app.use(
+    cors({
+      origin: env.CLIENT_URL,
+      credentials: true,
+    }),
+  );
+} else {
+  app.use(cors({ origin: false, credentials: true }));
+}
 app.use(compression());
 app.use(morgan(env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(express.json({ limit: '10mb' }));
@@ -63,7 +76,7 @@ app.get('/api/health', (_req, res) => {
   const dbConnected = mongoose.connection.readyState === 1;
   res.json({
     success: true,
-    message: 'H2O Water Refilling API is running',
+    message: 'Water Refilling Station POS API is running',
     database: dbConnected ? 'connected' : 'disconnected',
     version: process.env.npm_package_version || '1.0.0',
     timestamp: new Date().toISOString(),
@@ -91,20 +104,43 @@ app.use('/api/backups', backupRouter);
 app.use('/api/settings', settingsRouter);
 app.use('/api/search', searchRouter);
 
+const staticPath = path.join(process.cwd(), 'web', 'dist');
+if (fs.existsSync(staticPath)) {
+  app.use(express.static(staticPath));
+
+  app.use((req, res, next) => {
+    if (req.method !== 'GET' || req.path.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(staticPath, 'index.html'));
+  });
+}
+
 app.use(notFoundHandler);
 app.use(errorHandler);
 
 initSocket(server);
 
+const isSeedAdminOnly = process.argv.includes('--seed-admin-only');
+
 const start = async () => {
   await connectDB();
+  await ensureAdminUser();
+
+  if (isSeedAdminOnly) {
+    await mongoose.disconnect();
+    process.exit(0);
+  }
+
   initCronJobs();
   DeliveryNotificationService.checkAndNotifyDeliveries().catch((err) =>
     logger.warn('Initial delivery notification check skipped', { err }),
   );
 
   server.listen(env.PORT, () => {
-    logger.info(`Server running on port ${env.PORT} in ${env.NODE_ENV} mode`);
+    logger.info(
+      `Water Refilling Station POS server running on port ${env.PORT} in ${env.NODE_ENV} mode`,
+    );
   });
 };
 

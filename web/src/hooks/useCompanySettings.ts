@@ -9,7 +9,7 @@ export const useCompanySettings = () => {
   });
 
   return {
-    companyName: settings?.companyName ?? 'H2O Water Refilling',
+    companyName: settings?.companyName ?? 'Water Refilling Station POS',
     defaultSlimPrice: settings?.pricing?.defaultSlimPrice ?? 35,
     defaultRoundPrice: settings?.pricing?.defaultRoundPrice ?? 40,
     settings,

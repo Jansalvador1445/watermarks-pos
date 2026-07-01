@@ -71,6 +71,7 @@ export declare class InventoryMovementService {
         roundOut: number;
         slimReturn: number;
         roundReturn: number;
+        sourceInvoiceId?: mongoose.Types.ObjectId | string;
     }, userId: string): Promise<void>;
     static processTransactionStock(session: ClientSession | undefined, transaction: {
         type: TransactionType;
@@ -84,6 +85,26 @@ export declare class InventoryMovementService {
         }>;
     }, userId: string): Promise<void>;
     static reverseTransactionStock(session: ClientSession | undefined, transaction: {
+        invoiceNo: string;
+        items: Array<{
+            name: string;
+            quantity: number;
+            gallonType?: string;
+            decrementsStock?: boolean;
+            productId?: string;
+        }>;
+    }, userId: string): Promise<void>;
+    static processInvoiceStock(session: ClientSession | undefined, invoice: {
+        invoiceNo: string;
+        items: Array<{
+            name: string;
+            quantity: number;
+            gallonType?: string;
+            decrementsStock?: boolean;
+            productId?: string;
+        }>;
+    }, userId: string): Promise<void>;
+    static reverseInvoiceStock(session: ClientSession | undefined, invoice: {
         invoiceNo: string;
         items: Array<{
             name: string;

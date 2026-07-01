@@ -17,11 +17,11 @@ exports.createInvoice = (0, response_1.asyncHandler)(async (req, res) => {
     return (0, response_1.successResponse)(res, data, 'Invoice created', 201);
 });
 exports.updateInvoice = (0, response_1.asyncHandler)(async (req, res) => {
-    const data = await invoiceService_1.InvoiceService.update((0, params_1.getParamId)(req), req.body);
+    const data = await invoiceService_1.InvoiceService.update((0, params_1.getParamId)(req), req.body, req.user.userId);
     return (0, response_1.successResponse)(res, data, 'Invoice updated');
 });
 exports.deleteInvoice = (0, response_1.asyncHandler)(async (req, res) => {
-    await invoiceService_1.InvoiceService.delete((0, params_1.getParamId)(req));
+    await invoiceService_1.InvoiceService.delete((0, params_1.getParamId)(req), req.user.userId);
     return (0, response_1.successResponse)(res, null, 'Invoice deleted');
 });
 exports.convertInvoice = (0, response_1.asyncHandler)(async (req, res) => {

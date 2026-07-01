@@ -93,6 +93,7 @@ const deliverySchema = new mongoose_1.Schema({
         default: 'none',
     },
     inventoryProcessedAt: { type: Date },
+    sourceInvoiceId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Invoice' },
     isDeleted: { type: Boolean, default: false },
     deletedAt: { type: Date },
 }, { timestamps: true });

@@ -200,7 +200,7 @@ export const UsersPage = () => {
 
   const copyCredentials = async () => {
     if (!tempCredentials) return;
-    const text = `H2O Water Refilling — Login Credentials\nName: ${tempCredentials.name}\nEmail: ${tempCredentials.email}\nTemporary Password: ${tempCredentials.tempPassword}\n\nSign in and you will be asked to set up your own username, email, and password.`;
+    const text = `Water Refilling Station POS — Login Credentials\nName: ${tempCredentials.name}\nEmail: ${tempCredentials.email}\nTemporary Password: ${tempCredentials.tempPassword}\n\nSign in and you will be asked to set up your own username, email, and password.`;
     try {
       await navigator.clipboard.writeText(text);
       message.success('Credentials copied to clipboard');

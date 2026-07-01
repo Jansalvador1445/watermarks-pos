@@ -54,6 +54,7 @@ export interface IDelivery extends Document {
     assignedStaffId?: Types.ObjectId;
     continuationDecision?: string;
     inventoryProcessedAt?: Date;
+    sourceInvoiceId?: Types.ObjectId;
     isDeleted: boolean;
     deletedAt?: Date;
     createdAt: Date;

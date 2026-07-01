@@ -1,7 +1,9 @@
 import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: import.meta.env.PROD
+    ? '/api'
+    : import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });

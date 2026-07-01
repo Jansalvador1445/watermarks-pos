@@ -69,6 +69,7 @@ export declare class DashboardService {
         assignedStaffId?: mongoose.Types.ObjectId;
         continuationDecision?: string;
         inventoryProcessedAt?: Date;
+        sourceInvoiceId?: mongoose.Types.ObjectId;
         isDeleted: boolean;
         deletedAt?: Date;
         createdAt: Date;

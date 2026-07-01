@@ -96,6 +96,7 @@ class DeliveryService {
             roundOut: delivery.roundOut,
             slimReturn: delivery.slimReturn,
             roundReturn: delivery.roundReturn,
+            sourceInvoiceId: delivery.sourceInvoiceId,
         };
     }
     static async markInventoryProcessed(deliveryId, session) {

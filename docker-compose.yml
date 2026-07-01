@@ -10,7 +10,7 @@ services:
     volumes:
       - mongo_data:/data/db
     environment:
-      MONGO_INITDB_DATABASE: h2o-water-refilling
+      MONGO_INITDB_DATABASE: water-refilling-pos
 
   backend:
     build:
@@ -23,7 +23,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 5000
-      MONGODB_URI: mongodb://mongo:27017/h2o-water-refilling
+      MONGODB_URI: mongodb://mongo:27017/water-refilling-pos
       JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
       JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
       CLIENT_URL: http://localhost

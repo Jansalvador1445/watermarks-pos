@@ -54,6 +54,7 @@ var InventoryMovementType;
     InventoryMovementType["DELIVERY"] = "delivery";
     InventoryMovementType["POS_SALE"] = "pos_sale";
     InventoryMovementType["WALKIN_SALE"] = "walkin_sale";
+    InventoryMovementType["INVOICE_SALE"] = "invoice_sale";
     InventoryMovementType["RETURN"] = "return";
     InventoryMovementType["ADJUSTMENT"] = "adjustment";
 })(InventoryMovementType || (exports.InventoryMovementType = InventoryMovementType = {}));

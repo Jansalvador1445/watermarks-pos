@@ -23,6 +23,15 @@ export const connectDB = async (): Promise<void> => {
     logger.info('MongoDB connected successfully');
   } catch (error) {
     logger.error('MongoDB connection failed', { error });
+
+    if (env.NODE_ENV === 'production') {
+      logger.info('Waiting 3 seconds for MongoDB to start...');
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await mongoose.connect(uri);
+      logger.info('MongoDB connected successfully');
+      return;
+    }
+
     process.exit(1);
   }
 };

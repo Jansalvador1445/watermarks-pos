@@ -1,11 +1,11 @@
 /** Exact copy strings from reference login design */
 export const LOGIN_COPY = {
-  brandH2o: 'H2O',
-  brandSub: 'WATER REFILLING',
+  brandH2o: 'WATER',
+  brandSub: 'REFILLING STATION POS',
   headline: 'Pure Water. Better Life.',
   description:
-    'H2O Water Refilling System helps you manage deliveries, inventory, sales, and customers with ease.',
-  copyright: '© 2026 H2O Water Refilling System. All rights reserved.',
+    'Water Refilling Station POS helps you manage deliveries, inventory, sales, and customers with ease.',
+  copyright: '© 2026 Water Refilling Station POS. All rights reserved.',
   welcomeTitle: 'Welcome Back!',
   welcomeSubtitle: 'Sign in to continue to your account',
   usernameLabel: 'Username or Email',

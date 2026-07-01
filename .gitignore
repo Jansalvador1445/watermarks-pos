@@ -1,4 +1,7 @@
 backend/.env
 web/.env
-backend/.env
-web/.env
+Water-Refilling-POS-Desktop/
+backend/dist-desktop/
+mongodb/bin/*.exe
+mongodb/bin/*.pdb
+mongodb/bin/vc_redist.x64.exe

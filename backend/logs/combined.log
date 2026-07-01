@@ -1238,3 +1238,5 @@
 2026-06-30T17:01:10.191Z [info]: Successful login {"userId":"6a43d141cd626fa73f918838","email":"admin@h2o.com","ip":"::1"}
 2026-06-30T17:01:10.783Z [debug]: Socket connected: xB12A9IlWHtaO4J3AAAC
 2026-06-30T17:01:10.791Z [debug]: Socket connected: gcqBWT54FmECptvQAAAD
+2026-07-01T07:26:49.388Z [info]: MongoDB connected successfully
+2026-07-01T07:26:50.041Z [info]: Admin user created: admin@h2o.com / Admin@123

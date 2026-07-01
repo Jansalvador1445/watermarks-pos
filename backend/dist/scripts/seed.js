@@ -16,28 +16,11 @@ const Transaction_1 = require("../models/Transaction");
 const enums_1 = require("../types/enums");
 const logger_1 = require("../config/logger");
 const secureReference_1 = require("../utils/secureReference");
+const ensureAdminUser_1 = require("../services/ensureAdminUser");
 const seed = async () => {
     await (0, db_1.connectDB)();
-    const adminExists = await User_1.User.findOne({ email: 'admin@h2o.com' });
-    let adminUser = adminExists;
-    if (!adminExists) {
-        const passwordHash = await bcryptjs_1.default.hash('Admin@123', 12);
-        adminUser = await User_1.User.create({
-            name: 'Admin User',
-            email: 'admin@h2o.com',
-            username: 'admin',
-            passwordHash,
-            role: enums_1.UserRole.ADMIN,
-            status: enums_1.UserStatus.ACTIVE,
-            isOnboarded: true,
-        });
-        logger_1.logger.info('Admin user created: admin@h2o.com / Admin@123');
-    }
-    else if (!adminExists.isOnboarded) {
-        adminExists.isOnboarded = true;
-        adminExists.username = adminExists.username || 'admin';
-        await adminExists.save();
-    }
+    await (0, ensureAdminUser_1.ensureAdminUser)();
+    const adminUser = await User_1.User.findOne({ email: 'admin@h2o.com' });
     const cashierExists = await User_1.User.findOne({ email: 'cashier@h2o.com' });
     if (!cashierExists) {
         const passwordHash = await bcryptjs_1.default.hash('Cashier@123', 12);

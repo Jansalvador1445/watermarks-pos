@@ -25,14 +25,14 @@ export declare class InvoiceService {
     } & {
         id: string;
     }>;
-    static update(id: string, data: Record<string, unknown>): Promise<(mongoose.Document<unknown, {}, import("../models/Invoice").IInvoice, {}, mongoose.DefaultSchemaOptions> & import("../models/Invoice").IInvoice & Required<{
+    static update(id: string, data: Record<string, unknown>, userId: string): Promise<mongoose.Document<unknown, {}, import("../models/Invoice").IInvoice, {}, mongoose.DefaultSchemaOptions> & import("../models/Invoice").IInvoice & Required<{
         _id: mongoose.Types.ObjectId;
     }> & {
         __v: number;
     } & {
         id: string;
-    }) | null>;
-    static delete(id: string): Promise<mongoose.Document<unknown, {}, import("../models/Invoice").IInvoice, {}, mongoose.DefaultSchemaOptions> & import("../models/Invoice").IInvoice & Required<{
+    }>;
+    static delete(id: string, userId: string): Promise<mongoose.Document<unknown, {}, import("../models/Invoice").IInvoice, {}, mongoose.DefaultSchemaOptions> & import("../models/Invoice").IInvoice & Required<{
         _id: mongoose.Types.ObjectId;
     }> & {
         __v: number;
@@ -53,6 +53,8 @@ export declare class InvoiceService {
             id: string;
         };
     }>;
+    private static toStockItems;
+    private static enrichStockItems;
     private static resolveItems;
 }
 /** @deprecated Use InvoiceService */

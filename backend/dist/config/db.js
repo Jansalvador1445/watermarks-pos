@@ -29,6 +29,13 @@ const connectDB = async () => {
     }
     catch (error) {
         logger_1.logger.error('MongoDB connection failed', { error });
+        if (env_1.env.NODE_ENV === 'production') {
+            logger_1.logger.info('Waiting 3 seconds for MongoDB to start...');
+            await new Promise((resolve) => setTimeout(resolve, 3000));
+            await mongoose_1.default.connect(uri);
+            logger_1.logger.info('MongoDB connected successfully');
+            return;
+        }
         process.exit(1);
     }
 };

@@ -159,7 +159,7 @@ export const AppSidebar = () => {
         {!collapsed && (
           <div>
             <Text strong className="app-sidebar__brand-title">
-              H2O WATER REFILLING
+              WATER REFILLING STATION POS
             </Text>
           </div>
         )}

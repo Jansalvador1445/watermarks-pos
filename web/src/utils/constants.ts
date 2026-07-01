@@ -1,4 +1,4 @@
-export const APP_NAME = 'H2O Water Refilling';
+export const APP_NAME = import.meta.env.VITE_APP_NAME || 'Water Refilling Station POS';
 
 export const PRIMARY_COLOR = '#1677FF';
 export const BG_COLOR = '#F5F7FA';

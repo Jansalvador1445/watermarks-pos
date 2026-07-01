@@ -8,6 +8,7 @@ const response_1 = require("../utils/response");
 const pagination_1 = require("../utils/pagination");
 const enums_1 = require("../types/enums");
 const productPricing_1 = require("../utils/productPricing");
+const LINKED_INVENTORY_FIELDS = 'name category unit refillType currentStock lowStockThreshold';
 class ProductService {
     static formatProduct(product) {
         const linked = product.linkedInventoryId;
@@ -22,6 +23,8 @@ class ProductService {
                     name: doc.name ?? 'Inventory item',
                     category: doc.category,
                     unit: doc.unit,
+                    currentStock: doc.currentStock,
+                    lowStockThreshold: doc.lowStockThreshold,
                 },
             };
         }
@@ -74,7 +77,7 @@ class ProductService {
         Object.assign(filter, (0, pagination_1.buildSearchQuery)(search, ['name']));
         const [data, total] = await Promise.all([
             Product_1.Product.find(filter)
-                .populate('linkedInventoryId', 'name category unit refillType')
+                .populate('linkedInventoryId', LINKED_INVENTORY_FIELDS)
                 .sort(sort)
                 .skip(skip)
                 .limit(limit)
@@ -88,7 +91,7 @@ class ProductService {
     }
     static async getActiveProducts() {
         const products = await Product_1.Product.find({ isDeleted: false, status: enums_1.ProductStatus.ACTIVE })
-            .populate('linkedInventoryId', 'name category unit refillType')
+            .populate('linkedInventoryId', LINKED_INVENTORY_FIELDS)
             .sort({ name: 1 })
             .lean();
         return products.map((item) => this.formatProduct({ ...item }));
@@ -118,7 +121,7 @@ class ProductService {
         const product = await Product_1.Product.findOneAndUpdate({ _id: id, isDeleted: false }, updateFields, {
             new: true,
             runValidators: true,
-        }).populate('linkedInventoryId', 'name category unit refillType');
+        }).populate('linkedInventoryId', LINKED_INVENTORY_FIELDS);
         if (!product)
             throw new response_1.AppError('Product not found', 404);
         return this.formatProduct({ ...product.toObject() });

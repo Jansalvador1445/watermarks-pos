@@ -21,29 +21,13 @@ import {
 } from '../types/enums';
 import { logger } from '../config/logger';
 import { generateSecureReference } from '../utils/secureReference';
+import { ensureAdminUser } from '../services/ensureAdminUser';
 
 const seed = async () => {
   await connectDB();
 
-  const adminExists = await User.findOne({ email: 'admin@h2o.com' });
-  let adminUser = adminExists;
-  if (!adminExists) {
-    const passwordHash = await bcrypt.hash('Admin@123', 12);
-    adminUser = await User.create({
-      name: 'Admin User',
-      email: 'admin@h2o.com',
-      username: 'admin',
-      passwordHash,
-      role: UserRole.ADMIN,
-      status: UserStatus.ACTIVE,
-      isOnboarded: true,
-    });
-    logger.info('Admin user created: admin@h2o.com / Admin@123');
-  } else if (!adminExists.isOnboarded) {
-    adminExists.isOnboarded = true;
-    adminExists.username = adminExists.username || 'admin';
-    await adminExists.save();
-  }
+  await ensureAdminUser();
+  const adminUser = await User.findOne({ email: 'admin@h2o.com' });
 
   const cashierExists = await User.findOne({ email: 'cashier@h2o.com' });
   if (!cashierExists) {

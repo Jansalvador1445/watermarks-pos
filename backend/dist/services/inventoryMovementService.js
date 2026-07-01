@@ -261,7 +261,8 @@ class InventoryMovementService {
     }
     static async processDeliveryCompleted(session, delivery, userId) {
         const referenceNo = delivery.referenceNo;
-        if (delivery.slimOut > 0) {
+        const stockPreDeducted = Boolean(delivery.sourceInvoiceId);
+        if (!stockPreDeducted && delivery.slimOut > 0) {
             const slimInventory = await this.findInventoryByType(enums_1.GallonType.SLIM, session);
             await this.applyStockEvent(session, {
                 inventoryId: slimInventory._id.toString(),
@@ -272,7 +273,7 @@ class InventoryMovementService {
                 remarks: `Delivery completed — ${delivery.slimOut} slim gallon(s) out`,
             });
         }
-        if (delivery.roundOut > 0) {
+        if (!stockPreDeducted && delivery.roundOut > 0) {
             const roundInventory = await this.findInventoryByType(enums_1.GallonType.ROUND, session);
             await this.applyStockEvent(session, {
                 inventoryId: roundInventory._id.toString(),
@@ -360,6 +361,57 @@ class InventoryMovementService {
                 referenceNo,
                 userId,
                 remarks: `Reversal of sale ${transaction.invoiceNo} — ${item.name} x${item.quantity}`,
+            });
+        }
+    }
+    static async processInvoiceStock(session, invoice, userId) {
+        for (const item of invoice.items) {
+            if (!item.decrementsStock)
+                continue;
+            let inventory;
+            if (item.productId) {
+                inventory = await this.findInventoryByProductLink(item.productId, session);
+            }
+            else if (item.gallonType &&
+                (item.gallonType === enums_1.GallonType.SLIM || item.gallonType === enums_1.GallonType.ROUND)) {
+                inventory = await this.findInventoryByType(item.gallonType, session);
+            }
+            else {
+                continue;
+            }
+            await this.applyStockEvent(session, {
+                inventoryId: inventory._id.toString(),
+                movementType: enums_1.InventoryMovementType.INVOICE_SALE,
+                quantity: -item.quantity,
+                referenceNo: invoice.invoiceNo,
+                userId,
+                remarks: `Invoice sale — ${item.name} x${item.quantity}`,
+            });
+        }
+    }
+    static async reverseInvoiceStock(session, invoice, userId) {
+        const referenceNo = `REV-${invoice.invoiceNo}`;
+        for (const item of invoice.items) {
+            if (!item.decrementsStock)
+                continue;
+            let inventory;
+            if (item.productId) {
+                inventory = await this.findInventoryByProductLink(item.productId, session);
+            }
+            else if (item.gallonType &&
+                (item.gallonType === enums_1.GallonType.SLIM || item.gallonType === enums_1.GallonType.ROUND)) {
+                inventory = await this.findInventoryByType(item.gallonType, session);
+            }
+            else {
+                continue;
+            }
+            await this.applyStockEvent(session, {
+                inventoryId: inventory._id.toString(),
+                movementType: enums_1.InventoryMovementType.ADJUSTMENT,
+                quantity: item.quantity,
+                referenceNo,
+                userId,
+                remarks: `Reversal of invoice ${invoice.invoiceNo} — ${item.name} x${item.quantity}`,
             });
         }
     }
