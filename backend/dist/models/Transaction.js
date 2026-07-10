@@ -61,7 +61,6 @@ const transactionSchema = new mongoose_1.Schema({
     deletedAt: { type: Date },
 }, { timestamps: true });
 transactionSchema.index({ createdAt: -1 });
-transactionSchema.index({ invoiceNo: 1 });
 transactionSchema.index({ isDeleted: 1 });
 exports.Transaction = mongoose_1.default.model('Transaction', transactionSchema);
 //# sourceMappingURL=Transaction.js.map

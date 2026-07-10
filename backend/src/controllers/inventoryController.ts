@@ -60,8 +60,12 @@ export const deleteInventoryItem = asyncHandler(async (req: Request, res: Respon
 });
 
 export const getSalesReport = asyncHandler(async (req: Request, res: Response) => {
-  const { startDate, endDate } = req.query;
-  const data = await ReportService.getSalesReport(startDate as string, endDate as string);
+  const { startDate, endDate, groupBy } = req.query;
+  const data = await ReportService.getSalesReport(
+    startDate as string,
+    endDate as string,
+    groupBy as 'daily' | 'weekly' | 'monthly' | undefined,
+  );
   return successResponse(res, data);
 });
 

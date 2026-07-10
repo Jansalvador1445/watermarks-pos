@@ -50,8 +50,8 @@ exports.deleteInventoryItem = (0, response_1.asyncHandler)(async (req, res) => {
     return (0, response_1.successResponse)(res, null, 'Inventory item deleted');
 });
 exports.getSalesReport = (0, response_1.asyncHandler)(async (req, res) => {
-    const { startDate, endDate } = req.query;
-    const data = await inventoryService_1.ReportService.getSalesReport(startDate, endDate);
+    const { startDate, endDate, groupBy } = req.query;
+    const data = await inventoryService_1.ReportService.getSalesReport(startDate, endDate, groupBy);
     return (0, response_1.successResponse)(res, data);
 });
 exports.getDeliveryReport = (0, response_1.asyncHandler)(async (req, res) => {

@@ -57,7 +57,6 @@ const transactionSchema = new Schema<ITransaction>(
 );
 
 transactionSchema.index({ createdAt: -1 });
-transactionSchema.index({ invoiceNo: 1 });
 transactionSchema.index({ isDeleted: 1 });
 
 export const Transaction = mongoose.model<ITransaction>('Transaction', transactionSchema);

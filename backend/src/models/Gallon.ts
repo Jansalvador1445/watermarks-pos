@@ -122,7 +122,6 @@ const inventorySchema = new Schema<IInventory>(
 
 inventorySchema.index({ name: 'text', sku: 'text', category: 1 });
 inventorySchema.index({ isDeleted: 1 });
-inventorySchema.index({ publicId: 1 });
 inventorySchema.index({ refillType: 1 });
 
 export const Inventory = mongoose.model<IInventory>('Inventory', inventorySchema);

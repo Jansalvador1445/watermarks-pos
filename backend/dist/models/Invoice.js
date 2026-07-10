@@ -79,7 +79,6 @@ const invoiceSchema = new mongoose_1.Schema({
 invoiceSchema.index({ status: 1, createdAt: -1 });
 invoiceSchema.index({ customerId: 1 });
 invoiceSchema.index({ isDeleted: 1 });
-invoiceSchema.index({ invoiceNo: 1 });
 exports.Invoice = mongoose_1.default.model('Invoice', invoiceSchema);
 exports.WaterOrder = exports.Invoice;
 //# sourceMappingURL=Invoice.js.map

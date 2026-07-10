@@ -80,7 +80,6 @@ const invoiceSchema = new Schema<IInvoice>(
 invoiceSchema.index({ status: 1, createdAt: -1 });
 invoiceSchema.index({ customerId: 1 });
 invoiceSchema.index({ isDeleted: 1 });
-invoiceSchema.index({ invoiceNo: 1 });
 
 export const Invoice = mongoose.model<IInvoice>('Invoice', invoiceSchema);
 

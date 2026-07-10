@@ -53,8 +53,6 @@ const userSchema = new mongoose_1.Schema({
     isDeleted: { type: Boolean, default: false },
     deletedAt: { type: Date },
 }, { timestamps: true });
-userSchema.index({ email: 1 });
-userSchema.index({ username: 1 }, { unique: true, sparse: true });
 userSchema.index({ isDeleted: 1 });
 exports.User = mongoose_1.default.model('User', userSchema);
 //# sourceMappingURL=User.js.map

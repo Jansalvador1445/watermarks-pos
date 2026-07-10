@@ -1240,3 +1240,65 @@
 2026-06-30T17:01:10.791Z [debug]: Socket connected: gcqBWT54FmECptvQAAAD
 2026-07-01T07:26:49.388Z [info]: MongoDB connected successfully
 2026-07-01T07:26:50.041Z [info]: Admin user created: admin@h2o.com / Admin@123
+2026-07-10T11:48:58.363Z [info]: MongoDB connected successfully
+2026-07-10T11:48:58.580Z [info]: Admin user already exists: admin@h2o.com
+2026-07-10T11:48:58.673Z [info]: Cron jobs initialized
+2026-07-10T11:48:58.678Z [info]: Water Refilling Station POS server running on port 5000 in development mode
+2026-07-10T11:48:58.736Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-10T11:50:35.452Z [info]: Successful login {"userId":"6a44c13a7e130568617c05ce","email":"admin@h2o.com","ip":"::1"}
+2026-07-10T11:50:35.872Z [debug]: Socket connected: PPGbEWbU1od-nYQIAAAE
+2026-07-10T11:50:35.885Z [debug]: Socket connected: W3MXyTUStulXcGGWAAAF
+2026-07-10T12:06:11.932Z [info]: MongoDB connected successfully
+2026-07-10T12:06:11.990Z [info]: Admin user already exists: admin@h2o.com
+2026-07-10T12:06:12.033Z [info]: Cron jobs initialized
+2026-07-10T12:06:12.038Z [info]: Water Refilling Station POS server running on port 5000 in development mode
+2026-07-10T12:06:12.083Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-10T12:16:03.112Z [info]: MongoDB connected successfully
+2026-07-10T12:16:03.169Z [info]: Admin user already exists: admin@h2o.com
+2026-07-10T12:16:03.213Z [info]: Cron jobs initialized
+2026-07-10T12:16:03.220Z [info]: Water Refilling Station POS server running on port 5000 in development mode
+2026-07-10T12:16:03.252Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-10T12:17:09.797Z [info]: MongoDB connected successfully
+2026-07-10T12:17:09.871Z [info]: Admin user already exists: admin@h2o.com
+2026-07-10T12:17:09.913Z [info]: Cron jobs initialized
+2026-07-10T12:17:09.917Z [info]: Water Refilling Station POS server running on port 5000 in development mode
+2026-07-10T12:17:09.945Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-10T12:18:07.191Z [info]: MongoDB connected successfully
+2026-07-10T12:18:07.245Z [info]: Admin user already exists: admin@h2o.com
+2026-07-10T12:18:07.279Z [info]: Cron jobs initialized
+2026-07-10T12:18:07.284Z [info]: Water Refilling Station POS server running on port 5000 in development mode
+2026-07-10T12:18:07.303Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-10T12:18:14.432Z [info]: MongoDB connected successfully
+2026-07-10T12:18:14.493Z [info]: Admin user already exists: admin@h2o.com
+2026-07-10T12:18:14.536Z [info]: Cron jobs initialized
+2026-07-10T12:18:14.542Z [info]: Water Refilling Station POS server running on port 5000 in development mode
+2026-07-10T12:18:14.573Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-10T12:18:29.428Z [info]: Successful login {"userId":"6a44c13a7e130568617c05ce","email":"admin@h2o.com","ip":"::1"}
+2026-07-10T12:18:29.905Z [debug]: Socket connected: 0W7GXJQwgVLVwp13AAAC
+2026-07-10T12:18:29.909Z [debug]: Socket connected: lymEGv9yE4PCtveAAAAD
+2026-07-10T12:19:24.633Z [debug]: Socket disconnected: 0W7GXJQwgVLVwp13AAAC
+2026-07-10T12:19:24.634Z [debug]: Socket disconnected: lymEGv9yE4PCtveAAAAD
+2026-07-10T12:19:39.514Z [info]: MongoDB connected successfully
+2026-07-10T12:19:39.571Z [info]: Admin user already exists: admin@h2o.com
+2026-07-10T12:19:39.609Z [info]: Cron jobs initialized
+2026-07-10T12:19:39.614Z [info]: Water Refilling Station POS server running on port 5000 in development mode
+2026-07-10T12:19:39.637Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-10T12:19:45.337Z [debug]: Socket connected: 2iaDs72OcJ8i-ye3AAAC
+2026-07-10T12:19:45.359Z [debug]: Socket connected: jh4v4Ngq1oGwmAKJAAAD
+2026-07-10T12:22:11.298Z [debug]: Socket disconnected: jh4v4Ngq1oGwmAKJAAAD
+2026-07-10T12:22:11.334Z [debug]: Socket disconnected: 2iaDs72OcJ8i-ye3AAAC
+2026-07-10T12:22:14.137Z [debug]: Socket connected: sgGNjMzaUXmekwPWAAAG
+2026-07-10T12:22:14.166Z [debug]: Socket connected: UwDC-prndAfSJAxXAAAH
+2026-07-10T12:26:28.516Z [info]: MongoDB connected successfully
+2026-07-10T12:26:28.574Z [info]: Admin user already exists: admin@h2o.com
+2026-07-10T12:26:28.612Z [info]: Cron jobs initialized
+2026-07-10T12:26:28.616Z [info]: Water Refilling Station POS server running on port 5000 in development mode
+2026-07-10T12:26:28.649Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-10T12:26:29.047Z [debug]: Socket connected: ouU3igTXzWLBRS-MAAAB
+2026-07-10T12:26:30.054Z [debug]: Socket connected: Lfv7asnEciyGOizzAAAD
+2026-07-10T12:26:32.575Z [debug]: Socket disconnected: ouU3igTXzWLBRS-MAAAB
+2026-07-10T12:26:32.580Z [debug]: Socket disconnected: Lfv7asnEciyGOizzAAAD
+2026-07-10T12:26:34.009Z [debug]: Socket connected: WIbx5tcHg5KBMLYaAAAG
+2026-07-10T12:26:34.021Z [debug]: Socket connected: ESpSBEFe0K1GA6XUAAAH
+2026-07-10T12:27:00.482Z [debug]: Socket disconnected: WIbx5tcHg5KBMLYaAAAG
+2026-07-10T12:27:00.483Z [debug]: Socket disconnected: ESpSBEFe0K1GA6XUAAAH

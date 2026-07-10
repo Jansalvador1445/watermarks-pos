@@ -182,7 +182,8 @@ export const productApi = {
 };
 
 export const reportApi = {
-  sales: (startDate: string, endDate: string) => api.get('/reports/sales', { params: { startDate, endDate } }),
+  sales: (startDate: string, endDate: string, groupBy: 'daily' | 'weekly' | 'monthly' = 'daily') =>
+    api.get('/reports/sales', { params: { startDate, endDate, groupBy } }),
   deliveries: (startDate: string, endDate: string) => api.get('/reports/deliveries', { params: { startDate, endDate } }),
   customers: () => api.get('/reports/customers'),
   inventory: (startDate?: string, endDate?: string) =>

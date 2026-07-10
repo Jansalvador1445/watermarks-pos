@@ -91,7 +91,6 @@ const inventorySchema = new mongoose_1.Schema({
 }, { timestamps: true });
 inventorySchema.index({ name: 'text', sku: 'text', category: 1 });
 inventorySchema.index({ isDeleted: 1 });
-inventorySchema.index({ publicId: 1 });
 inventorySchema.index({ refillType: 1 });
 exports.Inventory = mongoose_1.default.model('Inventory', inventorySchema);
 //# sourceMappingURL=Gallon.js.map

@@ -240,7 +240,10 @@ export class InventoryService {
 }
 
 export class ReportService {
-  static async getSalesReport(startDate: string, endDate: string) {
+  static async getSalesReport(startDate: string, endDate: string, groupBy: 'daily' | 'weekly' | 'monthly' = 'daily') {
+    const groupFormat =
+      groupBy === 'weekly' ? '%G-W%V' : groupBy === 'monthly' ? '%Y-%m' : '%Y-%m-%d';
+
     return Transaction.aggregate([
       {
         $match: {
@@ -251,7 +254,7 @@ export class ReportService {
       },
       {
         $group: {
-          _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+          _id: { $dateToString: { format: groupFormat, date: '$createdAt' } },
           total: { $sum: '$amount' },
           count: { $sum: 1 },
         },

@@ -78,7 +78,7 @@ WaterMarks/
 - Transaction tracking with print/export
 - Water gallon inventory tracking
 - Inventory management
-- Reports with CSV export
+- Reports with PDF export
 - User management with RBAC
 - Real-time notifications (Socket.io)
 - Activity logs & audit trail

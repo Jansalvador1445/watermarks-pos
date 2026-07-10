@@ -123,7 +123,7 @@ export declare class InventoryService {
     }>;
 }
 export declare class ReportService {
-    static getSalesReport(startDate: string, endDate: string): Promise<any[]>;
+    static getSalesReport(startDate: string, endDate: string, groupBy?: 'daily' | 'weekly' | 'monthly'): Promise<any[]>;
     static getDeliveryReport(startDate: string, endDate: string): Promise<any[]>;
     static getCustomerReport(): Promise<{
         statusCounts: any[];

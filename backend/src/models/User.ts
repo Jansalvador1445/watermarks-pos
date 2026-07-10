@@ -42,8 +42,6 @@ const userSchema = new Schema<IUser>(
   { timestamps: true },
 );
 
-userSchema.index({ email: 1 });
-userSchema.index({ username: 1 }, { unique: true, sparse: true });
 userSchema.index({ isDeleted: 1 });
 
 export const User = mongoose.model<IUser>('User', userSchema);

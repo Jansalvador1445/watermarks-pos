@@ -136,6 +136,5 @@ deliverySchema.index({ date: -1, status: 1 });
 deliverySchema.index({ customerId: 1 });
 deliverySchema.index({ assignedStaffId: 1, status: 1 });
 deliverySchema.index({ isDeleted: 1 });
-deliverySchema.index({ referenceNo: 1 });
 
 export const Delivery = mongoose.model<IDelivery>('Delivery', deliverySchema);
