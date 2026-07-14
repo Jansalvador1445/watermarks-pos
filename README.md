@@ -130,9 +130,11 @@ Standalone local desktop app using a Local Browser Kiosk pattern (portable Mongo
 ### Quick Start for End Users
 
 1. Download `Water-Refilling-POS-Desktop.zip` and extract to any folder
-2. Double-click `start-pos.vbs` (or `start-pos.bat`)
+2. Double-click `start-pos.exe`
 3. Chrome/Edge opens in full-screen kiosk mode
 4. Sign in with your credentials
+
+`start-pos.bat` and `start-pos.vbs` remain in the package as fallback launchers.
 
 ### Building Desktop Package
 
@@ -141,11 +143,14 @@ Prerequisites:
 - Windows 10/11
 - Node.js 18+
 - MongoDB Community binaries (`mongod.exe`)
+- .NET 8 SDK (for the launcher EXE build)
 
 ```batch
 :: From repository root — MongoDB must be in .\mongodb\bin\
 build-desktop.bat
 ```
+
+The build script also generates a hidden `start-pos.exe` launcher from the embedded batch logic and applies the Watermarks POS icon from `web/src/assets/Watermarks POS icon.png`.
 
 Manual build:
 

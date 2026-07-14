@@ -1,122 +1,168 @@
-@echo off
-setlocal EnableDelayedExpansion
+using System.Diagnostics;
+using System.Reflection;
+using System.Text;
 
-:: =====================================================
-:: Water Refilling Station POS - Desktop Launcher
-:: =====================================================
+namespace StartPosLauncher;
 
-title Water Refilling Station POS Starting...
+internal static class Program
+{
+    private const string EmbeddedBatchName = "start-pos.bat";
+    private const string HelperBatchFileName = ".start-pos.runtime.bat";
+    private const string WrapperCmdFileName = ".start-pos.launcher.cmd";
+    private const string LauncherLogFileName = "launcher.log";
 
-pushd "%~dp0"
+    [STAThread]
+    private static int Main()
+    {
+        var launcherDirectory = AppContext.BaseDirectory;
+        var logsDirectory = Path.Combine(launcherDirectory, "logs");
+        var helperBatchPath = Path.Combine(launcherDirectory, HelperBatchFileName);
+        var wrapperCmdPath = Path.Combine(launcherDirectory, WrapperCmdFileName);
+        var launcherLogPath = Path.Combine(logsDirectory, LauncherLogFileName);
 
-if not exist "data" mkdir data
-if not exist "uploads" mkdir uploads
-if not exist "logs" mkdir logs
-if not exist "backups" mkdir backups
+        try
+        {
+            Directory.CreateDirectory(logsDirectory);
 
-if not exist "mongod.exe" (
-    if exist "mongodb\bin\mongod.exe" (
-        set MONGOD_EXE=mongodb\bin\mongod.exe
-    ) else (
-        echo ERROR: mongod.exe not found!
-        echo Expected mongod.exe in this folder or mongodb\bin\mongod.exe
-        pause
-        exit /b 1
-    )
-) else (
-    set MONGOD_EXE=mongod.exe
-)
+            // Startup cleanup
+            KillProcess("mongod");
+            KillProcess("server");
+            AppendLog(launcherLogPath, "Startup cleanup: killed old MongoDB/server processes.");
 
-if not exist "server.exe" (
-    echo ERROR: server.exe not found!
-    echo Please build the server first: npm run package:win
-    pause
-    exit /b 1
-)
+            WriteEmbeddedBatchIfNeeded(helperBatchPath);
+            WriteWrapperCommand(wrapperCmdPath);
 
-taskkill /F /IM mongod.exe 2>nul
-taskkill /F /IM server.exe 2>nul
-ping -n 3 127.0.0.1 >nul
+            // Run batch visibly and wait for it to finish
+            RunBatchVisibleAndWait(wrapperCmdPath, launcherDirectory);
 
-echo [1/5] Starting MongoDB Server...
-start /B "" "%MONGOD_EXE%" --dbpath "data" --bind_ip 127.0.0.1 --port 27017 --logpath "logs\mongodb.log" --logappend
+            // Launch browser after batch exits
+            var browserProcess = LaunchBrowser();
 
-echo [2/5] Waiting for MongoDB to initialize...
-ping -n 4 127.0.0.1 >nul
+            if (browserProcess != null)
+            {
+                browserProcess.EnableRaisingEvents = true;
+                browserProcess.Exited += (s, e) =>
+                {
+                    KillProcess("mongod");
+                    KillProcess("server");
+                    AppendLog(launcherLogPath, "Browser closed. MongoDB and server terminated.");
+                    Environment.Exit(0);
+                };
 
-netstat -an | findstr "LISTENING" | findstr ":27017" >nul
-if errorlevel 1 (
-    echo WARNING: MongoDB port 27017 not detected, waiting longer...
-    ping -n 4 127.0.0.1 >nul
-)
+                browserProcess.WaitForExit();
+            }
 
-echo [3/6] Ensuring default admin account...
-server.exe --seed-admin-only
-if errorlevel 1 (
-    echo ERROR: Admin account setup failed.
-    echo Please check logs\error.log for details
-    pause
-    exit /b 1
-)
+            return 0;
+        }
+        catch (Exception exception)
+        {
+            AppendLog(launcherLogPath, $"Launcher failed to start: {exception}");
+            return 1;
+        }
+    }
 
-echo [4/6] Starting Water Refilling Station POS Server...
-start /B "" "server.exe"
+    private static void WriteEmbeddedBatchIfNeeded(string helperBatchPath)
+    {
+        var embeddedBatch = ReadEmbeddedBatch();
 
-echo [5/6] Waiting for server on port 5000...
-ping -n 5 127.0.0.1 >nul
+        if (File.Exists(helperBatchPath))
+        {
+            var existingBatch = File.ReadAllBytes(helperBatchPath);
+            if (existingBatch.AsSpan().SequenceEqual(embeddedBatch))
+            {
+                return;
+            }
+        }
 
-set SERVER_READY=0
-for /L %%i in (1,1,15) do (
-    curl -s http://127.0.0.1:5000/api/health >nul 2>&1
-    if !errorlevel! == 0 (
-        set SERVER_READY=1
-        goto :server_ok
-    )
-    ping -n 2 127.0.0.1 >nul
-)
+        File.WriteAllBytes(helperBatchPath, embeddedBatch);
+    }
 
-:server_ok
-if !SERVER_READY! == 0 (
-    echo ERROR: Server failed to start on port 5000
-    echo Please check logs\error.log for details
-    pause
-    exit /b 1
-)
+    private static byte[] ReadEmbeddedBatch()
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+        var resourceName = assembly.GetManifestResourceNames()
+            .FirstOrDefault(name => name.EndsWith(EmbeddedBatchName, StringComparison.OrdinalIgnoreCase));
 
-echo [6/6] Launching browser in kiosk mode...
+        if (resourceName is null)
+        {
+            throw new InvalidOperationException("Embedded launcher batch file was not found.");
+        }
 
-set CHROME_PATHS="C:\Program Files\Google\Chrome\Application\chrome.exe" "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-set EDGE_PATHS="C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" "C:\Program Files\Microsoft\Edge\Application\msedge.exe"
+        using var resourceStream = assembly.GetManifestResourceStream(resourceName)
+            ?? throw new InvalidOperationException("Embedded launcher batch file could not be opened.");
 
-for %%p in (%CHROME_PATHS%) do (
-    if exist %%p (
-        echo Starting Chrome in app mode...
-        start "" %%p --app="http://127.0.0.1:5000" --start-fullscreen --kiosk --disable-pinch --overscroll-history-navigation=0
-        goto :browser_started
-    )
-)
+        using var memoryStream = new MemoryStream();
+        resourceStream.CopyTo(memoryStream);
+        return memoryStream.ToArray();
+    }
 
-for %%p in (%EDGE_PATHS%) do (
-    if exist %%p (
-        echo Starting Edge in app mode...
-        start "" %%p --app="http://127.0.0.1:5000" --start-fullscreen --kiosk
-        goto :browser_started
-    )
-)
+    private static void WriteWrapperCommand(string wrapperCmdPath)
+    {
+        var wrapperScript = new StringBuilder()
+            .AppendLine("@echo off")
+            .AppendLine("set \"STARTPOS_SILENT=1\"")
+            .AppendLine("call \".start-pos.runtime.bat\" >> \"logs\\launcher.log\" 2>&1")
+            .AppendLine("exit /b %errorlevel%");
 
-start http://127.0.0.1:5000
+        File.WriteAllText(wrapperCmdPath, wrapperScript.ToString(), Encoding.ASCII);
+    }
 
-:browser_started
-echo.
-echo Water Refilling Station POS is now running!
-echo Close this window to stop MongoDB and the server.
-echo.
+    private static void RunBatchVisibleAndWait(string wrapperCmdPath, string workingDirectory)
+    {
+        var command = $"/d /c \"\"{wrapperCmdPath}\"\"";
 
-:wait_loop
-ping -n 6 127.0.0.1 >nul
-goto :wait_loop
+        var startInfo = new ProcessStartInfo
+        {
+            FileName = "cmd.exe",
+            Arguments = command,
+            WorkingDirectory = workingDirectory,
+            UseShellExecute = false,
+            CreateNoWindow = false,   // show window
+            WindowStyle = ProcessWindowStyle.Normal
+        };
 
-:end
-taskkill /F /IM mongod.exe 2>nul
-taskkill /F /IM server.exe 2>nul
-popd
+        using var process = Process.Start(startInfo)
+            ?? throw new InvalidOperationException("Failed to start the desktop launcher.");
+
+        process.WaitForExit();   // block until batch finishes
+    }
+
+    private static Process? LaunchBrowser()
+    {
+        string chromePath = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+        string chromePathX86 = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+        string edgePath = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+        string edgePath64 = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
+
+        if (File.Exists(chromePath))
+            return Process.Start(chromePath, "--app=\"http://127.0.0.1:5000\" --start-fullscreen --kiosk");
+        if (File.Exists(chromePathX86))
+            return Process.Start(chromePathX86, "--app=\"http://127.0.0.1:5000\" --start-fullscreen --kiosk");
+        if (File.Exists(edgePath))
+            return Process.Start(edgePath, "--app=\"http://127.0.0.1:5000\" --start-fullscreen --kiosk");
+        if (File.Exists(edgePath64))
+            return Process.Start(edgePath64, "--app=\"http://127.0.0.1:5000\" --start-fullscreen --kiosk");
+
+        // fallback: default browser
+        Process.Start(new ProcessStartInfo("cmd", "/c start http://127.0.0.1:5000") { CreateNoWindow = false });
+        return null;
+    }
+
+    private static void AppendLog(string launcherLogPath, string message)
+    {
+        var logMessage = new StringBuilder()
+            .AppendLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {message}")
+            .AppendLine();
+
+        File.AppendAllText(launcherLogPath, logMessage.ToString());
+    }
+
+    private static void KillProcess(string name)
+    {
+        foreach (var proc in Process.GetProcessesByName(name))
+        {
+            try { proc.Kill(); }
+            catch { /* ignore */ }
+        }
+    }
+}

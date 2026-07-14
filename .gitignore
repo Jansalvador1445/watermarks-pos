@@ -5,3 +5,8 @@ backend/dist-desktop/
 mongodb/bin/*.exe
 mongodb/bin/*.pdb
 mongodb/bin/vc_redist.x64.exe
+launcher/StartPosLauncher/bin/
+launcher/StartPosLauncher/obj/
+launcher/StartPosLauncher/generated/
+launcher/StartPosLauncher/publish/
+launcher/StartPosLauncher/artifacts/

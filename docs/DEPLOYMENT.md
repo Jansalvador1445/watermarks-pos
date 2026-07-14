@@ -10,11 +10,12 @@ The desktop version uses a "Local Browser Kiosk" pattern:
 
 ```mermaid
 flowchart LR
-    startPos[start-pos.bat] --> mongod[mongod.exe]
-    startPos --> server[server.exe]
+    startPos[start-pos.exe] --> batch[embedded start-pos.bat]
+    batch --> mongod[mongod.exe]
+    batch --> server[server.exe]
     server --> api["/api routes"]
     server --> static["web/dist React app"]
-    startPos --> browser["Chrome or Edge --app"]
+    batch --> browser["Chrome or Edge --app"]
     browser --> server
     mongod --> dataDir[data/]
 ```
@@ -29,9 +30,11 @@ flowchart LR
 ## Quick Start (End Users)
 
 1. Download `Water-Refilling-POS-Desktop.zip` and extract to any folder
-2. Double-click `start-pos.vbs` (or `start-pos.bat`)
+2. Double-click `start-pos.exe`
 3. Chrome/Edge opens in full-screen kiosk mode
 4. Sign in with your credentials (`admin@h2o.com` / `Admin@123` on first run)
+
+`start-pos.bat` and `start-pos.vbs` remain available for manual troubleshooting, but `start-pos.exe` is the primary launcher.
 
 ## Building the Desktop Package
 
@@ -52,6 +55,8 @@ build-desktop.bat
 
 The build script auto-detects `mongodb\bin` when `MONGODB_BIN` is not set.
 
+The desktop build also creates `start-pos.exe` by embedding the batch launcher and applies an icon generated from `web/src/assets/Watermarks POS icon.png`.
+
 Manual alternative:
 
 ```bash
@@ -65,6 +70,7 @@ Then assemble `Water-Refilling-POS-Desktop/` using the structure below.
 
 ```
 Water-Refilling-POS-Desktop/
+├── start-pos.exe
 ├── start-pos.bat
 ├── start-pos.vbs
 ├── server.exe
@@ -166,6 +172,7 @@ To reset: delete `data/` (WARNING: all data lost).
 
 | Issue | Solution |
 |-------|----------|
+| Launcher log needed | Check `logs/launcher.log` for hidden launcher startup errors |
 | Port already in use | Kill existing `mongod.exe` / `server.exe` or change port |
 | MongoDB won't start | Check `data/` permissions; delete `mongod.lock` if stale |
 | Server can't connect to MongoDB | Use `127.0.0.1` in `MONGODB_URI`, not `localhost` (IPv6 mismatch) |
@@ -178,6 +185,7 @@ To reset: delete `data/` (WARNING: all data lost).
 Close the launcher window or run:
 
 ```batch
+taskkill /F /IM start-pos.exe
 taskkill /F /IM mongod.exe
 taskkill /F /IM server.exe
 ```
