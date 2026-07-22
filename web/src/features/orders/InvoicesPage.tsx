@@ -13,7 +13,7 @@ import {
   Divider,
   Alert,
 } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, SwapOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, SwapOutlined, MinusCircleOutlined, UserAddOutlined } from '@ant-design/icons';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { invoiceApi, customerApi, productApi, inventoryApi } from '@/services/api';
 import { BaseTable } from '@/components/BaseTable';
@@ -21,11 +21,12 @@ import { BaseModal } from '@/components/BaseModal';
 import { StockChip } from '@/components/StockChip';
 import { PageHeader } from '@/components/PageHeader';
 import { PermissionGate } from '@/components/PermissionGate';
+import { CustomerFormModal } from '@/components/CustomerFormModal';
 import { usePagination } from '@/hooks/usePagination';
 import { PAYMENT_METHODS } from '@/utils/constants';
 import { formatCurrency } from '@/utils/formatters';
 import { getApiErrorMessage } from '@/utils/apiError';
-import { invalidateAfterInvoiceChange } from '@/utils/invalidateBusinessQueries';
+import { invalidateAfterCustomerChange, invalidateAfterInvoiceChange } from '@/utils/invalidateBusinessQueries';
 import {
   buildInventoryLookup,
   buildInvoiceStockCredit,
@@ -55,6 +56,7 @@ export const InvoicesPage = () => {
   const queryClient = useQueryClient();
   const { page, limit, onPageChange } = usePagination();
   const [modalOpen, setModalOpen] = useState(false);
+  const [customerModalOpen, setCustomerModalOpen] = useState(false);
   const [editing, setEditing] = useState<Invoice | null>(null);
   const [statusFilter, setStatusFilter] = useState<string | undefined>();
   const [form] = Form.useForm();
@@ -312,8 +314,21 @@ export const InvoicesPage = () => {
             items: [{ quantity: 1, unitPrice: 0, discount: 0 }],
           }}
         >
-          <Form.Item name="customerId" label="Customer" rules={[{ required: true }]}>
-            <Select showSearch optionFilterProp="label" options={customerOptions} placeholder="Select customer" />
+          <Form.Item label="Customer" required>
+            <Space.Compact className="w-full">
+              <Form.Item name="customerId" noStyle rules={[{ required: true, message: 'Select customer' }]}>
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  options={customerOptions}
+                  placeholder="Select customer"
+                  style={{ width: 'calc(100% - 88px)' }}
+                />
+              </Form.Item>
+              <Button icon={<UserAddOutlined />} onClick={() => setCustomerModalOpen(true)}>
+                Add
+              </Button>
+            </Space.Compact>
           </Form.Item>
 
           <Divider plain>Line Items</Divider>
@@ -453,6 +468,16 @@ export const InvoicesPage = () => {
           </Form.Item>
         </Form>
       </BaseModal>
+
+      <CustomerFormModal
+        open={customerModalOpen}
+        onClose={() => setCustomerModalOpen(false)}
+        onSuccess={(customer) => {
+          invalidateAfterCustomerChange(queryClient);
+          form.setFieldValue('customerId', customer._id);
+          setCustomerModalOpen(false);
+        }}
+      />
     </div>
   );
 };

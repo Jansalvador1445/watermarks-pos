@@ -25,6 +25,7 @@ import { initSocket } from './socket';
 import { initCronJobs } from './jobs/cronJobs';
 import { DeliveryNotificationService } from './services/deliveryNotificationService';
 import { ensureAdminUser } from './services/ensureAdminUser';
+import { ensurePricingTiers } from './services/ensurePricingTiers';
 
 import authRoutes from './routes/authRoutes';
 import dashboardRoutes from './routes/dashboardRoutes';
@@ -76,7 +77,7 @@ app.get('/api/health', (_req, res) => {
   const dbConnected = mongoose.connection.readyState === 1;
   res.json({
     success: true,
-    message: 'Water Refilling Station POS API is running',
+    message: 'WATERMARKS Water Refilling Station API is running',
     database: dbConnected ? 'connected' : 'disconnected',
     version: process.env.npm_package_version || '1.0.0',
     timestamp: new Date().toISOString(),
@@ -126,6 +127,7 @@ const isSeedAdminOnly = process.argv.includes('--seed-admin-only');
 const start = async () => {
   await connectDB();
   await ensureAdminUser();
+  await ensurePricingTiers();
 
   if (isSeedAdminOnly) {
     await mongoose.disconnect();
@@ -139,7 +141,7 @@ const start = async () => {
 
   server.listen(env.PORT, () => {
     logger.info(
-      `Water Refilling Station POS server running on port ${env.PORT} in ${env.NODE_ENV} mode`,
+      `WATERMARKS Water Refilling Station server running on port ${env.PORT} in ${env.NODE_ENV} mode`,
     );
   });
 };

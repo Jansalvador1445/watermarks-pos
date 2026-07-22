@@ -1302,3 +1302,54 @@
 2026-07-10T12:26:34.021Z [debug]: Socket connected: ESpSBEFe0K1GA6XUAAAH
 2026-07-10T12:27:00.482Z [debug]: Socket disconnected: WIbx5tcHg5KBMLYaAAAG
 2026-07-10T12:27:00.483Z [debug]: Socket disconnected: ESpSBEFe0K1GA6XUAAAH
+2026-07-22T03:41:56.605Z [info]: MongoDB connected successfully
+2026-07-22T03:41:56.753Z [info]: Admin user already exists: admin@h2o.com
+2026-07-22T03:41:56.887Z [info]: Cron jobs initialized
+2026-07-22T03:41:56.892Z [info]: Water Refilling Station POS server running on port 5000 in development mode
+2026-07-22T03:41:56.938Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-22T03:43:29.444Z [info]: Successful login {"userId":"6a44c13a7e130568617c05ce","email":"admin@h2o.com","ip":"::1"}
+2026-07-22T03:43:29.893Z [debug]: Socket connected: 6eSbvJefDZedXFY0AAAE
+2026-07-22T03:43:29.909Z [debug]: Socket connected: Iz6P0k-cb2fSGoaSAAAF
+2026-07-22T04:00:00.033Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-22T04:00:00.035Z [info]: Overdue delivery check completed
+2026-07-22T04:00:30.154Z [debug]: Socket disconnected: 6eSbvJefDZedXFY0AAAE
+2026-07-22T04:00:30.155Z [debug]: Socket disconnected: Iz6P0k-cb2fSGoaSAAAF
+2026-07-22T04:04:09.528Z [info]: MongoDB connected successfully
+2026-07-22T04:04:09.592Z [info]: Admin user already exists: admin@h2o.com
+2026-07-22T04:04:09.628Z [info]: Cron jobs initialized
+2026-07-22T04:04:09.632Z [info]: WATERMARKS Water Refilling Station server running on port 5000 in development mode
+2026-07-22T04:04:09.661Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-22T04:04:18.680Z [info]: MongoDB connected successfully
+2026-07-22T04:04:18.721Z [info]: Admin user already exists: admin@h2o.com
+2026-07-22T04:04:18.789Z [info]: Pricing tiers ready (3 tier(s))
+2026-07-22T04:04:18.819Z [info]: Cron jobs initialized
+2026-07-22T04:04:18.824Z [info]: WATERMARKS Water Refilling Station server running on port 5000 in development mode
+2026-07-22T04:04:18.830Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-22T04:04:50.706Z [info]: MongoDB connected successfully
+2026-07-22T04:04:50.761Z [info]: Admin user already exists: admin@h2o.com
+2026-07-22T04:04:50.829Z [info]: Pricing tiers ready (3 tier(s))
+2026-07-22T04:04:50.868Z [info]: Cron jobs initialized
+2026-07-22T04:04:50.874Z [info]: WATERMARKS Water Refilling Station server running on port 5000 in development mode
+2026-07-22T04:04:50.883Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-22T04:05:39.337Z [info]: Successful login {"userId":"6a44c13a7e130568617c05ce","email":"admin@h2o.com","ip":"::1"}
+2026-07-22T04:05:39.829Z [debug]: Socket connected: w26QsWOZMp48DAK8AAAC
+2026-07-22T04:05:39.833Z [debug]: Socket connected: G8dTFgEGfhY0-4XpAAAD
+2026-07-22T04:07:07.135Z [debug]: Socket disconnected: w26QsWOZMp48DAK8AAAC
+2026-07-22T04:07:07.138Z [debug]: Socket disconnected: G8dTFgEGfhY0-4XpAAAD
+2026-07-22T04:07:08.182Z [debug]: Socket connected: A0jesDKYNEMhpFg3AAAG
+2026-07-22T04:07:08.194Z [debug]: Socket connected: tmlR1jyjmerd-kEQAAAH
+2026-07-22T04:07:54.165Z [debug]: Socket disconnected: A0jesDKYNEMhpFg3AAAG
+2026-07-22T04:07:54.168Z [debug]: Socket disconnected: tmlR1jyjmerd-kEQAAAH
+2026-07-22T04:07:55.462Z [debug]: Socket connected: Z0raw9G9NeAlNRuEAAAK
+2026-07-22T04:07:55.487Z [debug]: Socket connected: irmIfLpJ4mpkMWbwAAAL
+2026-07-22T04:08:59.330Z [debug]: Socket disconnected: Z0raw9G9NeAlNRuEAAAK
+2026-07-22T04:08:59.332Z [debug]: Socket disconnected: irmIfLpJ4mpkMWbwAAAL
+2026-07-22T04:09:18.123Z [info]: MongoDB connected successfully
+2026-07-22T04:09:18.185Z [info]: Admin user already exists: admin@h2o.com
+2026-07-22T04:09:18.230Z [info]: Pricing tiers ready (3 tier(s))
+2026-07-22T04:09:18.261Z [info]: Cron jobs initialized
+2026-07-22T04:09:18.266Z [info]: WATERMARKS Water Refilling Station server running on port 5000 in development mode
+2026-07-22T04:09:18.273Z [info]: Delivery notifications processed {"late3DayCount":0,"decisionCount":0}
+2026-07-22T04:09:24.939Z [info]: Successful login {"userId":"6a44c13a7e130568617c05ce","email":"admin@h2o.com","ip":"::1"}
+2026-07-22T04:09:25.248Z [debug]: Socket connected: Ow5twOmdizAABc9xAAAC
+2026-07-22T04:09:25.255Z [debug]: Socket connected: g6wJ_QJo298v8l9BAAAD

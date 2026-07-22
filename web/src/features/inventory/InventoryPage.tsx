@@ -12,6 +12,7 @@ import {
   Tabs,
   Typography,
   DatePicker,
+  Segmented,
 } from 'antd';
 import {
   PlusOutlined,
@@ -72,6 +73,7 @@ export const InventoryPage = () => {
   } = usePagination();
 
   const [search, setSearch] = useState('');
+  const [stockFilter, setStockFilter] = useState<'all' | 'low'>('all');
   const [movementTypeFilter, setMovementTypeFilter] = useState<string | undefined>();
   const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -85,8 +87,18 @@ export const InventoryPage = () => {
   const debouncedSearch = useDebounce(search);
 
   const { data, isLoading } = useQuery({
-    queryKey: ['inventory', page, limit, debouncedSearch],
-    queryFn: () => inventoryApi.list({ page, limit, search: debouncedSearch }).then((r) => r.data),
+    queryKey: ['inventory', page, limit, debouncedSearch, stockFilter],
+    queryFn: () =>
+      inventoryApi
+        .list({
+          page,
+          limit,
+          search: debouncedSearch,
+          stockFilter: stockFilter === 'low' ? 'low' : undefined,
+          sortBy: 'currentStock',
+          sortOrder: 'asc',
+        })
+        .then((r) => r.data),
   });
 
   const movementParams: Record<string, unknown> = {
@@ -260,17 +272,30 @@ export const InventoryPage = () => {
 
   const itemsTab = (
     <>
-      <Input
-        prefix={<SearchOutlined />}
-        placeholder="Search inventory..."
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-          reset();
-        }}
-        className="w-280 mb-16"
-        allowClear
-      />
+      <Space wrap className="mb-16">
+        <Input
+          prefix={<SearchOutlined />}
+          placeholder="Search inventory..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            reset();
+          }}
+          className="w-280"
+          allowClear
+        />
+        <Segmented
+          value={stockFilter}
+          onChange={(v) => {
+            setStockFilter(v as 'all' | 'low');
+            reset();
+          }}
+          options={[
+            { label: 'All', value: 'all' },
+            { label: 'Low Stock', value: 'low' },
+          ]}
+        />
+      </Space>
 
       <BaseTable
         dataSource={data?.data}
@@ -408,6 +433,7 @@ export const InventoryPage = () => {
           <Form.Item name="lowStockThreshold" label="Low Stock Threshold">
             <InputNumber min={0} className="w-full" />
           </Form.Item>
+          {/* Refill type hidden — kept in schema for legacy slim/round inventory links
           <Form.Item name="refillType" label="Refill Type (internal)">
             <Select
               allowClear
@@ -418,6 +444,7 @@ export const InventoryPage = () => {
               ]}
             />
           </Form.Item>
+          */}
         </Form>
       </BaseModal>
 

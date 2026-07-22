@@ -19,6 +19,7 @@ import {
   SettingOutlined,
   LogoutOutlined,
   DownOutlined,
+  UpOutlined,
   FileTextOutlined,
   DollarOutlined,
   CheckCircleOutlined,
@@ -28,7 +29,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { usePermission } from '@/hooks/useAuth';
 import { useLogoutConfirm } from '@/hooks/useLogoutConfirm';
 import { WaterDropIcon } from '@/components/icons/WaterDropIcon';
-import { MENU_GROUPS, SIDEBAR_WIDTH } from '@/utils/constants';
+import { MENU_GROUPS, SIDEBAR_WIDTH, APP_NAME } from '@/utils/constants';
 import { dashboardApi, healthApi } from '@/services/api';
 import { formatDateTime } from '@/utils/formatters';
 
@@ -77,7 +78,14 @@ export const AppSidebar = () => {
   const location = useLocation();
   const screens = useBreakpoint();
   const isMobile = !screens.md;
-  const { sidebarCollapsed, setSidebarCollapsed, mobileSidebarOpen, setMobileSidebarOpen } = useUIStore();
+  const {
+    sidebarCollapsed,
+    setSidebarCollapsed,
+    mobileSidebarOpen,
+    setMobileSidebarOpen,
+    systemInfoExpanded,
+    toggleSystemInfo,
+  } = useUIStore();
   const { user } = useAuth();
   const { confirmLogout } = useLogoutConfirm();
   const { hasPermission } = usePermission();
@@ -159,7 +167,7 @@ export const AppSidebar = () => {
         {!collapsed && (
           <div>
             <Text strong className="app-sidebar__brand-title">
-              WATER REFILLING STATION POS
+              {APP_NAME}
             </Text>
           </div>
         )}
@@ -176,30 +184,57 @@ export const AppSidebar = () => {
       />
 
       {!collapsed && (
-        <div className="sidebar-system-info">
-          <div className="sidebar-system-info__row">
-            <span className="sidebar-system-info__label">Version</span>
-            <span>{health?.version ?? systemSummary?.version ?? '—'}</span>
-          </div>
-          <div className="sidebar-system-info__row">
-            <span className="sidebar-system-info__label">Database</span>
-            <span className="sidebar-system-info__status">
-              <span
-                className={`sidebar-system-info__dot${health?.database !== 'connected' ? ' sidebar-system-info__dot--offline' : ''}`}
-              />
-              {health?.database === 'connected' ? 'Connected' : 'Disconnected'}
-            </span>
-          </div>
-          <div className="sidebar-system-info__row">
-            <span className="sidebar-system-info__label">Low Stock</span>
-            <span className="sidebar-system-info__value">{systemSummary?.lowStockItems ?? 0}</span>
-          </div>
-          <div className="sidebar-system-info__row">
-            <span className="sidebar-system-info__label">Last Backup</span>
-            <span className="sidebar-system-info__value">
-              {systemSummary?.lastBackup ? formatDateTime(systemSummary.lastBackup as string) : '—'}
-            </span>
-          </div>
+        <div
+          className={`sidebar-system-info${systemInfoExpanded ? ' sidebar-system-info--expanded' : ' sidebar-system-info--collapsed'}`}
+        >
+          <button
+            type="button"
+            className="sidebar-system-info__toggle"
+            onClick={toggleSystemInfo}
+            aria-expanded={systemInfoExpanded}
+            aria-label={systemInfoExpanded ? 'Collapse system info' : 'Expand system info'}
+          >
+            <span className="sidebar-system-info__toggle-label">System Info</span>
+            {!systemInfoExpanded && (
+              <span className="sidebar-system-info__status sidebar-system-info__status--compact">
+                <span
+                  className={`sidebar-system-info__dot${health?.database !== 'connected' ? ' sidebar-system-info__dot--offline' : ''}`}
+                />
+              </span>
+            )}
+            {systemInfoExpanded ? (
+              <UpOutlined className="sidebar-system-info__chevron" />
+            ) : (
+              <DownOutlined className="sidebar-system-info__chevron" />
+            )}
+          </button>
+          {systemInfoExpanded && (
+            <div className="sidebar-system-info__body">
+              <div className="sidebar-system-info__row">
+                <span className="sidebar-system-info__label">Version</span>
+                <span>{health?.version ?? systemSummary?.version ?? '—'}</span>
+              </div>
+              <div className="sidebar-system-info__row">
+                <span className="sidebar-system-info__label">Database</span>
+                <span className="sidebar-system-info__status">
+                  <span
+                    className={`sidebar-system-info__dot${health?.database !== 'connected' ? ' sidebar-system-info__dot--offline' : ''}`}
+                  />
+                  {health?.database === 'connected' ? 'Connected' : 'Disconnected'}
+                </span>
+              </div>
+              <div className="sidebar-system-info__row">
+                <span className="sidebar-system-info__label">Low Stock</span>
+                <span className="sidebar-system-info__value">{systemSummary?.lowStockItems ?? 0}</span>
+              </div>
+              <div className="sidebar-system-info__row">
+                <span className="sidebar-system-info__label">Last Backup</span>
+                <span className="sidebar-system-info__value">
+                  {systemSummary?.lastBackup ? formatDateTime(systemSummary.lastBackup as string) : '—'}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       )}
 

@@ -8,7 +8,7 @@ import { BaseModal } from '@/components/BaseModal';
 import { PageHeader } from '@/components/PageHeader';
 import { usePagination } from '@/hooks/usePagination';
 import { useSearchFromUrl } from '@/hooks/useSearchFromUrl';
-import { USER_ROLES, ROLE_PERMISSIONS } from '@/utils/constants';
+import { USER_ROLES, ROLE_PERMISSIONS, APP_NAME } from '@/utils/constants';
 import { getStatusColor } from '@/utils/formatters';
 import {
   buildPermissionsFromState,
@@ -200,7 +200,7 @@ export const UsersPage = () => {
 
   const copyCredentials = async () => {
     if (!tempCredentials) return;
-    const text = `Water Refilling Station POS — Login Credentials\nName: ${tempCredentials.name}\nEmail: ${tempCredentials.email}\nTemporary Password: ${tempCredentials.tempPassword}\n\nSign in and you will be asked to set up your own username, email, and password.`;
+    const text = `${APP_NAME} — Login Credentials\nName: ${tempCredentials.name}\nEmail: ${tempCredentials.email}\nTemporary Password: ${tempCredentials.tempPassword}\n\nSign in and you will be asked to set up your own username, email, and password.`;
     try {
       await navigator.clipboard.writeText(text);
       message.success('Credentials copied to clipboard');

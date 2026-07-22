@@ -99,7 +99,7 @@ export interface ISettings extends Document {
 
 const settingsSchema = new Schema<ISettings>(
   {
-    companyName: { type: String, default: 'Water Refilling Station POS' },
+    companyName: { type: String, default: 'WATERMARKS Water Refilling Station' },
     logo: { type: String },
     pricing: {
       defaultSlimPrice: { type: Number, default: 35 },

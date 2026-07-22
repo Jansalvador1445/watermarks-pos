@@ -76,14 +76,12 @@ export const AppHeader = () => {
   const searchOptionGroups: SearchOptionGroup[] = useMemo(() => {
     const customerOptions = apiOptions.filter((o) => o.type === 'customer');
     const transactionOptions = apiOptions.filter((o) => o.type === 'transaction');
-    const deliveryOptions = apiOptions.filter((o) => o.type === 'delivery');
     const userOptions = apiOptions.filter((o) => o.type === 'user');
 
     return buildGroupedSearchOptions([
       { label: 'Pages', options: pageOptions.map((o) => ({ ...o, label: `Page: ${o.label}` })) },
       { label: 'Customers', options: customerOptions },
       { label: 'Invoices', options: transactionOptions },
-      { label: 'Deliveries', options: deliveryOptions },
       { label: 'Users', options: userOptions },
     ]);
   }, [pageOptions, apiOptions]);

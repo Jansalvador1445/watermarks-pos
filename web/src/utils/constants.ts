@@ -1,4 +1,4 @@
-export const APP_NAME = import.meta.env.VITE_APP_NAME || 'Water Refilling Station POS';
+export const APP_NAME = import.meta.env.VITE_APP_NAME || 'WATERMARKS Water Refilling Station';
 
 export const PRIMARY_COLOR = '#1677FF';
 export const BG_COLOR = '#F5F7FA';
@@ -89,14 +89,15 @@ export const MENU_GROUPS: MenuGroupDef[] = [
       { key: '/water-orders', label: 'Invoices', icon: 'FileTextOutlined', permission: 'orders:read' },
     ],
   },
-  {
-    key: 'deliveries',
-    label: 'Deliveries',
-    items: [
-      { key: '/deliveries', label: 'Delivery Schedule', icon: 'CarOutlined', permission: 'deliveries:read' },
-      { key: '/delivered-history', label: 'Delivered History', icon: 'CheckCircleOutlined', permission: 'deliveries:read' },
-    ],
-  },
+  // Deliveries hidden from nav — routes remain active for direct URLs
+  // {
+  //   key: 'deliveries',
+  //   label: 'Deliveries',
+  //   items: [
+  //     { key: '/deliveries', label: 'Delivery Schedule', icon: 'CarOutlined', permission: 'deliveries:read' },
+  //     { key: '/delivered-history', label: 'Delivered History', icon: 'CheckCircleOutlined', permission: 'deliveries:read' },
+  //   ],
+  // },
   {
     key: 'sales',
     label: 'Sales & Collection',

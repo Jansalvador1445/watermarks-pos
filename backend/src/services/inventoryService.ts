@@ -172,12 +172,17 @@ export class GallonService {
 
 export class InventoryService {
   static async getAll(req: Request) {
-    const { page, limit, skip, sort } = getPagination(req);
-    const { search, category } = req.query;
+    const { page, limit, skip } = getPagination(req);
+    const { search, category, stockFilter } = req.query;
 
     const filter: Record<string, unknown> = { isDeleted: false };
     if (category) filter.category = category;
+    if (stockFilter === 'low') {
+      filter.$expr = { $lte: ['$currentStock', '$lowStockThreshold'] };
+    }
     Object.assign(filter, buildSearchQuery(search as string, ['name', 'sku', 'category']));
+
+    const sort = { currentStock: 1 as const };
 
     const [data, total] = await Promise.all([
       Inventory.find(filter).sort(sort).skip(skip).limit(limit).lean(),

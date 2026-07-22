@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Row, Col, Card, Table, Tag, Timeline, Button, Segmented, Select, Typography, Empty, App, Space } from 'antd';
 import {
   TeamOutlined,
-  CarOutlined,
   CalendarOutlined,
   DollarOutlined,
   BarChartOutlined,
   CloudUploadOutlined,
-  EyeOutlined,
 } from '@ant-design/icons';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
@@ -19,9 +16,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
 } from 'recharts';
 import { dashboardApi, backupApi } from '@/services/api';
 import { StatCard } from '@/components/StatCard';
@@ -29,8 +23,7 @@ import { StorageOverview } from '@/components/StorageOverview';
 import { PageRefreshButton } from '@/components/PageRefreshButton';
 import { useAuth } from '@/hooks/useAuth';
 import { formatCurrency, formatDate, formatDateTime, getStatusColor } from '@/utils/formatters';
-import { DeliveryColorDot } from '@/components/DeliveryColorDot';
-import type { Delivery, Transaction } from '@/types';
+import type { Transaction } from '@/types';
 
 const { Title } = Typography;
 
@@ -60,7 +53,6 @@ const formatPayment = (method: string) => {
 };
 
 export const DashboardPage = () => {
-  const navigate = useNavigate();
   const { user } = useAuth();
   const { message } = App.useApp();
   const queryClient = useQueryClient();
@@ -77,19 +69,9 @@ export const DashboardPage = () => {
     queryFn: () => dashboardApi.sales(salesPeriod, salesRange).then((r) => r.data.data),
   });
 
-  const { data: deliveriesData } = useQuery({
-    queryKey: ['dashboard', 'deliveries'],
-    queryFn: () => dashboardApi.deliveries().then((r) => r.data.data),
-  });
-
   const { data: inventoryData, isLoading: inventoryLoading } = useQuery({
     queryKey: ['dashboard', 'inventory'],
     queryFn: () => dashboardApi.inventory().then((r) => r.data.data),
-  });
-
-  const { data: recentDeliveries } = useQuery({
-    queryKey: ['dashboard', 'recent-deliveries'],
-    queryFn: () => dashboardApi.recentDeliveries().then((r) => r.data.data),
   });
 
   const { data: recentTransactions } = useQuery({
@@ -123,51 +105,7 @@ export const DashboardPage = () => {
   });
 
   const firstName = user?.name?.split(' ')[0] || 'Admin';
-  const deliveryTotal = deliveriesData?.total ?? 0;
-  const pieData = (deliveriesData?.breakdown || []).filter((item) => item.value > 0);
-  const hasPieData = pieData.length > 0;
   const hasSalesData = (salesData || []).some((point) => point.total > 0);
-
-  const deliveryColumns = [
-    { title: 'Date', dataIndex: 'date', render: (d: string) => formatDate(d) },
-    {
-      title: 'Customer',
-      dataIndex: 'customerId',
-      render: (c: Delivery['customerId']) => (typeof c === 'object' ? c.fullName : '-'),
-    },
-    { title: 'Schedule', dataIndex: 'schedule' },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      render: (s: string) => (
-        <Tag color={getStatusColor(s)} className="dashboard-status-tag">
-          {s.charAt(0).toUpperCase() + s.slice(1)}
-        </Tag>
-      ),
-    },
-    {
-      title: 'Color Coding',
-      key: 'colorCode',
-      render: (_: unknown, r: Delivery) => (
-        <DeliveryColorDot status={r.status} date={r.date} colorCode={r.colorCode} showLabel />
-      ),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      width: 64,
-      render: (_: unknown, r: Delivery) => (
-        <Button
-          type="text"
-          size="small"
-          className="dashboard-action-btn"
-          icon={<EyeOutlined />}
-          aria-label="View delivery"
-          onClick={() => navigate('/deliveries', { state: { highlightId: r._id } })}
-        />
-      ),
-    },
-  ];
 
   const transactionColumns = [
     { title: 'Date', dataIndex: 'createdAt', render: (d: string) => formatDate(d) },
@@ -221,27 +159,6 @@ export const DashboardPage = () => {
           index={0}
         />
         <StatCard
-          title="Today's Deliveries"
-          value={stats?.todayDeliveries ?? 0}
-          icon={<CarOutlined />}
-          iconVariant="green"
-          subtext={`${stats?.deliveredToday ?? 0} Delivered`}
-          subtextTone="success"
-          loading={statsLoading}
-          index={1}
-        />
-        <StatCard
-          title="Overdue Deliveries"
-          value={stats?.overdueDeliveries ?? 0}
-          icon={<CalendarOutlined />}
-          iconVariant="red"
-          subtext="3 days or more"
-          subtextTone="danger"
-          loading={statsLoading}
-          valueClassName="stat-card__value stat-card__value--danger"
-          index={2}
-        />
-        <StatCard
           title="Today's Sales"
           value={formatCurrency(stats?.todaySales ?? 0)}
           icon={<DollarOutlined />}
@@ -249,7 +166,7 @@ export const DashboardPage = () => {
           subtext={`${(stats?.salesGrowth ?? 0) >= 0 ? '+' : ''}${stats?.salesGrowth ?? 0}% vs yesterday`}
           subtextTone="success"
           loading={statsLoading}
-          index={3}
+          index={1}
         />
         <StatCard
           title="This Month Sales"
@@ -259,12 +176,12 @@ export const DashboardPage = () => {
           subtext={`${(stats?.monthGrowth ?? 0) >= 0 ? '+' : ''}${stats?.monthGrowth ?? 0}% vs last month`}
           subtextTone="success"
           loading={statsLoading}
-          index={4}
+          index={2}
         />
       </div>
 
       <Row gutter={[20, 20]} className="mt-24">
-        <Col xs={24} xl={8}>
+        <Col xs={24} xl={16}>
           <Card
             title="Sales Overview"
             bordered={false}
@@ -343,58 +260,6 @@ export const DashboardPage = () => {
         </Col>
 
         <Col xs={24} xl={8}>
-          <Card title="Deliveries Overview" bordered={false} className="card-rounded dashboard-chart-card dashboard-panel-card">
-            <div className="deliveries-donut">
-              <div className="deliveries-donut__layout">
-                <div className="deliveries-donut__chart">
-                  <ResponsiveContainer width="100%" height={240}>
-                    {hasPieData ? (
-                      <PieChart>
-                        <Pie
-                          data={pieData}
-                          cx="50%"
-                          cy="50%"
-                          innerRadius={52}
-                          outerRadius={88}
-                          dataKey="value"
-                          paddingAngle={2}
-                          stroke="none"
-                        >
-                          {pieData.map((entry, i) => (
-                            <Cell key={i} fill={entry.color} />
-                          ))}
-                        </Pie>
-                      </PieChart>
-                    ) : (
-                      <div className="dashboard-chart-empty">No delivery data for today</div>
-                    )}
-                  </ResponsiveContainer>
-                  <div className="deliveries-donut__center">
-                    <div className="deliveries-donut__total">{deliveryTotal}</div>
-                    <div className="deliveries-donut__label">Total</div>
-                  </div>
-                </div>
-                <div className="deliveries-legend">
-                  {(deliveriesData?.breakdown || []).map((item) => {
-                    const pct = deliveryTotal > 0 ? ((item.value / deliveryTotal) * 100).toFixed(1) : '0.0';
-                    return (
-                      <div key={item.name} className="deliveries-legend__item">
-                        <span
-                          className={`deliveries-legend__dot deliveries-legend__dot--${item.name.toLowerCase().replace(/\s+/g, '-').replace(/\+/g, 'plus')}`}
-                        />
-                        <span className="deliveries-legend__text">
-                          {item.name}: {item.value} ({pct}%)
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </Card>
-        </Col>
-
-        <Col xs={24} xl={8}>
           <StorageOverview
             slim={inventoryData?.slim}
             round={inventoryData?.round}
@@ -405,21 +270,7 @@ export const DashboardPage = () => {
       </Row>
 
       <Row gutter={[20, 20]} className="mt-24">
-        <Col xs={24} lg={12}>
-          <Card title="Recent Deliveries" bordered={false} className="card-rounded dashboard-panel-card">
-            <Table
-              dataSource={recentDeliveries}
-              columns={deliveryColumns}
-              rowKey="_id"
-              pagination={false}
-              size="small"
-              scroll={{ x: true }}
-              className="dashboard-table"
-              locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No deliveries yet" /> }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
+        <Col xs={24}>
           <Card title="Recent Transactions" bordered={false} className="card-rounded dashboard-panel-card">
             <Table
               dataSource={recentTransactions}

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { APP_NAME } from '@/utils/constants';
 import {
   Card,
   Tabs,
@@ -94,7 +95,7 @@ const buildPdf = (title: string, subtitle: string, filterSummary: string[], sect
   const marginX = 40;
   const contentWidth = pageWidth - marginX * 2;
 
-  pdf.setProperties({ title, subject: subtitle, author: 'Water Refilling Station POS' });
+  pdf.setProperties({ title, subject: subtitle, author: APP_NAME });
   pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(18);
   pdf.text(title, marginX, 42);

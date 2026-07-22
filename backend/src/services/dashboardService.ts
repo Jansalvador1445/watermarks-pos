@@ -369,7 +369,7 @@ export class DashboardService {
       databaseCollections: dbStats?.collections ?? 0,
       lastBackup: lastBackupDoc?.createdAt ?? null,
       lastBackupFilename: lastBackupDoc?.filename ?? null,
-      companyName: settings?.companyName || 'Water Refilling Station POS',
+      companyName: settings?.companyName || 'WATERMARKS Water Refilling Station',
       version: process.env.npm_package_version || '1.0.0',
     };
   }

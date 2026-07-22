@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -5,11 +6,16 @@ import { AppSidebar } from './AppSidebar';
 import { AppHeader } from './AppHeader';
 import { NotificationListener } from '@/components/NotificationListener';
 import { useUIStore } from '@/store/uiStore';
+import { APP_NAME } from '@/utils/constants';
 
 const { Content } = Layout;
 
 export const AppLayout = () => {
   const { mobileSidebarOpen, setMobileSidebarOpen } = useUIStore();
+
+  useEffect(() => {
+    document.title = APP_NAME;
+  }, []);
 
   return (
     <Layout className="app-shell min-h-screen">
