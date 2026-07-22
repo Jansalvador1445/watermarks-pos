@@ -1,16 +1,15 @@
-# Graph Report - watermarks-pos  (2026-07-22)
+# Graph Report - .  (2026-07-21)
 
 ## Corpus Check
-- 177 files · ~214,447 words
-- Verdict: corpus is large enough that graph structure adds value.
+- cluster-only mode — file stats not available
 
 ## Summary
-- 1262 nodes · 2317 edges · 139 communities (89 shown, 50 thin omitted)
+- 1200 nodes · 2256 edges · 131 communities (80 shown, 51 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `92dad45b`
+- Built from commit: `7a9e49db`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -131,14 +130,6 @@
 - updateWaterOrderSchema
 - waterOrderApi
 - invalidateAfterWaterOrderChange
-- @types/bcryptjs
-- @types/cookie-parser
-- @types/cors
-- @types/express
-- @types/morgan
-- @types/multer
-- @types/node-cron
-- @typescript-eslint/parser
 
 ## God Nodes (most connected - your core abstractions)
 1. `react` - 37 edges
@@ -167,15 +158,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (139 total, 50 thin omitted)
+## Communities (131 total, 51 thin omitted)
 
 ### Community 0 - "Inventory"
-Cohesion: 0.08
-Nodes (10): fail(), main(), pass(), DeliveryService, InventoryMovementService, isTransactionUnsupported(), calcLineSubtotal(), calcTotals() (+2 more)
+Cohesion: 0.06
+Nodes (15): Inventory, fail(), main(), pass(), DeliveryService, InventoryMovementService, isTransactionUnsupported(), InventoryService (+7 more)
 
 ### Community 1 - "dashboardRoutes.ts"
 Cohesion: 0.06
-Nodes (28): getActivity, getDeliveries, getInventory, getRecentDeliveries, getRecentTransactions, getSales, getStats, getSystemSummary (+20 more)
+Nodes (25): getActivity, getDeliveries, getInventory, getRecentDeliveries, getRecentTransactions, getSales, getStats, getSystemSummary (+17 more)
 
 ### Community 2 - "devDependencies"
 Cohesion: 0.05
@@ -186,12 +177,12 @@ Cohesion: 0.09
 Nodes (20): createCustomer, deleteCustomer, deleteCustomerPhoto, enrichCustomer(), getCustomer, getCustomers, importCustomers, toggleCustomerStatus (+12 more)
 
 ### Community 4 - "devDependencies"
-Cohesion: 0.12
-Nodes (17): devDependencies, pkg, prettier, tsx, @types/compression, @types/jsonwebtoken, @types/node, typescript (+9 more)
+Cohesion: 0.06
+Nodes (35): devDependencies, eslint, pkg, prettier, tsx, @types/bcryptjs, @types/compression, @types/cookie-parser (+27 more)
 
 ### Community 5 - "migrateV2.ts"
-Cohesion: 0.15
-Nodes (20): connectDB(), normalizeMongoUri(), envSchema, parsed, logFormat, logger, start(), errorHandler() (+12 more)
+Cohesion: 0.18
+Nodes (17): connectDB(), envSchema, parsed, logFormat, logger, start(), ensurePricingTiers(), linkProductsToInventory() (+9 more)
 
 ### Community 6 - "compilerOptions"
 Cohesion: 0.08
@@ -202,24 +193,24 @@ Cohesion: 0.08
 Nodes (25): ActivityLog, ApiResponse, Customer, CustomerContact, DailyCollection, DailyCollectionItem, DashboardStats, Delivery (+17 more)
 
 ### Community 8 - "dashboardService.ts"
-Cohesion: 0.17
-Nodes (13): backupSchema, IBackup, ILog, ISettings, Log, logSchema, Notification, notificationSchema (+5 more)
+Cohesion: 0.12
+Nodes (20): gallonSchema, IGallon, IGallonHistory, IInventory, IInventoryHistory, inventorySchema, backupSchema, IBackup (+12 more)
 
 ### Community 9 - "verifyBusinessRules.ts"
 Cohesion: 0.20
-Nodes (10): IPricingTier, PricingTier, PricingTierCode, pricingTierSchema, DeliveryRecord, INVENTORY_LOCKED_FIELDS, DeliveryStatus, IdLike (+2 more)
+Nodes (16): Customer, Delivery, IInventoryMovement, InventoryMovement, inventoryMovementSchema, Log, results, DeliveryRecord (+8 more)
 
 ### Community 10 - "Customer.ts"
-Cohesion: 0.17
-Nodes (12): IInvoice, IInvoiceItem, Invoice, invoiceItemSchema, invoiceSchema, InvoiceStatus, IWaterOrder, InvoiceItemInput (+4 more)
+Cohesion: 0.11
+Nodes (19): contactSchema, customerSchema, deliverySchema, ICustomer, ICustomerContact, IDelivery, IInvoice, IInvoiceItem (+11 more)
 
 ### Community 11 - "react"
 Cohesion: 0.10
 Nodes (5): react, RecordMode, useDebounce(), useSearchFromUrl(), OnboardingRouteProps
 
 ### Community 12 - "enums.ts"
-Cohesion: 0.26
-Nodes (10): ITransaction, ITransactionItem, Transaction, transactionSchema, TransactionService, ColorCode, ContinuationDecision, PaymentMethod (+2 more)
+Cohesion: 0.23
+Nodes (15): IProduct, Product, productSchema, ITransaction, ITransactionItem, Transaction, transactionSchema, ResolvedTransactionItem (+7 more)
 
 ### Community 13 - "schemas.ts"
 Cohesion: 0.09
@@ -238,40 +229,40 @@ Cohesion: 0.10
 Nodes (20): compilerOptions, declaration, declarationMap, esModuleInterop, forceConsistentCasingInFileNames, lib, module, outDir (+12 more)
 
 ### Community 17 - "src/index.ts"
-Cohesion: 0.10
-Nodes (24): completeOnboarding, getMe, login, logout, refresh, isSeedAdminOnly, server, staticPath (+16 more)
+Cohesion: 0.11
+Nodes (18): isSeedAdminOnly, server, staticPath, errorHandler(), notFoundHandler(), apiLimiter, authLimiter, router (+10 more)
 
 ### Community 18 - "api.ts"
 Cohesion: 0.10
 Nodes (19): authApi, backupApi, collectionApi, customerApi, dashboardApi, deliveryApi, gallonApi, healthApi (+11 more)
 
 ### Community 19 - "rbac.ts"
-Cohesion: 0.21
-Nodes (9): getDailyCollection, authorize(), getUserPermissions(), matchPermission(), router, CollectionService, ROLE_PERMISSIONS, asyncHandler() (+1 more)
+Cohesion: 0.17
+Nodes (13): getDailyCollection, authenticate(), optionalAuth(), authorize(), getUserPermissions(), matchPermission(), router, CollectionService (+5 more)
 
 ### Community 20 - "index.tsx"
 Cohesion: 0.11
 Nodes (17): BackupPage, CustomersPage, DailyCollectionPage, DashboardPage, DeliveredHistoryPage, DeliveriesPage, InventoryPage, InvoicesPage (+9 more)
 
 ### Community 21 - "userRoutes.ts"
-Cohesion: 0.17
-Nodes (17): createBackup, createUser, deleteUser, downloadBackup, getBackups, getLogs, getNotifications, getSettings (+9 more)
+Cohesion: 0.22
+Nodes (16): createBackup, createUser, deleteUser, downloadBackup, getBackups, getLogs, getNotifications, getSettings (+8 more)
 
 ### Community 22 - "dependencies"
-Cohesion: 0.06
-Nodes (35): dependencies, bcryptjs, compression, cookie-parser, cors, dayjs, dotenv, express (+27 more)
+Cohesion: 0.12
+Nodes (17): dependencies, cookie-parser, cors, dotenv, express-rate-limit, helmet, morgan, multer (+9 more)
 
 ### Community 23 - "GallonService"
-Cohesion: 0.23
-Nodes (5): assert(), main(), GallonService, defaultLabelFromKey(), slugifyItemKey()
+Cohesion: 0.21
+Nodes (6): Gallon, assert(), main(), GallonService, defaultLabelFromKey(), slugifyItemKey()
 
 ### Community 24 - "productRoutes.ts"
 Cohesion: 0.22
 Nodes (11): createProduct, deleteProduct, getActiveProducts, getProduct, getProducts, updateProduct, validateParamObjectId(), router (+3 more)
 
 ### Community 25 - "seed.ts"
-Cohesion: 0.23
-Nodes (13): contactSchema, Customer, customerSchema, Delivery, deliverySchema, ICustomer, ICustomerContact, IDelivery (+5 more)
+Cohesion: 0.35
+Nodes (7): normalizeMongoUri(), User, userSchema, main(), BACKUP_COLLECTIONS, UserRole, UserStatus
 
 ### Community 26 - "authService.ts"
 Cohesion: 0.36
@@ -283,11 +274,11 @@ Nodes (14): emptyPermissionState, PRESET_ROLES, ROLE_HINTS, TempCredentials, Use
 
 ### Community 28 - "dependencies"
 Cohesion: 0.13
-Nodes (15): axios, @fontsource/inter, react, react-dom, react-router-dom, recharts, dependencies, axios (+7 more)
+Nodes (15): @ant-design/icons, @fontsource/inter, react, react-dom, react-router-dom, recharts, dependencies, @ant-design/icons (+7 more)
 
 ### Community 29 - "invoiceRoutes.ts"
-Cohesion: 0.17
-Nodes (17): convertInvoice, createInvoice, deleteInvoice, getInvoice, getInvoices, updateInvoice, auditLog(), sanitizeBody() (+9 more)
+Cohesion: 0.22
+Nodes (12): convertInvoice, createInvoice, deleteInvoice, getInvoice, getInvoices, updateInvoice, auditLog(), sanitizeBody() (+4 more)
 
 ### Community 30 - "app"
 Cohesion: 0.13
@@ -302,8 +293,8 @@ Cohesion: 0.26
 Nodes (11): createDelivery, deleteDelivery, getCalendarEvents, getDeliveredHistory, getDeliveries, getDelivery, resolveDeliveryDecision, updateDelivery (+3 more)
 
 ### Community 33 - "backend/src/utils/permissions.ts"
-Cohesion: 0.13
-Nodes (6): ReportService, UserService, generateTempPassword(), ADMIN_ONLY_PERMISSIONS, ALL_ASSIGNABLE_PERMISSIONS, validateCustomPermissions()
+Cohesion: 0.21
+Nodes (5): UserService, generateTempPassword(), ADMIN_ONLY_PERMISSIONS, ALL_ASSIGNABLE_PERMISSIONS, validateCustomPermissions()
 
 ### Community 34 - "ReportsPage.tsx"
 Cohesion: 0.22
@@ -314,12 +305,12 @@ Cohesion: 0.22
 Nodes (11): UserPermissionsEditor(), UserPermissionsEditorProps, ADMIN_ONLY_MODULES, buildPermissionsFromState(), buildStateFromPermissions(), countEnabledPermissions(), getRolePermissionSummary(), matchPermission() (+3 more)
 
 ### Community 36 - "authRoutes.ts"
-Cohesion: 0.19
-Nodes (15): IGallon, IInventory, IInventoryMovement, InventoryMovement, inventoryMovementSchema, IProduct, Product, productSchema (+7 more)
+Cohesion: 0.26
+Nodes (9): completeOnboarding, getMe, login, logout, refresh, validate(), router, loginSchema (+1 more)
 
 ### Community 37 - "pricingTierRoutes.ts"
-Cohesion: 0.19
-Nodes (7): getPricingTiers, updatePricingTier, authorizeRoles(), validate(), router, PricingTierService, updatePricingTierSchema
+Cohesion: 0.20
+Nodes (7): getPricingTiers, updatePricingTier, authorizeRoles(), router, PricingTierService, asyncHandler(), updatePricingTierSchema
 
 ### Community 38 - "Program"
 Cohesion: 0.26
@@ -334,8 +325,8 @@ Cohesion: 0.27
 Nodes (9): createTransaction, deleteTransaction, getTransaction, getTransactions, updateTransaction, router, paginatedResponse(), createTransactionSchema (+1 more)
 
 ### Community 41 - "getPagination"
-Cohesion: 0.31
-Nodes (5): ResolvedTransactionItem, buildSearchQuery(), escapeRegex(), getPagination(), PaginationOptions
+Cohesion: 0.18
+Nodes (9): IPricingTier, PricingTier, PricingTierCode, pricingTierSchema, LogService, buildSearchQuery(), escapeRegex(), getPagination() (+1 more)
 
 ### Community 42 - "backend/package.json"
 Cohesion: 0.20
@@ -425,65 +416,29 @@ Nodes (3): calcLineSubtotal(), InvoicesPage(), STATUS_COLORS
 Cohesion: 0.67
 Nodes (3): PageRefreshTarget, refetchTarget(), usePageRefresh()
 
-### Community 69 - "SettingsService"
-Cohesion: 0.18
-Nodes (9): Gallon, gallonSchema, IGallonHistory, IInventoryHistory, Inventory, inventorySchema, seed(), InventoryService (+1 more)
-
 ### Community 71 - "jspdf"
 Cohesion: 0.67
 Nodes (3): jspdf, jspdf, buildPdf()
 
-### Community 89 - "axios"
-Cohesion: 0.18
-Nodes (10): A. Minimum Viable Copy, Appendix — Response Shapes, B. Implementation Order, C. Patterns Worth Keeping, D. Patterns Worth Improving When Copying, E. Dependencies, F. Test Checklist, Financial Reports — Reference & Duplication Guide (+2 more)
-
-### Community 91 - "bcryptjs"
-Cohesion: 0.18
-Nodes (11): 10. Role-Based Variants, 11. Caching & Invalidation, 12. Key File Map, 1. Overview, 2. High-Level Architecture, 3. Report Types Catalog, Backend, Frontend (+3 more)
-
-### Community 92 - "compression"
-Cohesion: 0.20
-Nodes (10): 5.1 Standard fetch flow, 5.2 Payment Received, 5.3 Outstanding Balances, 5.4 Credit / Aging, 5.5 Invoice Summary, 5.6 Commission, 5.7 Expense Summary, 5.8 Profit & Loss (+2 more)
-
-### Community 93 - "dayjs"
-Cohesion: 0.29
-Nodes (7): 4.1 UI layer, 4.2 Which filters apply per report type, 4.3 Backend validation, 4.4 Payment status computation, 4.5 Status intersection (frontend + backend must stay in sync), 4.6 Company scoping, 4. Filter System (End-to-End)
-
-### Community 94 - "express"
-Cohesion: 0.29
-Nodes (7): 6. Statement of Account (SOA) Special Mode, Behavior differences, Context loading, PDF path, Print path, SOA document structure, Trigger
-
-### Community 95 - "jsonwebtoken"
-Cohesion: 0.33
-Nodes (6): 9. Export & Print, Backend export endpoint (audit only), Export entry point, Output paths summary, Payment Received special case, Print
-
-### Community 96 - "mongoose"
-Cohesion: 0.40
-Nodes (5): 7. On-Screen Display, Financial reports, Payment reports, Report header block, Table columns
-
-### Community 97 - "node-cron"
-Cohesion: 0.40
-Nodes (5): 8. Column Selection & Preferences, Column definitions, Export alignment, Persistence, UI component
-
 ## Knowledge Gaps
-- **428 isolated node(s):** `Routes`, `Report types`, `2. High-Level Architecture`, `3. Report Types Catalog`, `4.1 UI layer` (+423 more)
+- **378 isolated node(s):** `name`, `version`, `description`, `main`, `bin` (+373 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **50 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **51 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `react` connect `react` to `index.tsx`, `constants.ts`, `app`, `ReportsPage.tsx`, `plugins`, `AppLayout.tsx`, `ErrorBoundary.tsx`, `CustomersPage.tsx`, `NotificationsPage.tsx`, `ProductCatalog.tsx`, `SalesHistory.tsx`, `CustomerLocationFields.tsx`, `DashboardPage.tsx`, `InventoryPage.tsx`, `InvoicesPage.tsx`, `SettingsPage.tsx`, `usePageRefresh.ts`, `main.tsx`, `PermissionGate.tsx`, `StatCard.tsx`, `POSPage.tsx`, `useAuth.ts`, `ProtectedRoute.tsx`?**
-  _High betweenness centrality (0.178) - this node is a cross-community bridge._
+  _High betweenness centrality (0.214) - this node is a cross-community bridge._
 - **Why does `app` connect `app` to `src/index.ts`, `usePageRefresh.ts`, `DashboardPage.tsx`?**
-  _High betweenness centrality (0.169) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `dependencies` to `devDependencies`, `socket.io`, `framer-motion`, `@hookform/resolvers`, `jspdf-autotable`, `jspdf`, `react-hook-form`, `socket.io-client`, `@tanstack/react-query`, `zod`, `zustand`, `antd`?**
-  _High betweenness centrality (0.076) - this node is a cross-community bridge._
-- **What connects `Routes`, `Report types`, `2. High-Level Architecture` to the rest of the system?**
-  _428 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.200) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `dependencies` to `devDependencies`, `framer-motion`, `@hookform/resolvers`, `jspdf-autotable`, `jspdf`, `react-hook-form`, `socket.io-client`, `@tanstack/react-query`, `zod`, `zustand`, `axios`, `antd`?**
+  _High betweenness centrality (0.090) - this node is a cross-community bridge._
+- **What connects `name`, `version`, `description` to the rest of the system?**
+  _378 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Inventory` be split into smaller, more focused modules?**
-  _Cohesion score 0.08106219426974144 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05835010060362173 - nodes in this community are weakly interconnected._
 - **Should `dashboardRoutes.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.05961426066627703 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05520614954577219 - nodes in this community are weakly interconnected._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.05405405405405406 - nodes in this community are weakly interconnected._
