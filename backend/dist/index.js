@@ -28,6 +28,7 @@ const socket_1 = require("./socket");
 const cronJobs_1 = require("./jobs/cronJobs");
 const deliveryNotificationService_1 = require("./services/deliveryNotificationService");
 const ensureAdminUser_1 = require("./services/ensureAdminUser");
+const ensurePricingTiers_1 = require("./services/ensurePricingTiers");
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const dashboardRoutes_1 = __importDefault(require("./routes/dashboardRoutes"));
 const customerRoutes_1 = __importDefault(require("./routes/customerRoutes"));
@@ -67,7 +68,7 @@ app.get('/api/health', (_req, res) => {
     const dbConnected = mongoose_1.default.connection.readyState === 1;
     res.json({
         success: true,
-        message: 'Water Refilling Station POS API is running',
+        message: 'WATERMARKS Water Refilling Station API is running',
         database: dbConnected ? 'connected' : 'disconnected',
         version: process.env.npm_package_version || '1.0.0',
         timestamp: new Date().toISOString(),
@@ -110,6 +111,7 @@ const isSeedAdminOnly = process.argv.includes('--seed-admin-only');
 const start = async () => {
     await (0, db_1.connectDB)();
     await (0, ensureAdminUser_1.ensureAdminUser)();
+    await (0, ensurePricingTiers_1.ensurePricingTiers)();
     if (isSeedAdminOnly) {
         await mongoose_1.default.disconnect();
         process.exit(0);
@@ -117,7 +119,7 @@ const start = async () => {
     (0, cronJobs_1.initCronJobs)();
     deliveryNotificationService_1.DeliveryNotificationService.checkAndNotifyDeliveries().catch((err) => logger_1.logger.warn('Initial delivery notification check skipped', { err }));
     server.listen(env_1.env.PORT, () => {
-        logger_1.logger.info(`Water Refilling Station POS server running on port ${env_1.env.PORT} in ${env_1.env.NODE_ENV} mode`);
+        logger_1.logger.info(`WATERMARKS Water Refilling Station server running on port ${env_1.env.PORT} in ${env_1.env.NODE_ENV} mode`);
     });
 };
 start();

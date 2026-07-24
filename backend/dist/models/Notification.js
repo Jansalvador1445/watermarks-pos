@@ -64,7 +64,7 @@ const backupSchema = new mongoose_1.Schema({
 }, { timestamps: true });
 exports.Backup = mongoose_1.default.model('Backup', backupSchema);
 const settingsSchema = new mongoose_1.Schema({
-    companyName: { type: String, default: 'Water Refilling Station POS' },
+    companyName: { type: String, default: 'WATERMARKS Water Refilling Station' },
     logo: { type: String },
     pricing: {
         defaultSlimPrice: { type: Number, default: 35 },
