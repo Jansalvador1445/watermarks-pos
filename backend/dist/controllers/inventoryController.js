@@ -59,8 +59,8 @@ exports.getDeliveryReport = (0, response_1.asyncHandler)(async (req, res) => {
     const data = await inventoryService_1.ReportService.getDeliveryReport(startDate, endDate);
     return (0, response_1.successResponse)(res, data);
 });
-exports.getCustomerReport = (0, response_1.asyncHandler)(async (_req, res) => {
-    const data = await inventoryService_1.ReportService.getCustomerReport();
+exports.getCustomerReport = (0, response_1.asyncHandler)(async (req, res) => {
+    const data = await inventoryService_1.ReportService.getCustomerReport(req);
     return (0, response_1.successResponse)(res, data);
 });
 exports.getInventoryReport = (0, response_1.asyncHandler)(async (req, res) => {

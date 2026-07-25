@@ -75,8 +75,8 @@ export const getDeliveryReport = asyncHandler(async (req: Request, res: Response
   return successResponse(res, data);
 });
 
-export const getCustomerReport = asyncHandler(async (_req: Request, res: Response) => {
-  const data = await ReportService.getCustomerReport();
+export const getCustomerReport = asyncHandler(async (req: Request, res: Response) => {
+  const data = await ReportService.getCustomerReport(req);
   return successResponse(res, data);
 });
 

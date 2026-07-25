@@ -71,7 +71,7 @@ const reportRouter = Router();
 reportRouter.use(authenticate);
 reportRouter.get('/sales', authorize('dashboard:read'), getSalesReport);
 reportRouter.get('/deliveries', authorize('dashboard:read'), getDeliveryReport);
-reportRouter.get('/customers', authorize('dashboard:read'), getCustomerReport);
+reportRouter.get('/customers', authorize('reports:read', 'dashboard:read'), getCustomerReport);
 reportRouter.get('/inventory', authorize('dashboard:read'), getInventoryReport);
 
 export { gallonRouter, inventoryRouter, movementRouter, reportRouter };

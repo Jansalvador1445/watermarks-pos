@@ -404,6 +404,17 @@ export declare const updatePricingTierSchema: z.ZodObject<{
     slimPrice: z.ZodOptional<z.ZodNumber>;
     roundPrice: z.ZodOptional<z.ZodNumber>;
 }, z.core.$strip>;
+export declare const createPaymentSchema: z.ZodObject<{
+    invoiceId: z.ZodString;
+    amount: z.ZodNumber;
+    paymentMethod: z.ZodEnum<{
+        cash: "cash";
+        gcash: "gcash";
+        bank: "bank";
+    }>;
+    paymentDate: z.ZodOptional<z.ZodString>;
+    notes: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
 export declare const deliveryDecisionSchema: z.ZodObject<{
     action: z.ZodEnum<{
         continue: "continue";

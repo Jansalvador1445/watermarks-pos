@@ -36,6 +36,6 @@ exports.reportRouter = reportRouter;
 reportRouter.use(auth_1.authenticate);
 reportRouter.get('/sales', (0, rbac_1.authorize)('dashboard:read'), inventoryController_1.getSalesReport);
 reportRouter.get('/deliveries', (0, rbac_1.authorize)('dashboard:read'), inventoryController_1.getDeliveryReport);
-reportRouter.get('/customers', (0, rbac_1.authorize)('dashboard:read'), inventoryController_1.getCustomerReport);
+reportRouter.get('/customers', (0, rbac_1.authorize)('reports:read', 'dashboard:read'), inventoryController_1.getCustomerReport);
 reportRouter.get('/inventory', (0, rbac_1.authorize)('dashboard:read'), inventoryController_1.getInventoryReport);
 //# sourceMappingURL=inventoryRoutes.js.map

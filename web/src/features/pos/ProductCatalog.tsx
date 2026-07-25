@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   Button,
   Form,
-  Input,
+  InputNumber,
   Select,
-  Switch,
   Tag,
   Space,
   message,
@@ -14,22 +13,17 @@ import {
 } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { productApi, inventoryApi, pricingTierApi } from '@/services/api';
+import { productApi, inventoryApi } from '@/services/api';
 import { BaseTable } from '@/components/BaseTable';
 import { BaseModal } from '@/components/BaseModal';
-import { ProductPricingFields } from '@/components/ProductPricingFields';
+import { InventoryItemFormModal } from '@/components/InventoryItemFormModal';
 import { usePagination } from '@/hooks/usePagination';
 import { formatCurrency, getStatusColor } from '@/utils/formatters';
 import { getApiErrorMessage } from '@/utils/apiError';
 import { getProductStockLabel } from '@/utils/productStock';
 import type { InventoryItem, Product } from '@/types';
 
-const CATEGORY_OPTIONS = [
-  { label: 'Refill', value: 'refill' },
-  { label: 'Container', value: 'container' },
-  { label: 'Rental', value: 'rental' },
-  { label: 'Other', value: 'other' },
-];
+const { Text } = Typography;
 
 const CATEGORY_COLORS: Record<string, string> = {
   refill: 'blue',
@@ -38,84 +32,95 @@ const CATEGORY_COLORS: Record<string, string> = {
   other: 'default',
 };
 
-type ProductFormValues = {
-  name: string;
+type ConfirmFormValues = {
   price: number;
-  purchasePrice?: number;
-  tierBPrice?: number;
-  tierCPrice?: number;
-  category: Product['category'];
-  linkedInventoryId?: string;
-  decrementsStock: boolean;
   status: Product['status'];
-};
-
-const defaultFormValues: ProductFormValues = {
-  name: '',
-  price: 0,
-  purchasePrice: undefined,
-  tierBPrice: undefined,
-  tierCPrice: undefined,
-  category: 'refill',
-  linkedInventoryId: undefined,
-  decrementsStock: true,
-  status: 'active',
 };
 
 export const ProductCatalog = () => {
   const queryClient = useQueryClient();
   const { page, limit, onPageChange } = usePagination();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [inlineAddOpen, setInlineAddOpen] = useState(false);
   const [editing, setEditing] = useState<Product | null>(null);
-  const [form] = Form.useForm<ProductFormValues>();
-  const decrementsStock = Form.useWatch('decrementsStock', form);
-  const category = Form.useWatch('category', form);
+  const [selectedInventoryId, setSelectedInventoryId] = useState<string | undefined>();
+  const [pickedInventory, setPickedInventory] = useState<InventoryItem | null>(null);
+  const [confirmForm] = Form.useForm<ConfirmFormValues>();
 
   const { data, isLoading } = useQuery({
     queryKey: ['products', page, limit],
     queryFn: () => productApi.list({ page, limit, sortBy: 'name', sortOrder: 'asc' }).then((r) => r.data),
   });
 
-  const { data: inventoryData } = useQuery({
-    queryKey: ['inventory', 'for-product-link'],
-    queryFn: () => inventoryApi.list({ page: 1, limit: 200 }).then((r) => r.data.data),
+  const {
+    data: availableInventory,
+    isLoading: inventoryLoading,
+    isError: inventoryError,
+    error: inventoryQueryError,
+  } = useQuery({
+    queryKey: ['inventory', 'not-in-catalog'],
+    queryFn: () =>
+      inventoryApi
+        .list({ page: 1, limit: 200, notInCatalog: 'true', catalogStatus: 'none' })
+        .then((r) => r.data.data),
+    enabled: pickerOpen,
   });
 
-  const { data: pricingTiers } = useQuery({
-    queryKey: ['pricing-tiers'],
-    queryFn: () => pricingTierApi.list().then((r) => r.data.data),
-  });
+  const inventoryOptions = useMemo(
+    () =>
+      (availableInventory ?? []).map((item: InventoryItem) => ({
+        label: `${item.name} (${item.category}${item.unit ? ` · ${item.unit}` : ''})`,
+        value: String(item._id),
+      })),
+    [availableInventory],
+  );
 
-  const inventoryOptions =
-    inventoryData?.map((item: InventoryItem) => ({
-      label: `${item.name} (${item.category}${item.unit ? ` · ${item.unit}` : ''})`,
-      value: item._id,
-    })) ?? [];
+  const selectedInventory = useMemo(() => {
+    if (pickedInventory) return pickedInventory;
+    return (availableInventory ?? []).find((i: InventoryItem) => String(i._id) === selectedInventoryId);
+  }, [availableInventory, selectedInventoryId, pickedInventory]);
 
   const invalidateProducts = () => {
     queryClient.invalidateQueries({ queryKey: ['products'] });
     queryClient.invalidateQueries({ queryKey: ['products', 'active'] });
+    queryClient.invalidateQueries({ queryKey: ['inventory'] });
+    queryClient.invalidateQueries({ queryKey: ['inventory', 'not-in-catalog'] });
   };
 
-  const saveMutation = useMutation({
-    mutationFn: (values: ProductFormValues) => {
-      const payload = {
-        ...values,
-        linkedInventoryId: values.decrementsStock ? values.linkedInventoryId : undefined,
-        purchasePrice: values.purchasePrice ?? undefined,
-        tierBPrice: values.tierBPrice ?? undefined,
-        tierCPrice: values.tierCPrice ?? undefined,
-      };
-      return editing ? productApi.update(editing._id, payload) : productApi.create(payload);
-    },
+  const createMutation = useMutation({
+    mutationFn: (values: ConfirmFormValues & { inventoryId: string; inventory: InventoryItem }) =>
+      productApi.create({
+        name: values.inventory.name,
+        price: values.price,
+        status: values.status,
+        linkedInventoryId: values.inventoryId,
+        category: 'refill',
+        decrementsStock: true,
+      }),
     onSuccess: () => {
-      message.success(editing ? 'Product updated' : 'Product created');
+      message.success('Product added to catalog');
       invalidateProducts();
-      setModalOpen(false);
-      setEditing(null);
-      form.resetFields();
+      setConfirmOpen(false);
+      setPickerOpen(false);
+      setSelectedInventoryId(undefined);
+      setPickedInventory(null);
+      confirmForm.resetFields();
     },
-    onError: (error) => message.error(getApiErrorMessage(error, 'Failed to save product')),
+    onError: (error) => message.error(getApiErrorMessage(error, 'Failed to add product')),
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: (values: ConfirmFormValues) =>
+      productApi.update(editing!._id, { price: values.price, status: values.status }),
+    onSuccess: () => {
+      message.success('Product updated');
+      invalidateProducts();
+      setConfirmOpen(false);
+      setEditing(null);
+      confirmForm.resetFields();
+    },
+    onError: (error) => message.error(getApiErrorMessage(error, 'Failed to update product')),
   });
 
   const deleteMutation = useMutation({
@@ -127,34 +132,52 @@ export const ProductCatalog = () => {
     onError: (error) => message.error(getApiErrorMessage(error, 'Failed to delete product')),
   });
 
-  const openModal = (record?: Product) => {
-    setEditing(record ?? null);
-    if (record) {
-      form.setFieldsValue({
-        name: record.name,
-        price: record.price,
-        purchasePrice: record.purchasePrice,
-        tierBPrice: record.tierBPrice,
-        tierCPrice: record.tierCPrice,
-        category: record.category,
-        linkedInventoryId: record.linkedInventoryId,
-        decrementsStock: record.decrementsStock,
-        status: record.status,
-      });
-    } else {
-      form.setFieldsValue(defaultFormValues);
-    }
-    setModalOpen(true);
+  const openAddFlow = () => {
+    setEditing(null);
+    setSelectedInventoryId(undefined);
+    setPickedInventory(null);
+    setPickerOpen(true);
   };
 
-  const handleCategoryChange = (value: Product['category']) => {
-    if (value === 'refill') {
-      form.setFieldsValue({ decrementsStock: true, category: value });
-    } else if (value === 'rental' || value === 'container') {
-      form.setFieldsValue({ decrementsStock: false, linkedInventoryId: undefined, category: value });
-    } else {
-      form.setFieldsValue({ category: value });
+  const openEditConfirm = (record: Product) => {
+    setEditing(record);
+    confirmForm.setFieldsValue({ price: record.price, status: record.status });
+    setConfirmOpen(true);
+  };
+
+  const handlePickerNext = () => {
+    if (!selectedInventoryId || !selectedInventory) {
+      message.warning('Select an inventory item');
+      return;
     }
+    confirmForm.setFieldsValue({
+      price: selectedInventory.price ?? 0,
+      status: 'active',
+    });
+    setConfirmOpen(true);
+  };
+
+  const handleConfirm = () => {
+    confirmForm.validateFields().then((values) => {
+      if (editing) {
+        updateMutation.mutate(values);
+      } else if (selectedInventoryId && selectedInventory) {
+        createMutation.mutate({
+          ...values,
+          inventoryId: selectedInventoryId,
+          inventory: selectedInventory,
+        });
+      }
+    });
+  };
+
+  const handleInlineAddSuccess = (_item: InventoryItem) => {
+    message.success('Item and catalog entry created');
+    invalidateProducts();
+    setInlineAddOpen(false);
+    setPickerOpen(false);
+    setSelectedInventoryId(undefined);
+    setPickedInventory(null);
   };
 
   const columns = [
@@ -166,11 +189,11 @@ export const ProductCatalog = () => {
         <Space direction="vertical" size={0}>
           <span>{formatCurrency(price)}</span>
           {(record.tierBPrice != null || record.tierCPrice != null) && (
-            <Typography.Text type="secondary" className="text-xs">
+            <Text type="secondary" className="text-xs">
               {record.tierBPrice != null && `B: ${formatCurrency(record.tierBPrice)}`}
               {record.tierBPrice != null && record.tierCPrice != null && ' · '}
               {record.tierCPrice != null && `C: ${formatCurrency(record.tierCPrice)}`}
-            </Typography.Text>
+            </Text>
           )}
         </Space>
       ),
@@ -205,10 +228,10 @@ export const ProductCatalog = () => {
       width: 120,
       render: (_: unknown, record: Product) => (
         <Space>
-          <Button type="text" icon={<EditOutlined />} onClick={() => openModal(record)} aria-label="Edit product" />
+          <Button type="text" icon={<EditOutlined />} onClick={() => openEditConfirm(record)} aria-label="Edit product" />
           <Popconfirm
             title="Remove this product?"
-            description="It will no longer appear on the POS. Past sales are kept."
+            description="It will no longer appear on Walk-In. Past sales are kept."
             onConfirm={() => deleteMutation.mutate(record._id)}
           >
             <Button type="text" danger icon={<DeleteOutlined />} aria-label="Delete product" />
@@ -224,15 +247,15 @@ export const ProductCatalog = () => {
         type="info"
         showIcon
         className="mb-16"
-        message="Product catalog & pricing"
-        description="Add products here and set retail, wholesale, and special prices per item. Walk-in POS sales use the retail price. Link refill products to an inventory item for stock tracking."
+        message="Product catalog"
+        description="Add catalog entries from inventory items. Set retail price and active/disabled status here; full pricing and stock settings are managed in Inventory."
       />
 
       <BaseTable
         cardTitle="Products"
         extra={
-          <Button type="primary" icon={<PlusOutlined />} onClick={() => openModal()}>
-            Add Product
+          <Button type="primary" icon={<PlusOutlined />} onClick={openAddFlow}>
+            Add to Catalog
           </Button>
         }
         dataSource={data?.data}
@@ -243,76 +266,119 @@ export const ProductCatalog = () => {
       />
 
       <BaseModal
-        title={editing ? 'Edit Product' : 'Add Product'}
-        open={modalOpen}
+        title="Add to Catalog — Select Item"
+        open={pickerOpen}
         onCancel={() => {
-          setModalOpen(false);
-          setEditing(null);
+          setPickerOpen(false);
+          setSelectedInventoryId(undefined);
+          setPickedInventory(null);
         }}
-        onOk={() => form.validateFields().then((v) => saveMutation.mutate(v))}
-        confirmLoading={saveMutation.isPending}
-        width={560}
+        onOk={handlePickerNext}
+        okText="Next"
+        okButtonProps={{ disabled: !selectedInventoryId }}
+        width={480}
       >
-        <Form form={form} layout="vertical" initialValues={defaultFormValues}>
-          <Form.Item
-            name="name"
-            label="Product Name"
-            rules={[{ required: true, min: 2, message: 'Enter a product name (min 2 characters)' }]}
-            extra="e.g. Slim Refill, Round Refill, PET Bottle Refill, 1L Jug Refill"
-          >
-            <Input placeholder="e.g. PET Bottle Refill" maxLength={120} />
-          </Form.Item>
+        {inventoryError ? (
+          <Alert
+            type="error"
+            showIcon
+            className="mb-16"
+            message="Could not load inventory items"
+            description={getApiErrorMessage(inventoryQueryError, 'Failed to load inventory')}
+          />
+        ) : null}
 
-          <ProductPricingFields tiers={pricingTiers} />
+        {!inventoryLoading && !inventoryError && inventoryOptions.length === 0 ? (
+          <Alert
+            type="info"
+            showIcon
+            className="mb-16"
+            message="All inventory items are already in the catalog"
+            description="Use Add to create a new inventory item, then add it to the catalog."
+          />
+        ) : null}
 
-          <Form.Item name="category" label="Category" rules={[{ required: true }]}>
-            <Select options={CATEGORY_OPTIONS} onChange={handleCategoryChange} />
-          </Form.Item>
-
-          <Form.Item
-            name="decrementsStock"
-            label="Decrease filled water stock on sale"
-            valuePropName="checked"
-            extra={
-              category === 'refill'
-                ? 'Refill products decrease inventory when sold.'
-                : 'Containers and rentals usually do not affect filled water stock.'
-            }
-          >
-            <Switch />
-          </Form.Item>
-
-          {decrementsStock ? (
-            <Form.Item
-              name="linkedInventoryId"
-              label="Inventory Item (stock source)"
-              rules={[{ required: true, message: 'Select which inventory item this product draws from' }]}
-              extra="Link to any inventory item — slim, round, PET bottle, jug, etc."
-            >
+        <Form layout="vertical">
+          <Form.Item label="Inventory item" required>
+            <Space.Compact className="w-full">
               <Select
                 showSearch
                 optionFilterProp="label"
                 placeholder="Select inventory item"
+                value={selectedInventoryId}
+                onChange={(id) => {
+                  setSelectedInventoryId(id);
+                  setPickedInventory(
+                    (availableInventory ?? []).find((i: InventoryItem) => String(i._id) === id) ?? null,
+                  );
+                }}
                 options={inventoryOptions}
-                loading={!inventoryData}
+                loading={inventoryLoading}
+                notFoundContent={
+                  inventoryLoading
+                    ? 'Loading…'
+                    : 'No items available — use Add to create one'
+                }
+                style={{ width: 'calc(100% - 88px)' }}
               />
-            </Form.Item>
-          ) : null}
+              <Button icon={<PlusOutlined />} onClick={() => setInlineAddOpen(true)}>
+                Add
+              </Button>
+            </Space.Compact>
+          </Form.Item>
+        </Form>
+      </BaseModal>
 
+      <BaseModal
+        title={editing ? 'Edit Catalog Entry' : 'Confirm Catalog Entry'}
+        open={confirmOpen}
+        onCancel={() => {
+          setConfirmOpen(false);
+          if (!editing) return;
+          setEditing(null);
+        }}
+        onOk={handleConfirm}
+        confirmLoading={createMutation.isPending || updateMutation.isPending}
+        width={400}
+      >
+        <Form form={confirmForm} layout="vertical">
+          {!editing && selectedInventory ? (
+            <Alert
+              type="info"
+              showIcon
+              className="mb-16"
+              message={selectedInventory.name}
+              description={`${selectedInventory.category}${selectedInventory.unit ? ` · ${selectedInventory.unit}` : ''}`}
+            />
+          ) : null}
+          <Form.Item
+            name="price"
+            label="Retail price"
+            rules={[{ required: true, type: 'number', min: 0, message: 'Enter a retail price' }]}
+          >
+            <InputNumber min={0} precision={2} prefix="₱" className="w-full" />
+          </Form.Item>
           <Form.Item name="status" label="Status" rules={[{ required: true }]}>
             <Select
               options={[
-                { label: 'Active — visible on POS', value: 'active' },
-                { label: 'Disabled — hidden from POS', value: 'disabled' },
+                { label: 'Active — visible on Walk-In', value: 'active' },
+                { label: 'Disabled — hidden from Walk-In', value: 'disabled' },
               ]}
             />
           </Form.Item>
-
-          <Typography.Text type="secondary" className="text-sm">
-            Disabled products are hidden from the sale screen but kept for transaction history.
-          </Typography.Text>
+          {editing ? (
+            <Text type="secondary" className="text-sm">
+              For category, wholesale/special pricing, and stock settings, edit the item in Inventory.
+            </Text>
+          ) : null}
         </Form>
       </BaseModal>
+
+      <InventoryItemFormModal
+        open={inlineAddOpen}
+        onClose={() => setInlineAddOpen(false)}
+        onSuccess={handleInlineAddSuccess}
+      />
     </div>
   );
 };

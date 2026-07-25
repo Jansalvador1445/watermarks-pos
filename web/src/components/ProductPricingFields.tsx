@@ -6,9 +6,17 @@ const { Text, Title } = Typography;
 
 interface ProductPricingFieldsProps {
   tiers?: PricingTier[];
+  /** Defaults to "price". Use when another form field already owns "price". */
+  retailFieldName?: string;
+  /** Hide purchase/cost row when cost is captured elsewhere in the form. */
+  hidePurchasePrice?: boolean;
 }
 
-export const ProductPricingFields = ({ tiers = [] }: ProductPricingFieldsProps) => {
+export const ProductPricingFields = ({
+  tiers = [],
+  retailFieldName = 'price',
+  hidePurchasePrice = false,
+}: ProductPricingFieldsProps) => {
   const sortedTiers = sortPricingTiers(tiers);
   const tierA = sortedTiers.find((t) => t.code === 'tier_a') ?? sortedTiers[0];
   const tierB = sortedTiers.find((t) => t.code === 'tier_b') ?? sortedTiers[1];
@@ -24,12 +32,16 @@ export const ProductPricingFields = ({ tiers = [] }: ProductPricingFieldsProps) 
         Pricing
       </Title>
       <Text type="secondary" className="block mb-16">
-        Set your cost first, then define selling prices for retail, wholesale, and special customers.
+        {hidePurchasePrice
+          ? 'Set selling prices for retail, wholesale, and special customers.'
+          : 'Set your cost first, then define selling prices for retail, wholesale, and special customers.'}
       </Text>
 
-      <Form.Item name="purchasePrice" label="Purchase price (cost)">
-        <InputNumber min={0} precision={2} prefix="₱" className="w-full" placeholder="0" />
-      </Form.Item>
+      {!hidePurchasePrice ? (
+        <Form.Item name="purchasePrice" label="Purchase price (cost)">
+          <InputNumber min={0} precision={2} prefix="₱" className="w-full" placeholder="0" />
+        </Form.Item>
+      ) : null}
 
       <Title level={5} className="mb-0 mt-8">
         Selling prices
@@ -40,7 +52,7 @@ export const ProductPricingFields = ({ tiers = [] }: ProductPricingFieldsProps) 
 
       <div className="pricing-panel">
         <Form.Item
-          name="price"
+          name={retailFieldName}
           label={
             <span>
               {retailLabel}{' '}

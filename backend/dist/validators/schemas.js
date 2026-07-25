@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.paginationQuerySchema = exports.updatePermissionsSchema = exports.deliveryDecisionSchema = exports.updatePricingTierSchema = exports.updateWaterOrderSchema = exports.createWaterOrderSchema = exports.updateInvoiceSchema = exports.createInvoiceSchema = exports.updateSettingsSchema = exports.updateProductSchema = exports.createProductSchema = exports.adjustmentSchema = exports.productionSchema = exports.updateInventorySchema = exports.createInventorySchema = exports.createGallonSchema = exports.recordGallonReturnSchema = exports.recordGallonOutSchema = exports.updateTransactionSchema = exports.createTransactionSchema = exports.updateDeliverySchema = exports.createDeliverySchema = exports.updateCustomerSchema = exports.createCustomerSchema = exports.updateUserSchema = exports.createUserSchema = exports.onboardingSchema = exports.loginSchema = void 0;
+exports.paginationQuerySchema = exports.updatePermissionsSchema = exports.deliveryDecisionSchema = exports.createPaymentSchema = exports.updatePricingTierSchema = exports.updateWaterOrderSchema = exports.createWaterOrderSchema = exports.updateInvoiceSchema = exports.createInvoiceSchema = exports.updateSettingsSchema = exports.updateProductSchema = exports.createProductSchema = exports.adjustmentSchema = exports.productionSchema = exports.updateInventorySchema = exports.createInventorySchema = exports.createGallonSchema = exports.recordGallonReturnSchema = exports.recordGallonOutSchema = exports.updateTransactionSchema = exports.createTransactionSchema = exports.updateDeliverySchema = exports.createDeliverySchema = exports.updateCustomerSchema = exports.createCustomerSchema = exports.updateUserSchema = exports.createUserSchema = exports.onboardingSchema = exports.loginSchema = void 0;
 const zod_1 = require("zod");
 const enums_1 = require("../types/enums");
 const permissions_1 = require("../utils/permissions");
@@ -233,6 +233,13 @@ exports.updatePricingTierSchema = zod_1.z.object({
     label: zod_1.z.string().min(1).optional(),
     slimPrice: zod_1.z.number().min(0).optional(),
     roundPrice: zod_1.z.number().min(0).optional(),
+});
+exports.createPaymentSchema = zod_1.z.object({
+    invoiceId: objectIdSchema,
+    amount: zod_1.z.number().min(0.01, 'Amount must be greater than zero'),
+    paymentMethod: zod_1.z.enum(['cash', 'gcash', 'bank']),
+    paymentDate: zod_1.z.string().optional(),
+    notes: zod_1.z.string().max(500).optional(),
 });
 exports.deliveryDecisionSchema = zod_1.z.object({
     action: zod_1.z.enum(['continue', 'stop']),

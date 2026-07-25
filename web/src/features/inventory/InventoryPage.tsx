@@ -12,7 +12,6 @@ import {
   Tabs,
   Typography,
   DatePicker,
-  Segmented,
 } from 'antd';
 import {
   PlusOutlined,
@@ -23,6 +22,7 @@ import {
   ToolOutlined,
   HistoryOutlined,
   InboxOutlined,
+  DownloadOutlined,
 } from '@ant-design/icons';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -30,11 +30,13 @@ import { inventoryApi } from '@/services/api';
 import { BaseTable } from '@/components/BaseTable';
 import { BaseModal } from '@/components/BaseModal';
 import { PageHeader } from '@/components/PageHeader';
+import { InventoryItemFormModal } from '@/components/InventoryItemFormModal';
 import { usePagination } from '@/hooks/usePagination';
 import { useDebounce } from '@/hooks/useDebounce';
-import { formatCurrency } from '@/utils/formatters';
+import { formatCurrency, formatDateTime, getStatusColor } from '@/utils/formatters';
 import { getApiErrorMessage } from '@/utils/apiError';
 import { useAuthStore } from '@/store/authStore';
+import { buildCsvBlob, buildPdf, downloadBlob, toDisplayValue } from '@/features/reports/reportExport';
 import type { InventoryItem, InventoryMovement } from '@/types';
 
 const { RangePicker } = DatePicker;
@@ -59,6 +61,18 @@ const MOVEMENT_TYPE_COLORS: Record<string, string> = {
   adjustment: 'gold',
 };
 
+const MOVEMENT_EXPORT_HEADERS = [
+  'Date',
+  'Item',
+  'Movement Type',
+  'Qty',
+  'Before',
+  'After',
+  'Ref No',
+  'User',
+  'Remarks',
+];
+
 export const InventoryPage = () => {
   const queryClient = useQueryClient();
   const user = useAuthStore((s) => s.user);
@@ -74,6 +88,9 @@ export const InventoryPage = () => {
 
   const [search, setSearch] = useState('');
   const [stockFilter, setStockFilter] = useState<'all' | 'low'>('all');
+  const [catalogStatusFilter, setCatalogStatusFilter] = useState<
+    'all' | 'active' | 'disabled' | 'none'
+  >('all');
   const [movementTypeFilter, setMovementTypeFilter] = useState<string | undefined>();
   const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -81,13 +98,13 @@ export const InventoryPage = () => {
   const [adjustOpen, setAdjustOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
   const [editing, setEditing] = useState<InventoryItem | null>(null);
-  const [form] = Form.useForm();
   const [productionForm] = Form.useForm();
   const [adjustForm] = Form.useForm();
+  const [exportLoading, setExportLoading] = useState(false);
   const debouncedSearch = useDebounce(search);
 
   const { data, isLoading } = useQuery({
-    queryKey: ['inventory', page, limit, debouncedSearch, stockFilter],
+    queryKey: ['inventory', page, limit, debouncedSearch, stockFilter, catalogStatusFilter],
     queryFn: () =>
       inventoryApi
         .list({
@@ -95,6 +112,7 @@ export const InventoryPage = () => {
           limit,
           search: debouncedSearch,
           stockFilter: stockFilter === 'low' ? 'low' : undefined,
+          catalogStatus: catalogStatusFilter === 'all' ? undefined : catalogStatusFilter,
           sortBy: 'currentStock',
           sortOrder: 'asc',
         })
@@ -114,18 +132,6 @@ export const InventoryPage = () => {
   const { data: movementsData, isLoading: movementsLoading } = useQuery({
     queryKey: ['inventory-movements', movementPage, movementLimit, movementTypeFilter, dateRange],
     queryFn: () => inventoryApi.movements(movementParams).then((r) => r.data),
-  });
-
-  const saveMutation = useMutation({
-    mutationFn: (values: Partial<InventoryItem>) =>
-      editing ? inventoryApi.update(editing.publicId, values) : inventoryApi.create(values),
-    onSuccess: () => {
-      message.success(editing ? 'Updated' : 'Created');
-      queryClient.invalidateQueries({ queryKey: ['inventory'] });
-      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
-      setModalOpen(false);
-    },
-    onError: (error) => message.error(getApiErrorMessage(error, 'Failed to save inventory item')),
   });
 
   const deleteMutation = useMutation({
@@ -168,18 +174,7 @@ export const InventoryPage = () => {
   });
 
   const openModal = (record?: InventoryItem) => {
-    setEditing(record || null);
-    form.setFieldsValue(
-      record || {
-        name: '',
-        sku: '',
-        unit: 'pcs',
-        category: 'general',
-        price: 0,
-        description: '',
-        lowStockThreshold: 10,
-      },
-    );
+    setEditing(record ?? null);
     setModalOpen(true);
   };
 
@@ -195,12 +190,113 @@ export const InventoryPage = () => {
     setAdjustOpen(true);
   };
 
+  const buildMovementExportParams = (page = 1): Record<string, unknown> => {
+    const params: Record<string, unknown> = { page, limit: 100 };
+    if (movementTypeFilter) params.movementType = movementTypeFilter;
+    if (dateRange) {
+      params.startDate = dateRange[0].startOf('day').toISOString();
+      params.endDate = dateRange[1].endOf('day').toISOString();
+    }
+    return params;
+  };
+
+  const movementToExportRow = (movement: InventoryMovement): string[] => {
+    const itemName = typeof movement.itemId === 'object' ? movement.itemId.name : '—';
+    const userName = typeof movement.userId === 'object' ? movement.userId.name : '—';
+    const qty = movement.quantity;
+    const qtyDisplay = qty > 0 ? `+${qty}` : String(qty);
+
+    return [
+      formatDateTime(movement.date),
+      itemName,
+      MOVEMENT_TYPE_LABELS[movement.movementType] || movement.movementType,
+      qtyDisplay,
+      toDisplayValue(movement.beforeStock),
+      toDisplayValue(movement.afterStock),
+      toDisplayValue(movement.referenceNo),
+      userName,
+      toDisplayValue(movement.remarks),
+    ];
+  };
+
+  const getMovementFilterSummary = () => [
+    `Movement type: ${movementTypeFilter ? MOVEMENT_TYPE_LABELS[movementTypeFilter] || movementTypeFilter : 'All'}`,
+    `Date range: ${
+      dateRange
+        ? `${dateRange[0].format('MMM D, YYYY')} - ${dateRange[1].format('MMM D, YYYY')}`
+        : 'All dates'
+    }`,
+  ];
+
+  const fetchAllMovementsForExport = async (): Promise<InventoryMovement[]> => {
+    const first = await inventoryApi.movements(buildMovementExportParams(1)).then((r) => r.data);
+    const all = [...(first.data ?? [])];
+    const { total = 0, limit = 100 } = first.pagination ?? {};
+    const totalPages = Math.ceil(total / limit);
+
+    for (let page = 2; page <= totalPages; page++) {
+      const next = await inventoryApi.movements(buildMovementExportParams(page)).then((r) => r.data);
+      all.push(...(next.data ?? []));
+    }
+
+    return all;
+  };
+
+  const handleExportMovementsCsv = async () => {
+    setExportLoading(true);
+    try {
+      const movements = await fetchAllMovementsForExport();
+      if (!movements.length) {
+        message.warning('No data to export');
+        return;
+      }
+
+      downloadBlob(
+        buildCsvBlob(MOVEMENT_EXPORT_HEADERS, movements.map(movementToExportRow)),
+        'inventory-movement-log.csv',
+      );
+    } catch {
+      message.error('Failed to export movement log');
+    } finally {
+      setExportLoading(false);
+    }
+  };
+
+  const handleExportMovementsPdf = async () => {
+    setExportLoading(true);
+    try {
+      const movements = await fetchAllMovementsForExport();
+      if (!movements.length) {
+        message.warning('No data to export');
+        return;
+      }
+
+      buildPdf(
+        'Inventory Movement Log',
+        'Stock movement history from live business data',
+        getMovementFilterSummary(),
+        [
+          {
+            title: 'Movement Log',
+            headers: MOVEMENT_EXPORT_HEADERS,
+            rows: movements.map(movementToExportRow),
+          },
+        ],
+        'inventory-movement-log.pdf',
+      );
+    } catch {
+      message.error('Failed to export movement log');
+    } finally {
+      setExportLoading(false);
+    }
+  };
+
   const columns = [
     { title: 'Name', dataIndex: 'name' },
     { title: 'SKU', dataIndex: 'sku', render: (v: string) => v || '—' },
     { title: 'Unit', dataIndex: 'unit' },
     { title: 'Category', dataIndex: 'category', render: (c: string) => <Tag>{c}</Tag> },
-    { title: 'Price', dataIndex: 'price', render: (v: number) => formatCurrency(v) },
+    { title: 'Cost / Base', dataIndex: 'price', render: (v: number) => formatCurrency(v) },
     { title: 'Stock', dataIndex: 'currentStock' },
     { title: 'Low Threshold', dataIndex: 'lowStockThreshold' },
     {
@@ -210,6 +306,17 @@ export const InventoryPage = () => {
           {r.currentStock <= r.lowStockThreshold ? 'LOW STOCK' : 'OK'}
         </Tag>
       ),
+    },
+    {
+      title: 'Catalog Status',
+      render: (_: unknown, r: InventoryItem) => {
+        if (!r.linkedProduct) return <Tag>No Catalog</Tag>;
+        return (
+          <Tag color={getStatusColor(r.linkedProduct.status)}>
+            {r.linkedProduct.status.toUpperCase()}
+          </Tag>
+        );
+      },
     },
     {
       title: 'Actions',
@@ -284,15 +391,30 @@ export const InventoryPage = () => {
           className="w-280"
           allowClear
         />
-        <Segmented
+        <Select
           value={stockFilter}
           onChange={(v) => {
-            setStockFilter(v as 'all' | 'low');
+            setStockFilter(v);
             reset();
           }}
+          className="w-140"
           options={[
-            { label: 'All', value: 'all' },
+            { label: 'All Stock', value: 'all' },
             { label: 'Low Stock', value: 'low' },
+          ]}
+        />
+        <Select
+          value={catalogStatusFilter}
+          onChange={(v) => {
+            setCatalogStatusFilter(v);
+            reset();
+          }}
+          className="w-160"
+          options={[
+            { label: 'All Catalog', value: 'all' },
+            { label: 'Active', value: 'active' },
+            { label: 'Disabled', value: 'disabled' },
+            { label: 'No Catalog', value: 'none' },
           ]}
         />
       </Space>
@@ -328,6 +450,12 @@ export const InventoryPage = () => {
             resetMovement();
           }}
         />
+        <Button icon={<DownloadOutlined />} onClick={handleExportMovementsCsv} loading={exportLoading}>
+          Export CSV
+        </Button>
+        <Button icon={<DownloadOutlined />} onClick={handleExportMovementsPdf} loading={exportLoading}>
+          Export PDF
+        </Button>
       </Space>
 
       <BaseTable
@@ -385,68 +513,14 @@ export const InventoryPage = () => {
         ]}
       />
 
-      <BaseModal
-        title={editing ? 'Edit Item' : 'Add Item'}
+      <InventoryItemFormModal
         open={modalOpen}
-        onCancel={() => setModalOpen(false)}
-        onOk={() => form.validateFields().then((v) => saveMutation.mutate(v))}
-        confirmLoading={saveMutation.isPending}
-        width={520}
-      >
-        <Form form={form} layout="vertical">
-          <Form.Item name="name" label="Name" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="sku" label="SKU">
-            <Input placeholder="Optional SKU" />
-          </Form.Item>
-          <Form.Item name="unit" label="Unit" rules={[{ required: true }]}>
-            <Input placeholder="e.g. pcs, liters, bottles" />
-          </Form.Item>
-          <Form.Item name="category" label="Category" rules={[{ required: true }]}>
-            <Input placeholder="e.g. containers, chemicals" />
-          </Form.Item>
-          <Form.Item name="price" label="Price">
-            <InputNumber min={0} prefix="₱" className="w-full" />
-          </Form.Item>
-          <Form.Item name="description" label="Description">
-            <Input.TextArea rows={2} placeholder="Optional description" />
-          </Form.Item>
-          {editing ? (
-            <Form.Item label="Current Stock">
-              <InputNumber value={editing.currentStock} disabled className="w-full" />
-            </Form.Item>
-          ) : (
-            <>
-              <Form.Item
-                name="initialQuantity"
-                label="Initial Quantity"
-                extra="Optional starting stock. Recorded as production on create."
-              >
-                <InputNumber min={0} placeholder="0" className="w-full" />
-              </Form.Item>
-              <Typography.Text type="secondary" className="mb-16">
-                Leave at 0 to add stock later via Production.
-              </Typography.Text>
-            </>
-          )}
-          <Form.Item name="lowStockThreshold" label="Low Stock Threshold">
-            <InputNumber min={0} className="w-full" />
-          </Form.Item>
-          {/* Refill type hidden — kept in schema for legacy slim/round inventory links
-          <Form.Item name="refillType" label="Refill Type (internal)">
-            <Select
-              allowClear
-              placeholder="Link to slim/round for delivery stock"
-              options={[
-                { label: 'Slim', value: 'slim' },
-                { label: 'Round', value: 'round' },
-              ]}
-            />
-          </Form.Item>
-          */}
-        </Form>
-      </BaseModal>
+        onClose={() => {
+          setModalOpen(false);
+          setEditing(null);
+        }}
+        editing={editing}
+      />
 
       <BaseModal
         title={`Add Production — ${selectedItem?.name ?? ''}`}

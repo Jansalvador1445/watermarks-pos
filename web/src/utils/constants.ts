@@ -102,7 +102,7 @@ export const MENU_GROUPS: MenuGroupDef[] = [
     key: 'sales',
     label: 'Sales & Collection',
     items: [
-      { key: '/pos', label: 'POS (Sales)', icon: 'ShoppingCartOutlined', permission: 'pos:*' },
+      { key: '/pos', label: 'Walk-In', icon: 'ShoppingCartOutlined', permission: 'pos:*' },
       { key: '/transactions', label: 'Transactions', icon: 'TransactionOutlined', permission: 'transactions:read' },
       { key: '/daily-collection', label: 'Daily Collection', icon: 'DollarOutlined', permission: 'collection:read' },
     ],

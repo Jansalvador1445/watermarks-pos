@@ -15,6 +15,8 @@ import type {
   Invoice,
   PricingTier,
   DailyCollection,
+  Payment,
+  InvoicePaymentSummary,
   GallonOverviewResponse,
   GallonHistoryEntry,
 } from '@/types';
@@ -181,13 +183,30 @@ export const productApi = {
   delete: (id: string) => api.delete(`/products/${id}`),
 };
 
+export const paymentApi = {
+  listByInvoice: (invoiceId: string) =>
+    api.get<ApiResponse<InvoicePaymentSummary>>(`/payments/invoice/${invoiceId}`),
+  create: (data: {
+    invoiceId: string;
+    amount: number;
+    paymentMethod: string;
+    paymentDate?: string;
+    notes?: string;
+  }) => api.post<ApiResponse<Payment>>('/payments', data),
+  delete: (id: string) => api.delete(`/payments/${id}`),
+};
+
 export const reportApi = {
   sales: (startDate: string, endDate: string, groupBy: 'daily' | 'weekly' | 'monthly' = 'daily') =>
     api.get('/reports/sales', { params: { startDate, endDate, groupBy } }),
   deliveries: (startDate: string, endDate: string) => api.get('/reports/deliveries', { params: { startDate, endDate } }),
-  customers: () => api.get('/reports/customers'),
+  customers: (params?: Record<string, unknown>) => api.get('/reports/customers', { params }),
   inventory: (startDate?: string, endDate?: string) =>
     api.get('/reports/inventory', { params: { startDate, endDate } }),
+  invoiceSummary: (params: Record<string, unknown>) =>
+    api.get('/reports/invoices/summary', { params }),
+  invoiceOutstanding: (params: Record<string, unknown>) =>
+    api.get('/reports/invoices/outstanding', { params }),
 };
 
 export const userApi = {

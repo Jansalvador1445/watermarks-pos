@@ -13,7 +13,7 @@ import {
   Divider,
   Alert,
 } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, SwapOutlined, MinusCircleOutlined, UserAddOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, SwapOutlined, MinusCircleOutlined, UserAddOutlined, DollarOutlined } from '@ant-design/icons';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { invoiceApi, customerApi, productApi, inventoryApi } from '@/services/api';
 import { BaseTable } from '@/components/BaseTable';
@@ -35,6 +35,9 @@ import {
   invoiceLinesExceedStock,
 } from '@/utils/productStock';
 import type { Customer, Invoice, Product } from '@/types';
+import { InvoicePaymentsDrawer } from './InvoicePaymentsDrawer';
+import { PAYMENT_STATUS_COLORS, PAYMENT_STATUS_LABELS } from '@/features/reports/reporting';
+import type { InvoicePaymentStatus } from '@/types';
 
 const { Text } = Typography;
 
@@ -57,6 +60,7 @@ export const InvoicesPage = () => {
   const { page, limit, onPageChange } = usePagination();
   const [modalOpen, setModalOpen] = useState(false);
   const [customerModalOpen, setCustomerModalOpen] = useState(false);
+  const [paymentsInvoice, setPaymentsInvoice] = useState<Invoice | null>(null);
   const [editing, setEditing] = useState<Invoice | null>(null);
   const [statusFilter, setStatusFilter] = useState<string | undefined>();
   const [form] = Form.useForm();
@@ -222,6 +226,21 @@ export const InvoicesPage = () => {
       render: (v: number) => formatCurrency(v),
     },
     {
+      title: 'Balance',
+      key: 'balance',
+      render: (_: unknown, r: Invoice & { paymentSummary?: { outstandingBalance?: number; paymentStatus?: InvoicePaymentStatus } }) =>
+        formatCurrency(r.paymentSummary?.outstandingBalance ?? r.total),
+    },
+    {
+      title: 'Pay Status',
+      key: 'paymentStatus',
+      render: (_: unknown, r: Invoice & { paymentSummary?: { paymentStatus?: InvoicePaymentStatus } }) => {
+        if (r.status === 'rejected') return '—';
+        const status = r.paymentSummary?.paymentStatus ?? 'unpaid';
+        return <Tag color={PAYMENT_STATUS_COLORS[status]}>{PAYMENT_STATUS_LABELS[status]}</Tag>;
+      },
+    },
+    {
       title: 'Payment',
       dataIndex: 'paymentMethod',
       render: (v: string) => v.toUpperCase(),
@@ -235,6 +254,9 @@ export const InvoicesPage = () => {
       title: 'Actions',
       render: (_: unknown, r: Invoice) => (
         <Space>
+          {r.status !== 'rejected' && (
+            <Button type="text" icon={<DollarOutlined />} title="Payments" onClick={() => setPaymentsInvoice(r)} />
+          )}
           <PermissionGate permission="orders:*">
             {r.status !== 'converted' && (
               <>
@@ -468,6 +490,12 @@ export const InvoicesPage = () => {
           </Form.Item>
         </Form>
       </BaseModal>
+
+      <InvoicePaymentsDrawer
+        invoice={paymentsInvoice}
+        open={!!paymentsInvoice}
+        onClose={() => setPaymentsInvoice(null)}
+      />
 
       <CustomerFormModal
         open={customerModalOpen}

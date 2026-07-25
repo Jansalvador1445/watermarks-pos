@@ -1353,3 +1353,95 @@
 2026-07-22T04:09:24.939Z [info]: Successful login {"userId":"6a44c13a7e130568617c05ce","email":"admin@h2o.com","ip":"::1"}
 2026-07-22T04:09:25.248Z [debug]: Socket connected: Ow5twOmdizAABc9xAAAC
 2026-07-22T04:09:25.255Z [debug]: Socket connected: g6wJ_QJo298v8l9BAAAD
+2026-07-25T07:56:32.230Z [info]: MongoDB connected successfully
+2026-07-25T07:56:32.234Z [info]: Clearing demo data (--fresh)...
+2026-07-25T07:56:32.417Z [info]: Admin user already exists: admin@h2o.com
+2026-07-25T07:56:33.049Z [info]: User created: cashier@h2o.com / Cashier@123
+2026-07-25T07:56:33.629Z [info]: User created: driver@h2o.com / Driver@123
+2026-07-25T07:56:33.776Z [error]: Seed failed {"error":{}}
+2026-07-25T07:56:46.729Z [info]: MongoDB connected successfully
+2026-07-25T07:56:46.732Z [info]: Clearing demo data (--fresh)...
+2026-07-25T07:56:46.814Z [info]: Admin user already exists: admin@h2o.com
+2026-07-25T07:56:47.312Z [info]: User created: cashier@h2o.com / Cashier@123
+2026-07-25T07:56:47.775Z [info]: User created: driver@h2o.com / Driver@123
+2026-07-25T07:56:47.827Z [error]: Seed failed {"error":{}}
+2026-07-25T07:57:05.397Z [info]: MongoDB connected successfully
+2026-07-25T07:57:05.400Z [info]: Clearing demo data (--fresh)...
+2026-07-25T07:57:05.484Z [info]: Admin user already exists: admin@h2o.com
+2026-07-25T07:57:05.976Z [info]: User created: cashier@h2o.com / Cashier@123
+2026-07-25T07:57:06.430Z [info]: User created: driver@h2o.com / Driver@123
+2026-07-25T07:57:06.488Z [error]: Error: Inventory seed failed
+    at seed (C:\Users\Aaron\GitHub Repos\watermarks-pos\backend\src\scripts\seed.ts:438:54)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {"error":"Inventory seed failed"}
+2026-07-25T07:57:28.642Z [info]: MongoDB connected successfully
+2026-07-25T07:57:28.646Z [info]: Clearing demo data (--fresh)...
+2026-07-25T07:57:28.730Z [info]: Admin user already exists: admin@h2o.com
+2026-07-25T07:57:29.218Z [info]: User created: cashier@h2o.com / Cashier@123
+2026-07-25T07:57:29.678Z [info]: User created: driver@h2o.com / Driver@123
+2026-07-25T07:57:29.860Z [info]: Created 10 demo customers
+2026-07-25T07:57:29.961Z [info]: Created 24 inventory movements
+2026-07-25T07:57:29.970Z [error]: Error: Products required for invoice seed
+    at seedInvoicesAndPayments (C:\Users\Aaron\GitHub Repos\watermarks-pos\backend\src\scripts\seed.ts:250:62)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async seed (C:\Users\Aaron\GitHub Repos\watermarks-pos\backend\src\scripts\seed.ts:466:20) {"error":"Products required for invoice seed"}
+2026-07-25T07:57:42.765Z [info]: MongoDB connected successfully
+2026-07-25T07:57:42.768Z [info]: Clearing demo data (--fresh)...
+2026-07-25T07:57:42.857Z [info]: Admin user already exists: admin@h2o.com
+2026-07-25T07:57:43.351Z [info]: User created: cashier@h2o.com / Cashier@123
+2026-07-25T07:57:43.810Z [info]: User created: driver@h2o.com / Driver@123
+2026-07-25T07:57:43.997Z [info]: Created 10 demo customers
+2026-07-25T07:57:44.018Z [info]: Created 24 inventory movements
+2026-07-25T07:57:44.093Z [info]: Created 13 demo invoices with payments
+2026-07-25T07:57:44.220Z [info]: Created 12 demo deliveries
+2026-07-25T07:57:44.305Z [info]: Created 20 demo transactions
+2026-07-25T07:57:44.321Z [info]: Seed completed successfully
+2026-07-25T08:17:56.064Z [info]: MongoDB connected successfully
+2026-07-25T08:17:56.110Z [info]: Admin user already exists: admin@h2o.com
+2026-07-25T08:17:56.162Z [info]: Pricing tiers ready (3 tier(s))
+2026-07-25T08:17:56.305Z [info]: Cron jobs initialized
+2026-07-25T08:17:56.310Z [info]: WATERMARKS Water Refilling Station server running on port 5000 in development mode
+2026-07-25T08:17:56.354Z [info]: Delivery notifications processed {"late3DayCount":4,"decisionCount":0}
+2026-07-25T08:18:36.412Z [info]: Successful login {"userId":"6a44c13a7e130568617c05ce","email":"admin@h2o.com","ip":"::1"}
+2026-07-25T08:18:36.781Z [debug]: Socket connected: SrzoE7AdIeciTEvAAAAE
+2026-07-25T08:18:36.784Z [debug]: Socket connected: oiLDNct5rfEUdj00AAAF
+2026-07-25T08:25:12.557Z [info]: MongoDB connected successfully
+2026-07-25T08:25:12.648Z [info]: Admin user already exists: admin@h2o.com
+2026-07-25T08:25:12.709Z [info]: Pricing tiers ready (3 tier(s))
+2026-07-25T08:25:12.749Z [info]: Cron jobs initialized
+2026-07-25T08:25:12.754Z [info]: WATERMARKS Water Refilling Station server running on port 5000 in development mode
+2026-07-25T08:25:12.825Z [debug]: Socket connected: 2va0I6JP7yn_JQT6AAAC
+2026-07-25T08:25:12.831Z [debug]: Socket connected: w-17DbcqWgDKPrbCAAAD
+2026-07-25T08:25:12.858Z [info]: Delivery notifications processed {"late3DayCount":4,"decisionCount":0}
+2026-07-25T08:26:08.878Z [info]: MongoDB connected successfully
+2026-07-25T08:26:08.939Z [info]: Admin user already exists: admin@h2o.com
+2026-07-25T08:26:09.012Z [info]: Pricing tiers ready (3 tier(s))
+2026-07-25T08:26:09.063Z [info]: Cron jobs initialized
+2026-07-25T08:26:09.070Z [info]: WATERMARKS Water Refilling Station server running on port 5000 in development mode
+2026-07-25T08:26:09.152Z [debug]: Socket connected: hpAW7Ag4lbNV2JfEAAAC
+2026-07-25T08:26:09.173Z [debug]: Socket connected: vRX3A_Tn0bbPx_0KAAAD
+2026-07-25T08:26:09.215Z [info]: Delivery notifications processed {"late3DayCount":4,"decisionCount":0}
+2026-07-25T08:28:42.951Z [info]: MongoDB connected successfully
+2026-07-25T08:28:43.015Z [info]: Admin user already exists: admin@h2o.com
+2026-07-25T08:28:43.058Z [info]: Pricing tiers ready (3 tier(s))
+2026-07-25T08:28:43.091Z [info]: Cron jobs initialized
+2026-07-25T08:28:43.097Z [info]: WATERMARKS Water Refilling Station server running on port 5000 in development mode
+2026-07-25T08:28:43.155Z [debug]: Socket connected: RoOgfg_QZLycsbTYAAAC
+2026-07-25T08:28:43.159Z [debug]: Socket connected: r8tDLLmtq6XdErbwAAAD
+2026-07-25T08:28:43.195Z [info]: Delivery notifications processed {"late3DayCount":4,"decisionCount":0}
+2026-07-25T08:28:46.245Z [debug]: Socket disconnected: RoOgfg_QZLycsbTYAAAC
+2026-07-25T08:28:46.247Z [debug]: Socket disconnected: r8tDLLmtq6XdErbwAAAD
+2026-07-25T08:28:47.813Z [debug]: Socket connected: UBFp-761HPBu6ClRAAAG
+2026-07-25T08:28:47.817Z [debug]: Socket connected: 67xcJR4f9fXIKaJ1AAAH
+2026-07-25T08:33:20.251Z [info]: MongoDB connected successfully
+2026-07-25T08:33:20.328Z [info]: Admin user already exists: admin@h2o.com
+2026-07-25T08:33:20.385Z [info]: Pricing tiers ready (3 tier(s))
+2026-07-25T08:33:20.429Z [info]: Cron jobs initialized
+2026-07-25T08:33:20.435Z [info]: WATERMARKS Water Refilling Station server running on port 5000 in development mode
+2026-07-25T08:33:20.541Z [info]: Delivery notifications processed {"late3DayCount":4,"decisionCount":0}
+2026-07-25T08:33:20.840Z [debug]: Socket connected: G6SKXKMJCJzS5-pJAAAC
+2026-07-25T08:33:20.848Z [debug]: Socket connected: KSATpqiLK0yZ2yK_AAAD
+2026-07-25T08:33:44.306Z [info]: Successful login {"userId":"6a44c13a7e130568617c05ce","email":"admin@h2o.com","ip":"::ffff:127.0.0.1"}
+2026-07-25T08:33:44.651Z [debug]: Socket connected: OCBX_msS39OazAFPAAAG
+2026-07-25T08:33:44.655Z [debug]: Socket connected: RPy0hCLTnmk1vraaAAAH
+2026-07-25T08:34:05.659Z [debug]: Socket disconnected: G6SKXKMJCJzS5-pJAAAC
+2026-07-25T08:34:05.673Z [debug]: Socket disconnected: KSATpqiLK0yZ2yK_AAAD

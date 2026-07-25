@@ -4,12 +4,15 @@ import dayjs from 'dayjs';
 import { Gallon, Inventory } from '../models/Gallon';
 import { Transaction } from '../models/Transaction';
 import { Delivery, Customer } from '../models/Customer';
+import { Invoice, InvoiceStatus } from '../models/Invoice';
 import { InventoryMovement } from '../models/InventoryMovement';
 import { AppError } from '../utils/response';
 import { getPagination, buildSearchQuery } from '../utils/pagination';
 import { GallonType } from '../types/enums';
 import { defaultLabelFromKey, slugifyItemKey } from '../utils/itemKey';
 import { InventoryMovementService } from './inventoryMovementService';
+import { PaymentService } from './paymentService';
+import { computeOutstandingBalance } from '../utils/invoicePaymentStatus';
 
 interface GallonRecordInput {
   itemKey?: string;
@@ -173,22 +176,79 @@ export class GallonService {
 export class InventoryService {
   static async getAll(req: Request) {
     const { page, limit, skip } = getPagination(req);
-    const { search, category, stockFilter } = req.query;
+    const { search, category, stockFilter, catalogStatus, notInCatalog } = req.query;
 
-    const filter: Record<string, unknown> = { isDeleted: false };
-    if (category) filter.category = category;
+    const matchStage: Record<string, unknown> = { isDeleted: false };
+    if (category) matchStage.category = category;
     if (stockFilter === 'low') {
-      filter.$expr = { $lte: ['$currentStock', '$lowStockThreshold'] };
+      matchStage.$expr = { $lte: ['$currentStock', '$lowStockThreshold'] };
     }
-    Object.assign(filter, buildSearchQuery(search as string, ['name', 'sku', 'category']));
+    Object.assign(matchStage, buildSearchQuery(search as string, ['name', 'sku', 'category']));
 
-    const sort = { currentStock: 1 as const };
+    const pipeline: mongoose.PipelineStage[] = [
+      { $match: matchStage },
+      {
+        $lookup: {
+          from: 'products',
+          localField: '_id',
+          foreignField: 'linkedInventoryId',
+          as: 'linkedProducts',
+          pipeline: [{ $match: { isDeleted: false } }, { $limit: 1 }],
+        },
+      },
+      {
+        $addFields: {
+          linkedProduct: {
+            $cond: {
+              if: { $gt: [{ $size: '$linkedProducts' }, 0] },
+              then: {
+                _id: { $toString: { $arrayElemAt: ['$linkedProducts._id', 0] } },
+                status: { $arrayElemAt: ['$linkedProducts.status', 0] },
+              },
+              else: null,
+            },
+          },
+        },
+      },
+      { $project: { linkedProducts: 0 } },
+    ];
 
-    const [data, total] = await Promise.all([
-      Inventory.find(filter).sort(sort).skip(skip).limit(limit).lean(),
-      Inventory.countDocuments(filter),
+    const notInCatalogFlag = String(notInCatalog) === 'true';
+
+    if (catalogStatus === 'active') {
+      pipeline.push({ $match: { 'linkedProduct.status': 'active' } });
+    } else if (catalogStatus === 'disabled') {
+      pipeline.push({ $match: { 'linkedProduct.status': 'disabled' } });
+    } else if (catalogStatus === 'none') {
+      pipeline.push({ $match: { linkedProduct: null } });
+    }
+
+    if (notInCatalogFlag) {
+      pipeline.push({ $match: { linkedProduct: null } });
+    }
+
+    const [countResult, rawData] = await Promise.all([
+      Inventory.aggregate([...pipeline, { $count: 'total' }]),
+      Inventory.aggregate([
+        ...pipeline,
+        { $sort: { currentStock: 1 } },
+        { $skip: skip },
+        { $limit: limit },
+      ]),
     ]);
 
+    const data = rawData.map((row) => ({
+      ...row,
+      _id: row._id?.toString?.() ?? row._id,
+      linkedProduct: row.linkedProduct
+        ? {
+            _id: row.linkedProduct._id?.toString?.() ?? row.linkedProduct._id,
+            status: row.linkedProduct.status,
+          }
+        : null,
+    }));
+
+    const total = countResult[0]?.total ?? 0;
     return { data, pagination: { page, limit, total } };
   }
 
@@ -285,8 +345,33 @@ export class ReportService {
     ]);
   }
 
-  static async getCustomerReport() {
-    const [statusCounts, outstanding] = await Promise.all([
+  static async getCustomerReport(req: Request) {
+    const { page, limit, skip, sort } = getPagination(req);
+    const {
+      search,
+      status,
+      pricingCategory,
+      hasGallonOutstanding,
+      hasInvoiceBalance,
+      startDate,
+      endDate,
+    } = req.query;
+
+    const filter: Record<string, unknown> = { isDeleted: false };
+    if (status) filter.status = status;
+    if (pricingCategory) filter.pricingCategory = pricingCategory;
+    if (hasGallonOutstanding === 'true') {
+      filter.$expr = { $gt: [{ $add: ['$outstandingSlim', '$outstandingRound'] }, 0] };
+    }
+    if (startDate || endDate) {
+      const createdAt: Record<string, Date> = {};
+      if (startDate) createdAt.$gte = new Date(String(startDate));
+      if (endDate) createdAt.$lte = new Date(String(endDate));
+      filter.createdAt = createdAt;
+    }
+    Object.assign(filter, buildSearchQuery(search as string, ['fullName', 'phone', 'address']));
+
+    const [statusCounts, outstandingAgg, customers, totalBeforeBalanceFilter] = await Promise.all([
       Customer.aggregate([
         { $match: { isDeleted: false } },
         { $group: { _id: '$status', count: { $sum: 1 } } },
@@ -307,15 +392,71 @@ export class ReportService {
           },
         },
       ]),
+      Customer.find(filter)
+        .populate('pricingCategory', 'code label slimPrice roundPrice')
+        .sort(sort)
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      Customer.countDocuments(filter),
     ]);
+
+    const customerIds = customers.map((c) => c._id as mongoose.Types.ObjectId);
+    const invoices = customerIds.length
+      ? await Invoice.find({
+          customerId: { $in: customerIds },
+          isDeleted: false,
+          status: { $ne: InvoiceStatus.REJECTED },
+          legacyWaterOrder: { $ne: true },
+        }).lean()
+      : [];
+
+    const invoiceIds = invoices.map((inv) => inv._id as mongoose.Types.ObjectId);
+    const paymentTotals = await PaymentService.getTotalsByInvoiceIds(invoiceIds);
+
+    const balanceByCustomer = new Map<string, { invoiceBalance: number; unpaidInvoiceCount: number }>();
+    for (const inv of invoices) {
+      const customerId = String(inv.customerId);
+      const totals = paymentTotals.get(String(inv._id)) ?? { total: 0, count: 0 };
+      const balance = computeOutstandingBalance(inv.total, totals.total);
+      const existing = balanceByCustomer.get(customerId) ?? { invoiceBalance: 0, unpaidInvoiceCount: 0 };
+      existing.invoiceBalance += balance;
+      if (balance > 0) existing.unpaidInvoiceCount += 1;
+      balanceByCustomer.set(customerId, existing);
+    }
+
+    let rows = customers.map((customer) => {
+      const balances = balanceByCustomer.get(String(customer._id)) ?? {
+        invoiceBalance: 0,
+        unpaidInvoiceCount: 0,
+      };
+      return {
+        customer,
+        outstandingSlim: customer.outstandingSlim ?? 0,
+        outstandingRound: customer.outstandingRound ?? 0,
+        invoiceBalance: balances.invoiceBalance,
+        unpaidInvoiceCount: balances.unpaidInvoiceCount,
+        pricingTier: customer.pricingCategory,
+      };
+    });
+
+    if (hasInvoiceBalance === 'true') {
+      rows = rows.filter((r) => r.invoiceBalance > 0);
+    }
 
     return {
       statusCounts,
-      outstanding: outstanding[0] ?? {
+      outstanding: outstandingAgg[0] ?? {
         totalCustomers: 0,
         outstandingSlim: 0,
         outstandingRound: 0,
         withOutstanding: 0,
+      },
+      customers: rows,
+      pagination: {
+        page,
+        limit,
+        total: hasInvoiceBalance === 'true' ? rows.length : totalBeforeBalanceFilter,
       },
     };
   }

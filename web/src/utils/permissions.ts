@@ -18,7 +18,7 @@ export const PERMISSION_MODULES: PermissionModule[] = [
   { key: 'deliveries', label: 'Deliveries', viewPermission: 'deliveries:read', managePermission: 'deliveries:*' },
   { key: 'orders', label: 'Invoices', viewPermission: 'orders:read', managePermission: 'orders:*' },
   { key: 'transactions', label: 'Transactions', viewPermission: 'transactions:read', managePermission: 'transactions:*' },
-  { key: 'pos', label: 'POS Sales', managePermission: 'pos:*', manageOnly: true },
+  { key: 'pos', label: 'Walk-In', managePermission: 'pos:*', manageOnly: true },
   { key: 'gallons', label: 'Item Tracking', viewPermission: 'gallons:read', managePermission: 'gallons:*' },
   { key: 'inventory', label: 'Inventory', viewPermission: 'inventory:read', managePermission: 'inventory:*' },
   { key: 'reports', label: 'Reports', viewPermission: 'reports:read', viewOnly: true },

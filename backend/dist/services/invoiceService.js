@@ -12,6 +12,8 @@ const response_1 = require("../utils/response");
 const pagination_1 = require("../utils/pagination");
 const enums_1 = require("../types/enums");
 const inventoryMovementService_1 = require("./inventoryMovementService");
+const paymentService_1 = require("./paymentService");
+const invoicePaymentStatus_1 = require("../utils/invoicePaymentStatus");
 function calcLineSubtotal(item) {
     const discount = item.discount ?? 0;
     return Math.max(0, item.quantity * item.unitPrice - discount);
@@ -53,7 +55,22 @@ class InvoiceService {
                     customer?.phone?.match(regex));
             });
         }
-        return { data: filtered, pagination: { page, limit, total: search ? filtered.length : total } };
+        const invoiceIds = filtered.map((inv) => inv._id);
+        const paymentTotals = await paymentService_1.PaymentService.getTotalsByInvoiceIds(invoiceIds);
+        const enriched = filtered.map((inv) => {
+            const totals = paymentTotals.get(String(inv._id)) ?? { total: 0, count: 0 };
+            const paymentStatus = (0, invoicePaymentStatus_1.computePaymentStatus)(inv.total, totals.total);
+            return {
+                ...inv,
+                paymentSummary: {
+                    totalPaid: totals.total,
+                    paymentCount: totals.count,
+                    outstandingBalance: (0, invoicePaymentStatus_1.computeOutstandingBalance)(inv.total, totals.total),
+                    paymentStatus,
+                },
+            };
+        });
+        return { data: enriched, pagination: { page, limit, total: search ? enriched.length : total } };
     }
     static async getById(id) {
         const invoice = await Invoice_1.Invoice.findOne({ _id: id, isDeleted: false })

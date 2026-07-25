@@ -27,6 +27,15 @@ export declare class CollectionService {
             source: "delivery";
             staff: string | undefined;
             createdAt: Date;
+        } | {
+            id: import("mongoose").Types.ObjectId;
+            customer: string;
+            amount: number;
+            paymentMethod: import("../types/enums").PaymentMethod;
+            paid: boolean;
+            type: string;
+            source: "invoice_payment";
+            createdAt: Date;
         })[];
     }>;
 }

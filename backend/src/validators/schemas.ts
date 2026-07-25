@@ -271,6 +271,14 @@ export const updatePricingTierSchema = z.object({
   roundPrice: z.number().min(0).optional(),
 });
 
+export const createPaymentSchema = z.object({
+  invoiceId: objectIdSchema,
+  amount: z.number().min(0.01, 'Amount must be greater than zero'),
+  paymentMethod: z.enum(['cash', 'gcash', 'bank']),
+  paymentDate: z.string().optional(),
+  notes: z.string().max(500).optional(),
+});
+
 export const deliveryDecisionSchema = z.object({
   action: z.enum(['continue', 'stop']),
   rescheduleDate: z.string().optional(),

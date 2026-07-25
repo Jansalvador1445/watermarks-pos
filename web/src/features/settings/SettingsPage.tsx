@@ -130,7 +130,7 @@ export const SettingsPage = () => {
             message="Two places to set prices"
             description={
               <>
-                <strong>POS → Catalog</strong> — set retail / wholesale / special prices <em>per product</em> (for POS sales).
+                <strong>Walk-In → Catalog</strong> — set retail / wholesale / special prices <em>per product</em> (for walk-in sales).
                 <br />
                 <strong>Below</strong> — slim &amp; round gallon rates per customer tier (for deliveries &amp; collection).
               </>

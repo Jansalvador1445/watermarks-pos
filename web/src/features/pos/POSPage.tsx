@@ -473,11 +473,11 @@ export const POSPage = () => {
   return (
     <div>
       <PageHeader
-        title="POS Sales"
+        title="Walk-In"
         subtitle={
           isAdmin
-            ? 'Point of sale for walk-in customers · manage products in the Product Catalog tab'
-            : 'Point of sale for walk-in customers'
+            ? 'Walk-in sales · manage products in the Product Catalog tab'
+            : 'Walk-in sales'
         }
         refreshQueryKeys={['products', 'pos-sales', 'transactions', 'inventory']}
       />

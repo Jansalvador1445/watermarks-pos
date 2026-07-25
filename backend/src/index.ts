@@ -37,6 +37,8 @@ import invoiceRoutes from './routes/invoiceRoutes';
 import pricingTierRoutes from './routes/pricingTierRoutes';
 import collectionRoutes from './routes/collectionRoutes';
 import productRoutes from './routes/productRoutes';
+import paymentRoutes from './routes/paymentRoutes';
+import invoiceReportRoutes from './routes/invoiceReportRoutes';
 import {
   userRouter,
   notificationRouter,
@@ -97,7 +99,9 @@ app.use('/api/gallons', gallonRouter);
 app.use('/api/inventory', inventoryRouter);
 app.use('/api/inventory-movements', movementRouter);
 app.use('/api/products', productRoutes);
+app.use('/api/payments', paymentRoutes);
 app.use('/api/reports', reportRouter);
+app.use('/api/reports/invoices', invoiceReportRoutes);
 app.use('/api/users', userRouter);
 app.use('/api/notifications', notificationRouter);
 app.use('/api/logs', logRouter);

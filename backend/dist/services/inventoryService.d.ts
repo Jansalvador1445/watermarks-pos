@@ -82,15 +82,11 @@ export declare class GallonService {
 }
 export declare class InventoryService {
     static getAll(req: Request): Promise<{
-        data: (import("../models/Gallon").IInventory & Required<{
-            _id: mongoose.Types.ObjectId;
-        }> & {
-            __v: number;
-        })[];
+        data: any[];
         pagination: {
             page: number;
             limit: number;
-            total: number;
+            total: any;
         };
     }>;
     static getById(id: string): Promise<mongoose.Document<unknown, {}, import("../models/Gallon").IInventory, {}, mongoose.DefaultSchemaOptions> & import("../models/Gallon").IInventory & Required<{
@@ -125,9 +121,26 @@ export declare class InventoryService {
 export declare class ReportService {
     static getSalesReport(startDate: string, endDate: string, groupBy?: 'daily' | 'weekly' | 'monthly'): Promise<any[]>;
     static getDeliveryReport(startDate: string, endDate: string): Promise<any[]>;
-    static getCustomerReport(): Promise<{
+    static getCustomerReport(req: Request): Promise<{
         statusCounts: any[];
         outstanding: any;
+        customers: {
+            customer: import("../models/Customer").ICustomer & Required<{
+                _id: mongoose.Types.ObjectId;
+            }> & {
+                __v: number;
+            };
+            outstandingSlim: number;
+            outstandingRound: number;
+            invoiceBalance: number;
+            unpaidInvoiceCount: number;
+            pricingTier: mongoose.Types.ObjectId;
+        }[];
+        pagination: {
+            page: number;
+            limit: number;
+            total: number;
+        };
     }>;
     static getInventoryReport(startDate?: string, endDate?: string): Promise<{
         items: (import("../models/Gallon").IInventory & Required<{

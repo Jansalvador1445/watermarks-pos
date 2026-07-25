@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { Transaction } from '../models/Transaction';
 import { Delivery } from '../models/Customer';
+import { Payment } from '../models/Payment';
 import { TransactionStatus } from '../types/enums';
 
 export class CollectionService {
@@ -9,7 +10,7 @@ export class CollectionService {
     const start = date.startOf('day').toDate();
     const end = date.endOf('day').toDate();
 
-    const [transactions, deliveries] = await Promise.all([
+    const [transactions, deliveries, invoicePayments] = await Promise.all([
       Transaction.find({
         isDeleted: false,
         status: TransactionStatus.PAID,
@@ -30,6 +31,17 @@ export class CollectionService {
         .populate('assignedStaffId', 'name')
         .sort({ date: -1 })
         .lean(),
+      Payment.find({
+        isDeleted: false,
+        paymentDate: { $gte: start, $lte: end },
+      })
+        .populate({
+          path: 'invoiceId',
+          select: 'invoiceNo customerId',
+          populate: { path: 'customerId', select: 'fullName phone' },
+        })
+        .sort({ paymentDate: -1 })
+        .lean(),
     ]);
 
     const summary = { cash: 0, gcash: 0, bank: 0, total: 0 };
@@ -39,6 +51,12 @@ export class CollectionService {
       summary[tx.paymentMethod as keyof typeof summary] =
         (summary[tx.paymentMethod as keyof typeof summary] as number) + amount;
       summary.total += amount;
+    });
+
+    invoicePayments.forEach((payment) => {
+      summary[payment.paymentMethod as keyof typeof summary] =
+        (summary[payment.paymentMethod as keyof typeof summary] as number) + payment.amount;
+      summary.total += payment.amount;
     });
 
     const transactionItems = transactions.map((tx) => ({
@@ -80,13 +98,35 @@ export class CollectionService {
       };
     });
 
+    const paymentItems = invoicePayments.map((payment) => {
+      const invoice = payment.invoiceId as {
+        invoiceNo?: string;
+        customerId?: { fullName?: string } | string;
+      } | null;
+      const customer =
+        invoice?.customerId && typeof invoice.customerId === 'object'
+          ? invoice.customerId.fullName
+          : 'Unknown';
+
+      return {
+        id: payment._id,
+        customer: customer || 'Unknown',
+        amount: payment.amount,
+        paymentMethod: payment.paymentMethod,
+        paid: true,
+        type: 'invoice_payment',
+        source: 'invoice_payment' as const,
+        createdAt: payment.paymentDate,
+      };
+    });
+
     const unpaidTotal = deliveryItems.filter((i) => !i.paid).reduce((sum, i) => sum + i.amount, 0);
 
     return {
       date: date.format('YYYY-MM-DD'),
       summary,
       unpaidTotal,
-      items: [...transactionItems, ...deliveryItems],
+      items: [...transactionItems, ...deliveryItems, ...paymentItems],
     };
   }
 }

@@ -9,12 +9,15 @@ const dayjs_1 = __importDefault(require("dayjs"));
 const Gallon_1 = require("../models/Gallon");
 const Transaction_1 = require("../models/Transaction");
 const Customer_1 = require("../models/Customer");
+const Invoice_1 = require("../models/Invoice");
 const InventoryMovement_1 = require("../models/InventoryMovement");
 const response_1 = require("../utils/response");
 const pagination_1 = require("../utils/pagination");
 const enums_1 = require("../types/enums");
 const itemKey_1 = require("../utils/itemKey");
 const inventoryMovementService_1 = require("./inventoryMovementService");
+const paymentService_1 = require("./paymentService");
+const invoicePaymentStatus_1 = require("../utils/invoicePaymentStatus");
 class GallonService {
     static resolveItemKey(data) {
         const rawKey = data.itemKey?.trim().toLowerCase();
@@ -147,19 +150,63 @@ exports.GallonService = GallonService;
 class InventoryService {
     static async getAll(req) {
         const { page, limit, skip } = (0, pagination_1.getPagination)(req);
-        const { search, category, stockFilter } = req.query;
-        const filter = { isDeleted: false };
+        const { search, category, stockFilter, catalogStatus, notInCatalog } = req.query;
+        const matchStage = { isDeleted: false };
         if (category)
-            filter.category = category;
+            matchStage.category = category;
         if (stockFilter === 'low') {
-            filter.$expr = { $lte: ['$currentStock', '$lowStockThreshold'] };
+            matchStage.$expr = { $lte: ['$currentStock', '$lowStockThreshold'] };
         }
-        Object.assign(filter, (0, pagination_1.buildSearchQuery)(search, ['name', 'sku', 'category']));
-        const sort = { currentStock: 1 };
-        const [data, total] = await Promise.all([
-            Gallon_1.Inventory.find(filter).sort(sort).skip(skip).limit(limit).lean(),
-            Gallon_1.Inventory.countDocuments(filter),
+        Object.assign(matchStage, (0, pagination_1.buildSearchQuery)(search, ['name', 'sku', 'category']));
+        const pipeline = [
+            { $match: matchStage },
+            {
+                $lookup: {
+                    from: 'products',
+                    localField: '_id',
+                    foreignField: 'linkedInventoryId',
+                    as: 'linkedProducts',
+                    pipeline: [{ $match: { isDeleted: false } }, { $limit: 1 }],
+                },
+            },
+            {
+                $addFields: {
+                    linkedProduct: {
+                        $cond: {
+                            if: { $gt: [{ $size: '$linkedProducts' }, 0] },
+                            then: {
+                                _id: { $toString: { $arrayElemAt: ['$linkedProducts._id', 0] } },
+                                status: { $arrayElemAt: ['$linkedProducts.status', 0] },
+                            },
+                            else: null,
+                        },
+                    },
+                },
+            },
+            { $project: { linkedProducts: 0 } },
+        ];
+        if (catalogStatus === 'active') {
+            pipeline.push({ $match: { 'linkedProduct.status': 'active' } });
+        }
+        else if (catalogStatus === 'disabled') {
+            pipeline.push({ $match: { 'linkedProduct.status': 'disabled' } });
+        }
+        else if (catalogStatus === 'none') {
+            pipeline.push({ $match: { linkedProduct: null } });
+        }
+        if (notInCatalog === 'true') {
+            pipeline.push({ $match: { linkedProduct: null } });
+        }
+        const [countResult, data] = await Promise.all([
+            Gallon_1.Inventory.aggregate([...pipeline, { $count: 'total' }]),
+            Gallon_1.Inventory.aggregate([
+                ...pipeline,
+                { $sort: { currentStock: 1 } },
+                { $skip: skip },
+                { $limit: limit },
+            ]),
         ]);
+        const total = countResult[0]?.total ?? 0;
         return { data, pagination: { page, limit, total } };
     }
     static async getById(id) {
@@ -237,8 +284,27 @@ class ReportService {
             },
         ]);
     }
-    static async getCustomerReport() {
-        const [statusCounts, outstanding] = await Promise.all([
+    static async getCustomerReport(req) {
+        const { page, limit, skip, sort } = (0, pagination_1.getPagination)(req);
+        const { search, status, pricingCategory, hasGallonOutstanding, hasInvoiceBalance, startDate, endDate, } = req.query;
+        const filter = { isDeleted: false };
+        if (status)
+            filter.status = status;
+        if (pricingCategory)
+            filter.pricingCategory = pricingCategory;
+        if (hasGallonOutstanding === 'true') {
+            filter.$expr = { $gt: [{ $add: ['$outstandingSlim', '$outstandingRound'] }, 0] };
+        }
+        if (startDate || endDate) {
+            const createdAt = {};
+            if (startDate)
+                createdAt.$gte = new Date(String(startDate));
+            if (endDate)
+                createdAt.$lte = new Date(String(endDate));
+            filter.createdAt = createdAt;
+        }
+        Object.assign(filter, (0, pagination_1.buildSearchQuery)(search, ['fullName', 'phone', 'address']));
+        const [statusCounts, outstandingAgg, customers, totalBeforeBalanceFilter] = await Promise.all([
             Customer_1.Customer.aggregate([
                 { $match: { isDeleted: false } },
                 { $group: { _id: '$status', count: { $sum: 1 } } },
@@ -259,14 +325,66 @@ class ReportService {
                     },
                 },
             ]),
+            Customer_1.Customer.find(filter)
+                .populate('pricingCategory', 'code label slimPrice roundPrice')
+                .sort(sort)
+                .skip(skip)
+                .limit(limit)
+                .lean(),
+            Customer_1.Customer.countDocuments(filter),
         ]);
+        const customerIds = customers.map((c) => c._id);
+        const invoices = customerIds.length
+            ? await Invoice_1.Invoice.find({
+                customerId: { $in: customerIds },
+                isDeleted: false,
+                status: { $ne: Invoice_1.InvoiceStatus.REJECTED },
+                legacyWaterOrder: { $ne: true },
+            }).lean()
+            : [];
+        const invoiceIds = invoices.map((inv) => inv._id);
+        const paymentTotals = await paymentService_1.PaymentService.getTotalsByInvoiceIds(invoiceIds);
+        const balanceByCustomer = new Map();
+        for (const inv of invoices) {
+            const customerId = String(inv.customerId);
+            const totals = paymentTotals.get(String(inv._id)) ?? { total: 0, count: 0 };
+            const balance = (0, invoicePaymentStatus_1.computeOutstandingBalance)(inv.total, totals.total);
+            const existing = balanceByCustomer.get(customerId) ?? { invoiceBalance: 0, unpaidInvoiceCount: 0 };
+            existing.invoiceBalance += balance;
+            if (balance > 0)
+                existing.unpaidInvoiceCount += 1;
+            balanceByCustomer.set(customerId, existing);
+        }
+        let rows = customers.map((customer) => {
+            const balances = balanceByCustomer.get(String(customer._id)) ?? {
+                invoiceBalance: 0,
+                unpaidInvoiceCount: 0,
+            };
+            return {
+                customer,
+                outstandingSlim: customer.outstandingSlim ?? 0,
+                outstandingRound: customer.outstandingRound ?? 0,
+                invoiceBalance: balances.invoiceBalance,
+                unpaidInvoiceCount: balances.unpaidInvoiceCount,
+                pricingTier: customer.pricingCategory,
+            };
+        });
+        if (hasInvoiceBalance === 'true') {
+            rows = rows.filter((r) => r.invoiceBalance > 0);
+        }
         return {
             statusCounts,
-            outstanding: outstanding[0] ?? {
+            outstanding: outstandingAgg[0] ?? {
                 totalCustomers: 0,
                 outstandingSlim: 0,
                 outstandingRound: 0,
                 withOutstanding: 0,
+            },
+            customers: rows,
+            pagination: {
+                page,
+                limit,
+                total: hasInvoiceBalance === 'true' ? rows.length : totalBeforeBalanceFilter,
             },
         };
     }

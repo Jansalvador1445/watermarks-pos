@@ -66,7 +66,9 @@ WaterMarks/
 │   │   ├── middlewares/
 │   │   └── socket/
 │   └── Dockerfile
-└── docker-compose.yml
+├── docs/                # Deployment and feature guides
+├── docker-compose.yml
+└── CHANGELOG.md
 ```
 
 ## Features
@@ -74,10 +76,10 @@ WaterMarks/
 - Dashboard with real-time stats, charts, and analytics
 - Customer CRUD with CSV import
 - Delivery management with calendar view
-- POS Sales system
+- Walk-In sales (formerly POS Sales) with product catalog
 - Transaction tracking with print/export
 - Water gallon inventory tracking
-- Inventory management
+- Inventory management with optional product catalog linking
 - Reports with PDF export
 - User management with RBAC
 - Real-time notifications (Socket.io)
@@ -108,8 +110,12 @@ WaterMarks/
 | Role | Permissions |
 |------|-------------|
 | Admin | Full access |
-| Cashier | Dashboard, Customers (read), Transactions, POS |
+| Cashier | Dashboard, Customers (read), Transactions, Walk-In |
 | Delivery Staff | Dashboard, Customers (read), Deliveries, Gallons |
+
+## Inventory & Walk-In
+
+See [docs/INVENTORY_AND_WALKIN.md](docs/INVENTORY_AND_WALKIN.md) for how inventory items, product catalog entries, and walk-in sales work together.
 
 ## Production Deployment
 

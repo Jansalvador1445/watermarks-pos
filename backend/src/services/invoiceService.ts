@@ -7,6 +7,8 @@ import { AppError } from '../utils/response';
 import { getPagination } from '../utils/pagination';
 import { GallonType, PaymentMethod, ProductStatus } from '../types/enums';
 import { InventoryMovementService } from './inventoryMovementService';
+import { PaymentService } from './paymentService';
+import { computeOutstandingBalance, computePaymentStatus } from '../utils/invoicePaymentStatus';
 
 interface InvoiceItemInput {
   productId?: string;
@@ -78,7 +80,23 @@ export class InvoiceService {
       });
     }
 
-    return { data: filtered, pagination: { page, limit, total: search ? filtered.length : total } };
+    const invoiceIds = filtered.map((inv) => inv._id as mongoose.Types.ObjectId);
+    const paymentTotals = await PaymentService.getTotalsByInvoiceIds(invoiceIds);
+    const enriched = filtered.map((inv) => {
+      const totals = paymentTotals.get(String(inv._id)) ?? { total: 0, count: 0 };
+      const paymentStatus = computePaymentStatus(inv.total, totals.total);
+      return {
+        ...inv,
+        paymentSummary: {
+          totalPaid: totals.total,
+          paymentCount: totals.count,
+          outstandingBalance: computeOutstandingBalance(inv.total, totals.total),
+          paymentStatus,
+        },
+      };
+    });
+
+    return { data: enriched, pagination: { page, limit, total: search ? enriched.length : total } };
   }
 
   static async getById(id: string) {

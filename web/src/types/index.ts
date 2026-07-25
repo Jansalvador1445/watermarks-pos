@@ -124,6 +124,39 @@ export interface Invoice {
 /** @deprecated use Invoice */
 export type WaterOrder = Invoice;
 
+export type InvoicePaymentStatus = 'paid' | 'unpaid' | 'partial' | 'credit';
+
+export interface Payment {
+  _id: string;
+  invoiceId: string;
+  amount: number;
+  paymentMethod: 'cash' | 'gcash' | 'bank';
+  paymentDate: string;
+  notes?: string;
+  recordedBy?: User | string;
+  createdAt: string;
+}
+
+export interface InvoicePaymentSummary {
+  invoice: Pick<Invoice, '_id' | 'invoiceNo' | 'total' | 'status'>;
+  payments: Payment[];
+  summary: {
+    totalPaid: number;
+    paymentCount: number;
+    outstandingBalance: number;
+    paymentStatus: InvoicePaymentStatus;
+  };
+}
+
+export interface CustomerReportRow {
+  customer: Customer;
+  outstandingSlim: number;
+  outstandingRound: number;
+  invoiceBalance: number;
+  unpaidInvoiceCount: number;
+  pricingTier?: PricingTier | string;
+}
+
 export interface DailyCollectionItem {
   id: string;
   customer: string;
@@ -131,7 +164,7 @@ export interface DailyCollectionItem {
   paymentMethod: string;
   paid: boolean;
   type: string;
-  source: 'transaction' | 'delivery';
+  source: 'transaction' | 'delivery' | 'invoice_payment';
   staff?: string;
   createdAt: string;
 }
@@ -178,6 +211,10 @@ export interface InventoryItem {
   lowStockThreshold: number;
   borrowed: number;
   returned: number;
+  linkedProduct?: {
+    _id: string;
+    status: 'active' | 'disabled';
+  };
 }
 
 export interface Product {

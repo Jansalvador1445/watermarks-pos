@@ -185,3 +185,12 @@
     at async <anonymous> (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\inventoryMovementService.ts:50:20)
     at async ClientSession.withTransaction (C:\Users\John Wayne Enrique\WaterMarks\backend\node_modules\mongodb\src\sessions.ts:827:20)
     at async Function.withTransaction (C:\Users\John Wayne Enrique\WaterMarks\backend\src\services\inventoryMovementService.ts:49:9) {"error":"This MongoDB deployment does not support retryable writes. Please add retryWrites=false to your connection string."}
+2026-07-25T07:56:33.776Z [error]: Seed failed {"error":{}}
+2026-07-25T07:56:47.827Z [error]: Seed failed {"error":{}}
+2026-07-25T07:57:06.488Z [error]: Error: Inventory seed failed
+    at seed (C:\Users\Aaron\GitHub Repos\watermarks-pos\backend\src\scripts\seed.ts:438:54)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {"error":"Inventory seed failed"}
+2026-07-25T07:57:29.970Z [error]: Error: Products required for invoice seed
+    at seedInvoicesAndPayments (C:\Users\Aaron\GitHub Repos\watermarks-pos\backend\src\scripts\seed.ts:250:62)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async seed (C:\Users\Aaron\GitHub Repos\watermarks-pos\backend\src\scripts\seed.ts:466:20) {"error":"Products required for invoice seed"}
